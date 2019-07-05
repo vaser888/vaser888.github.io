@@ -1,0 +1,178 @@
+
+body {
+	background-color: #333;
+	color: #eee;	
+}
+
+#abutton {
+	font-size: 20px;
+	background-color: cornflowerblue;
+	color: maroon;
+	border: 4px dotted lime;
+}
+
+#a, #b, #c {
+	font-size: 20px;
+	background-color: orange;
+	color: blue;
+	border: 4px dotted lime;
+}
+
+#ball {
+	width: 64px;
+	height: 64px;
+	background-color: purple;
+	color: red;
+	border-radius: 32px;
+	text-align: center;
+	line-height: 64px;
+	position: absolute;
+	top: 80px;
+	left: 180px;
+	cursor: none;
+	box-shadow: 16px 16px 16px blue;
+	transition: box-shadow 0.2s
+}
+
+#ball:active {
+	box-shadow: 1px 1px 16px blue;
+}
+
+#square {
+	width: 32px;
+	height: 32px;
+	background-color:blue;
+	color: blue;
+	position: absolute;
+	top: 20%;
+	right: 66px;
+
+	animation: colourcycle 4s linear infinite;
+}
+
+#triangle_red{
+	/*Equilateral triangle  =>  (border-left-width + border-right-width) * 0.866% = border-bottom-width*/
+	width: 0px;
+	height: 0px;
+	border-left: 32px solid transparent;
+	border-right: 32px solid transparent;
+	border-bottom: 55px solid red;
+	position: absolute;
+	top: 10.7%;
+	right: 260px;
+	
+}
+
+#triangle_lime{
+
+	width: 0px;
+	height: 0px;
+	border-left: 32px solid transparent;
+	border-right: 32px solid transparent;
+	border-bottom: 55px solid lime;
+	position: absolute;
+	top: 125px;
+	right: 228px;
+}
+
+#triangle_yellow{
+
+	width: 0px;
+	height: 0px;
+	border-left: 32px solid transparent;
+	border-right: 32px solid transparent;
+	border-top: 55px solid yellow;
+	position: absolute;
+	top: 125px;
+	right: 260px;
+}
+
+#triangle_blue{
+
+	width: 0px;
+	height: 0px;
+	border-left: 32px solid transparent;
+	border-right: 32px solid transparent;
+	border-bottom: 55px solid blue;
+	position: absolute;
+	top: 70px;
+	right: 196px;
+
+}
+
+#triangle_magenta{
+
+	width: 0px;
+	height: 0px;
+	border-left: 32px solid transparent;
+	border-right: 32px solid transparent;
+	border-top: 55px solid magenta;
+	position: absolute;
+	top: 70px;
+	right: 228px;
+}
+
+#triangle_cyan{
+
+	width: 0px;
+	height: 0px;
+	border-left: 32px solid transparent;
+	border-right: 32px solid transparent;
+	border-top: 55px solid cyan;
+	position: absolute;
+	top: 125px;
+	right: 196px;
+}
+
+#box_thing{
+
+	width: 100px;
+	height: 100px;
+	background-color: magenta;
+	border-left: 48px solid orange;
+	border-right: 48px solid red;
+	border-top: 48px solid cyan;
+	border-bottom: 48px solid blue;
+	position: relative;
+	margin: 10px auto; /*add "auto" to center it in the middle of the page*/
+	/*top: 280px;
+	right: 186px;*/
+	box-shadow: 0px 0px 50px blue; 
+
+	text-align: center;
+	line-height: 100px;
+	font-size: 20px; 
+}
+
+@keyframes colourcycle{
+	0%		{background-color: red; transform: rotate(0deg) translateX(40px);}
+	33%		{background-color: cyan;}
+	66%		{background-color: lime;}
+	100%	{background-color: red; transform: rotate(360deg) translateX(40px);}
+}
+
+body[data-number = "0"]{
+	background-color: #300;
+}
+
+
+.numberthing{
+	font-size: 20px;
+	color: red;
+}
+
+.hyperlink{
+	color: lightblue;
+	font-size: 15px;	
+}
+.margin{
+	margin-left: 10px;
+	color: lightblue;
+	font-size: 15px;
+}
+.picture{
+	width: 24px;
+}
+table,td{
+	border: 1px solid #fff;
+}
