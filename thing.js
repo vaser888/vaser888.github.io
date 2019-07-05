@@ -136,3 +136,15 @@ function PageChange(){
 		}
 }
 
+colorCode.addEventListener("change", valueUpdate);
+rangeValue.addEventListener("change", valueUpdate);
+
+function valueUpdate(){
+	var h = document.querySelector("#rangeValue").value;
+	var j = document.querySelector("#colorCode").value;
+	//alert(h);
+document.querySelector(".rangeValueArea").textContent = h;
+document.querySelector(".colorCodeArea").textContent = j;
+}
+
+

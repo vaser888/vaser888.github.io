@@ -58,8 +58,8 @@ body {
 	border-right: 32px solid transparent;
 	border-bottom: 55px solid red;
 	position: absolute;
-	top: 10.7%;
-	right: 260px;
+	top: 145px;
+	right: 164px;
 	
 }
 
@@ -71,8 +71,8 @@ body {
 	border-right: 32px solid transparent;
 	border-bottom: 55px solid lime;
 	position: absolute;
-	top: 125px;
-	right: 228px;
+	top: 200px;
+	right: 132px;
 }
 
 #triangle_yellow{
@@ -83,8 +83,8 @@ body {
 	border-right: 32px solid transparent;
 	border-top: 55px solid yellow;
 	position: absolute;
-	top: 125px;
-	right: 260px;
+	top: 200px;
+	right: 164px;
 }
 
 #triangle_blue{
@@ -95,8 +95,8 @@ body {
 	border-right: 32px solid transparent;
 	border-bottom: 55px solid blue;
 	position: absolute;
-	top: 70px;
-	right: 196px;
+	top: 145px;
+	right: 100px;
 
 }
 
@@ -108,8 +108,8 @@ body {
 	border-right: 32px solid transparent;
 	border-top: 55px solid magenta;
 	position: absolute;
-	top: 70px;
-	right: 228px;
+	top: 145px;
+	right: 132px;
 }
 
 #triangle_cyan{
@@ -120,8 +120,8 @@ body {
 	border-right: 32px solid transparent;
 	border-top: 55px solid cyan;
 	position: absolute;
-	top: 125px;
-	right: 196px;
+	top: 200px;
+	right: 100px;
 }
 
 #box_thing{
