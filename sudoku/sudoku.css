@@ -1,0 +1,14 @@
+table{
+	border: 1px solid;
+	border-spacing: 2px;
+	padding: 5px;
+	font-size: 30px;
+}
+td{
+	border: 1px solid;
+	border-spacing: 2px;
+	padding-left: 10px;
+	padding-right: 10px;
+	font-size: 24px;
+	height: 32px;
+}
