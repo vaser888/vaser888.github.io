@@ -25,7 +25,7 @@
 
 <br></br>
 
-<input list="choices" value="hello" id="something" >
+<input list="choices" value="hello" id="something" title="this is how you make a title">
 
 <datalist id="choices">
 	<option value="hello">
@@ -43,7 +43,6 @@
 <button id="abutton">Calculate</button>
 <br></br>
 <input id="c">
-<input id="d" title="this is how you make a title">
 <div></div>
 <p></p>
 
@@ -159,10 +158,27 @@
 </div>
 
 <input id="colorCode" type="color"></input>
+<button id="updateBackgroundColor">Update Background Colour</button> 
+<input id="autoUpdateBackgroundColor" type="checkbox"> Auto update</input>
 <P class="colorCodeArea">nul</p>
-<input id="rangeValue" type="range" min="0" max="100"></input>
+
+<div style="margin-left: 70px; float: left">000</div>
+<div style="margin-left: 150px; float: left">000</div>
+<div style="margin-left: 410px">000</div>
+
+
+<input id="rColor" type="range" min="0" max="255" value="0"></input>
+<input id="gColor" type="range" min="0" max="255" value="0"></input>
+<input id="bColor" type="range" min="0" max="255" value="0"></input>
+
+
+<p></p>
+<input id="rangeValue" type="range" min="0" max="100" step="10"></input>
 <p class="rangeValueArea">nul</P>
 
+
+<canvas id="myCanvas" width="200px" height="200px"></canvas>
+
+
+
 <script src="thing.js"></script>
-
-

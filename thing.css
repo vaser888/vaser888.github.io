@@ -173,6 +173,8 @@ body[data-number = "0"]{
 .picture{
 	width: 24px;
 }
-table,td{
+canvas,table,td{
 	border: 1px solid #fff;
 }
+
+

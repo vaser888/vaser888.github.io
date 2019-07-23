@@ -15,6 +15,8 @@ var randomNumber
 function generateRowNumbers(){
 		testAreaRow.textContent = "";
 		let randomNumber = Math.floor(Math.random() * 9) + 1;
+	
+	
 	for (i=0; i<9; i++){
 		
 		rowStore[i] = randomNumber;
@@ -40,7 +42,7 @@ function checkRowNumbers(){
 		//testArea.textContent += x +".",i;
 	}
 }
-
+/* 
 function checkColumnNumbers(){
 	for (y = 0; y <= i; y++){
 		
@@ -50,6 +52,9 @@ function checkColumnNumbers(){
 	
 	
 }
-	
+
+var r = 1;
+var s = 1;
+function test (r,s	 */
 	
 	

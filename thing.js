@@ -5,11 +5,10 @@ var thebutton = document.getElementById('abutton');
 var inputa = document.getElementById('a');
 var inputb = document.getElementById('b');
 var inputc = document.getElementById('c');
-var inputd = document.getElementById('d');
 
 var ball = document.getElementById('ball');
 
-thebutton.onclick = function () {
+thebutton.onclick = function (open) {
 	var na = parseInt(inputa.value);
 	var nb = parseInt(inputb.value);
 	var nc = na + nb;
@@ -137,14 +136,48 @@ function PageChange(){
 }
 
 colorCode.addEventListener("change", valueUpdate);
-rangeValue.addEventListener("change", valueUpdate);
+rangeValue.addEventListener("input", valueUpdate);
+
 
 function valueUpdate(){
 	var h = document.querySelector("#rangeValue").value;
 	var j = document.querySelector("#colorCode").value;
 	//alert(h);
+
 document.querySelector(".rangeValueArea").textContent = h;
 document.querySelector(".colorCodeArea").textContent = j;
 }
 
+var updateBackgroundButton = document.getElementById("updateBackgroundColor");
+updateBackgroundButton.onclick = function(){
+	var j = document.querySelector("#colorCode").value;
+	document.body.style.background = j;
+}
 
+autoUpdateBackgroundColor.addEventListener("clicked", testing);
+
+function testing (){
+	alert("hi i work")
+}
+
+var canv = document.getElementById("myCanvas");
+ctx = canv.getContext("2d");
+
+ctx.clearRect(0, 0, 200, 100);
+
+ctx.strokeStyle = "blue";
+ctx.fillStyle = "red";
+ctx.fillRect(10, 20, 30, 40);
+ctx.strokeRect(10, 20, 30, 40);
+
+ctx.fillStyle = "rgb(200, 0, 0)";
+ctx.fillRect(70, 80, 30, 30);
+ctx.fillStyle = "rgba(0, 0, 200, 0.7)";
+ctx.fillRect(85, 95, 30, 30); //(x, y, length x, length y)
+
+ctx.beginPath();
+ctx.moveTo(0, 20);
+ctx.lineTo(20, 0);
+ctx.lineTo(0,0);
+ctx.closePath();
+ctx.fill();
