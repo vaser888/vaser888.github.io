@@ -154,20 +154,23 @@ document.querySelector(".colorCodeArea").textContent = j;
 rColor.addEventListener("input", valueUpdateRed);
 function valueUpdateRed(){
 	var h = document.querySelector("#rColor").value;
-	document.querySelector("#rColorValue").textContent = "R " + h.padStart(3, "0");
-updateColorBox();
+	var hHex = Number(h).toString(16);
+	document.querySelector("#rColorValue").textContent = "R " + h.padStart(3, "0") + " / #" + hHex.padStart(2, "0");
+	updateColorBox();
 }
 gColor.addEventListener("input", valueUpdateGreen);
 function valueUpdateGreen(){
 	var h = document.querySelector("#gColor").value;
-	document.querySelector("#gColorValue").textContent = "G " + h.padStart(3, "0");
-updateColorBox();
+	var hHex = Number(h).toString(16);
+	document.querySelector("#gColorValue").textContent = "G " + h.padStart(3, "0") + " / #" + hHex.padStart(2, "0");
+	updateColorBox();
 }
 bColor.addEventListener("input", valueUpdateBlue);
 function valueUpdateBlue(){
 	var h = document.querySelector("#bColor").value;
-	document.querySelector("#bColorValue").textContent = "B " + h.padStart(3, "0");
-updateColorBox();
+	var hHex = Number(h).toString(16);
+	document.querySelector("#bColorValue").textContent = "B " + h.padStart(3, "0") + " / #" + hHex.padStart(2, "0");
+	updateColorBox();
 }
 
 
