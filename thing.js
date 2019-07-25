@@ -1,5 +1,9 @@
 
 
+window.onload = function(event){
+	updateColorBox();
+}
+
 var thebutton = document.getElementById('abutton');
 
 var inputa = document.getElementById('a');
@@ -138,7 +142,6 @@ function PageChange(){
 colorCode.addEventListener("change", valueUpdate);
 rangeValue.addEventListener("input", valueUpdate);
 
-
 function valueUpdate(){
 	var h = document.querySelector("#rangeValue").value;
 	var j = document.querySelector("#colorCode").value;
@@ -148,16 +151,47 @@ document.querySelector(".rangeValueArea").textContent = h;
 document.querySelector(".colorCodeArea").textContent = j;
 }
 
+rColor.addEventListener("input", valueUpdateRed);
+function valueUpdateRed(){
+	var h = document.querySelector("#rColor").value;
+	document.querySelector("#rColorValue").textContent = "R " + h.padStart(3, "0");
+updateColorBox();
+}
+gColor.addEventListener("input", valueUpdateGreen);
+function valueUpdateGreen(){
+	var h = document.querySelector("#gColor").value;
+	document.querySelector("#gColorValue").textContent = "G " + h.padStart(3, "0");
+updateColorBox();
+}
+bColor.addEventListener("input", valueUpdateBlue);
+function valueUpdateBlue(){
+	var h = document.querySelector("#bColor").value;
+	document.querySelector("#bColorValue").textContent = "B " + h.padStart(3, "0");
+updateColorBox();
+}
+
+
+function updateColorBox(){
+var r = document.querySelector("#rColor").value;
+var g = document.querySelector("#gColor").value;
+var b = document.querySelector("#bColor").value;
+
+var canv = document.getElementById("colorBox");
+ctx = canv.getContext("2d");
+
+ctx.fillStyle = "rgb("+r+", "+g+", "+b+")";
+ctx.fillRect(0, 0, 100,100);
+}
 var updateBackgroundButton = document.getElementById("updateBackgroundColor");
 updateBackgroundButton.onclick = function(){
 	var j = document.querySelector("#colorCode").value;
 	document.body.style.background = j;
 }
 
-autoUpdateBackgroundColor.addEventListener("clicked", testing);
+autoUpdateBackgroundColor.addEventListener("input", testing);
 
 function testing (){
-	alert("hi i work")
+	alert("this box has been checked but it does not work yet")
 }
 
 var canv = document.getElementById("myCanvas");
