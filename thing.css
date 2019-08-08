@@ -2,7 +2,7 @@
 body {
 	
 	background: 
-	repeating-linear-gradient(45deg, rgb(60, 60, 60) 0%, rgb(50, 117, 108) 5%, transparent 5%, #17f2d24f 10%), 
+	repeating-linear-gradient(45deg, rgb(60, 60, 60) 0%, rgb(64, 168, 153) 5%, transparent 5%, #17f2d24f 10%), 
 	repeating-linear-gradient(-45deg, rgb(51, 51, 51) 0%, rgb(92, 92, 92) 5%, #fefefe59 5%, transparent 10%),	
 	linear-gradient(180deg, rgb(51, 51, 51), transparent);
 	
