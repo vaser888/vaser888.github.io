@@ -32,8 +32,8 @@ body {
 	text-align: center;
 	line-height: 64px;
 	position: absolute;
-	top: 150px;
-	left: 180px;
+	top: 10px;
+	left: 595px;
 	cursor: none;
 	box-shadow: 16px 16px 16px blue;
 	transition: box-shadow 0.2s

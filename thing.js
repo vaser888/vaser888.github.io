@@ -2,6 +2,10 @@
 
 window.onload = function(event){
 	updateColorBox();
+	valueUpdateRed();
+	valueUpdateGreen();
+	valueUpdateBlue();
+	valueUpdate();
 }
 
 var thebutton = document.getElementById('abutton');
@@ -128,6 +132,9 @@ function resetGame() {
 	
 /////// End of Guessing Game ///////
 
+////////////////////
+// change pages
+////////////////////
 pages.addEventListener("change", PageChange);
 
 function PageChange(){
@@ -138,18 +145,30 @@ function PageChange(){
 		window.open("sudoku/sudoku.html", "_top");
 		}
 }
-
+////////////////////
+//change background color
+////////////////////
 colorCode.addEventListener("change", valueUpdate);
-rangeValue.addEventListener("input", valueUpdate);
-
 function valueUpdate(){
-	var h = document.querySelector("#rangeValue").value;
 	var j = document.querySelector("#colorCode").value;
-	//alert(h);
-
-document.querySelector(".rangeValueArea").textContent = h;
-document.querySelector(".colorCodeArea").textContent = j;
+	document.querySelector(".colorCodeArea").textContent = j;
 }
+
+var updateBackgroundButton = document.getElementById("updateBackgroundColor");
+updateBackgroundButton.onclick = function(){
+	var j = document.querySelector("#colorCode").value;
+	document.body.style.background = j;
+}
+
+autoUpdateBackgroundColor.addEventListener("input", testing);
+
+function testing (){
+	alert("this box has been checked but it does not work yet")
+}
+
+////////////////////
+//color box
+////////////////////
 
 rColor.addEventListener("input", valueUpdateRed);
 function valueUpdateRed(){
@@ -158,6 +177,7 @@ function valueUpdateRed(){
 	document.querySelector("#rColorValue").textContent = "R " + h.padStart(3, "0") + " / #" + hHex.padStart(2, "0");
 	updateColorBox();
 }
+
 gColor.addEventListener("input", valueUpdateGreen);
 function valueUpdateGreen(){
 	var h = document.querySelector("#gColor").value;
@@ -165,6 +185,7 @@ function valueUpdateGreen(){
 	document.querySelector("#gColorValue").textContent = "G " + h.padStart(3, "0") + " / #" + hHex.padStart(2, "0");
 	updateColorBox();
 }
+
 bColor.addEventListener("input", valueUpdateBlue);
 function valueUpdateBlue(){
 	var h = document.querySelector("#bColor").value;
@@ -185,18 +206,16 @@ ctx = canv.getContext("2d");
 ctx.fillStyle = "rgb("+r+", "+g+", "+b+")";
 ctx.fillRect(0, 0, 100,100);
 }
-var updateBackgroundButton = document.getElementById("updateBackgroundColor");
-updateBackgroundButton.onclick = function(){
-	var j = document.querySelector("#colorCode").value;
-	document.body.style.background = j;
-}
+////////////////////
+//drawing canvas
+////////////////////
 
-autoUpdateBackgroundColor.addEventListener("input", testing);
 
-function testing (){
-	alert("this box has been checked but it does not work yet")
-}
 
+
+////////////////////
+//test canvas
+////////////////////
 var canv = document.getElementById("myCanvas");
 ctx = canv.getContext("2d");
 
