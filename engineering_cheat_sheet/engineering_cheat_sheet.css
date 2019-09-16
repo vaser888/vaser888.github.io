@@ -13,3 +13,10 @@ td{
 	font-size: 18px;
 	height: 32px;
 }
+
+.BandResistor_Hidden{
+	display: none;
+}
+.BandResistor_Visible{
+	display: inline;
+}
