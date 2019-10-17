@@ -51,8 +51,16 @@ function updateValueFourBands() {
 	var highRangeOhmResult = ohmResult + rangeValue;
 	var lowRangeKOhmResult = lowRangeOhmResult/1000;
 	var highRangeKOhmResult = highRangeOhmResult/1000;
+	var lowRangeMOhmResult = lowRangeKOhmResult/1000;
+	var highRangeMOhmResult = highRangeKOhmResult/1000;
+
 	
-	document.querySelector(".resistorResult").textContent = "Result = " + ohmResult +" ohms " +  per + "% , " + kohmResult + "k ohms " + per + "% , " + mohmResult + "M ohms " + per + "%";
-	document.querySelector(".resistorRangeResult").textContent = "Range = " + lowRangeOhmResult + " ohms - " + highRangeOhmResult + " ohms , "+ lowRangeKOhmResult + "k ohms - " + highRangeKOhmResult + "k ohms";
+	document.querySelector(".resistorResultOne").textContent = "Ohms Result = " + ohmResult +" ohms " +  per + "%";
+	document.querySelector(".resistorResultTwo").textContent = "k Ohms Result = " + kohmResult + "k ohms " + per + "%"; 
+	document.querySelector(".resistorResultThree").textContent = "M Ohms Result = " + mohmResult + "M ohms " + per + "%";
+	
+	document.querySelector(".resistorRangeResultOne").textContent = "Ohms Range = " + lowRangeOhmResult + " ohms - " + highRangeOhmResult + " ohms";
+	document.querySelector(".resistorRangeResultTwo").textContent = "k Ohms Range = " + lowRangeKOhmResult + "k ohms - " + highRangeKOhmResult + "k ohms";
+	document.querySelector(".resistorRangeResultThree").textContent = "M Ohms Range = " + lowRangeMOhmResult + "M ohms - " + highRangeMOhmResult + "M ohms";
 }
 

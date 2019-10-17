@@ -1,3 +1,13 @@
+body{
+	background-color:#333;
+	color:white;
+}
+
+div.ex1{
+	width: 1980px;
+	background-color:#000;
+}
+
 table{
 	border: 1px solid;
 	border-spacing: 2px;
@@ -20,3 +30,9 @@ td{
 .BandResistor_Visible{
 	display: inline;
 }
+
+.results{
+	border: 1px solid;
+	width: 400px;
+	padding-left:10px;
+	}

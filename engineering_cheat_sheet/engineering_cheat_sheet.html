@@ -7,6 +7,7 @@
 <!-- <link rel="shortcut icon" href="baba_0_1.png" type="image/x-icon"> --> 
 <link rel="stylesheet" href="engineering_cheat_sheet.css">
 </head>
+<div class="ex1">Width</div>
 
 <div>
 <h1>Ryan's tool box</h1>  
@@ -25,23 +26,23 @@
 			<td>Tolorance</td>
 			<td>Temperature Coefficent</td>
 		</tr>
-		<tr style="background-color:black; color:white">
-			<td>Black</td>
-			<td>0</td>
-			<td>0</td>
-			<td>0</td>
-			<td>1 ohm</td>
-			<td></td>
-			<td>250 ppm/K</td>
+		<tr style="background-color:black; color:black">
+			<td><font color="white">Black</td></font>
+			<td><font color="white">0</td></font>
+			<td><font color="white">0</td></font>
+			<td><font color="white">0</td></font>
+			<td><font color="white">1 ohm</td></font>
+			<td><font color="white"></td></font>
+			<td><font color="white">250 ppm/K</td></font>
 		</tr>
-		<tr style="background-color:#804000; color:white">
-			<td>Brown</td>
-			<td>1</td>
-			<td>1</td>
-			<td>1</td>
-			<td>10 ohm</td>
-			<td>+/- 1%</td>
-			<td>100 ppm/K</td>
+		<tr style="background-color:#804000; color:black">
+			<td><font color="white">Brown</td></font>
+			<td><font color="white">1</td></font>
+			<td><font color="white">1</td></font>
+			<td><font color="white">1</td></font>
+			<td><font color="white">10 ohm</td></font>
+			<td><font color="white">+/- 1%</td></font>
+			<td><font color="white">100 ppm/K</td></font>
 		</tr>
 		<tr style="background-color:red; color:black">
 			<td>Red</td>
@@ -79,14 +80,14 @@
 			<td>+/- 0.5%</td>
 			<td>20 ppm/K</td>
 		</tr>
-		<tr style="background-color:blue; color:white">
-			<td>Blue</td>
-			<td>6</td>
-			<td>6</td>
-			<td>6</td>
-			<td>1M ohm</td>
-			<td>+/- 0.25%</td>
-			<td>10 ppm/K</td>
+		<tr style="background-color:blue; color:black">
+			<td><font color="white">Blue</td></font>
+			<td><font color="white">6</td></font>
+			<td><font color="white">6</td></font>
+			<td><font color="white">6</td></font>
+			<td><font color="white">1M ohm</td></font>
+			<td><font color="white">+/- 0.25%</td></font>
+			<td><font color="white">10 ppm/K</td></font>
 		</tr>
 		<tr style="background-color:violet; color:Black">
 			<td>Violet</td>
@@ -136,7 +137,7 @@
 	</tbody>
 </table>
 
-<div>
+<div name="Resistor band selector">
 	<select id="resistorType">
 		<option value="0">Select Number of Resistor Bands</option>
 		<option value="4">4 Band Resistor</option>
@@ -369,9 +370,17 @@
 
 </div>
 
-<p class="resistorResult">test</p>
-<p class="resistorRangeResult">test</P>
+<div class="results">
+<p class="resistorResultOne">Ohms Result =</p>
+<p class="resistorResultTwo">k Ohms Result =</p>
+<p class="resistorResultThree">M Ohms Result =</p>
+</div>
 
+<div class="results">
+<p class="resistorRangeResultOne">Ohms Range =</P>
+<p class="resistorRangeResultTwo">k Ohms Range =</P>
+<p class="resistorRangeResultThree">M Ohms Rnage =</P>
+</div>
 
 
 <script src="engineering_cheat_sheet.js"></script>
