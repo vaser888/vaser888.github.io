@@ -1,6 +1,7 @@
 body{
 	background-color:#333;
 	color:white;
+	font-family: 'Open Sans', sans-serif;
 }
 
 div.ex1{
@@ -9,14 +10,19 @@ div.ex1{
 }
 
 table{
-	border: 1px solid;
+	border: 1px solid black;
 	border-spacing: 2px;
 	padding: 5px;
 	font-size: 30px;
 }
+
+.resistor-row-dark td {
+	color: white;
+}
+
 td{
 	 
-	border: 1px solid;
+	border: 1px solid black;
 	border-spacing: 2px;
 	padding-left: 10px;
 	padding-right: 10px;
@@ -24,11 +30,16 @@ td{
 	height: 32px;
 }
 
-.BandResistor_Hidden{
+.bandResistor_Hidden{
 	display: none;
 }
-.BandResistor_Visible{
-	display: inline;
+.bandResistor_Visible{
+	display: flex;
+	flex-flow: row nowrap;
+}
+
+.bandResistor_Visible > * {
+	flex: 0 1 auto;
 }
 
 .results{
