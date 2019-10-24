@@ -44,7 +44,6 @@ function calculateValueOfBands() {
 	var fou = document.querySelector("#multiplierBandBox").value;
 	var fiv = document.querySelector("#toloranceBandBox").value;
 	
-	
 	var al = document.querySelector("#resistorType").value
 		if (al === "4") {
 			var ohmResult = (fir + sec) * fou;
@@ -65,11 +64,11 @@ function calculateValueOfBands() {
 	var highRangeMOhmResult = highRangeKOhmResult/1000;
 	
 	document.querySelector(".resistorResultOne").textContent = "Ohms Result = " + ohmResult +" \u2126 \u00b1 " +  per + "%";
-	document.querySelector(".resistorResultTwo").textContent = "k Ohms Result = " + kohmResult + " k\u2126 +/- " + per + "%"; 
-	document.querySelector(".resistorResultThree").textContent = "M Ohms Result = " + mohmResult + "M ohms " + per + "%";
+	document.querySelector(".resistorResultTwo").textContent = "k Ohms Result = " + kohmResult + " k\u2126 \u00b1 " + per + "%"; 
+	document.querySelector(".resistorResultThree").textContent = "M Ohms Result = " + mohmResult + " M\u2126 \u00b1 " + per + "%";
 	
-	document.querySelector(".resistorRangeResultOne").textContent = "Ohms Range = " + lowRangeOhmResult + " ohms - " + highRangeOhmResult + " ohms";
-	document.querySelector(".resistorRangeResultTwo").textContent = "k Ohms Range = " + lowRangeKOhmResult + "k ohms - " + highRangeKOhmResult + "k ohms";
-	document.querySelector(".resistorRangeResultThree").textContent = "M Ohms Range = " + lowRangeMOhmResult + "M ohms - " + highRangeMOhmResult + "M ohms";
+	document.querySelector(".resistorRangeResultOne").textContent = "Ohms Range = " + lowRangeOhmResult + " \u2126 - " + highRangeOhmResult + " \u2126";
+	document.querySelector(".resistorRangeResultTwo").textContent = "k Ohms Range = " + lowRangeKOhmResult + " k\u2126 - " + highRangeKOhmResult + " k\u2126";
+	document.querySelector(".resistorRangeResultThree").textContent = "M Ohms Range = " + lowRangeMOhmResult + " M\u2126 - " + highRangeMOhmResult + " M\u2126";
 }
 

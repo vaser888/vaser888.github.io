@@ -1,0 +1,24 @@
+body {
+	background-color:#333;
+	color:white;
+	padding: 0;
+	margin: 0;
+}	
+
+html {
+	font: 24px 'Open Sans', sans-serif;
+}
+
+table, td {
+	border: 1px solid;
+	border-color:white;
+}
+
+fieldset{
+	text-align: center;
+}
+
+.margin {
+	margin-left: 20%;
+	margin-right: 20%;
+}

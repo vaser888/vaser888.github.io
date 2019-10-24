@@ -1,33 +1,49 @@
-body{
+body {
 	background-color:#333;
 	color:white;
-	font-family: 'Open Sans', sans-serif;
+	padding: 0;
+	margin: 0;
+}	
+	
+html {
+	font: 16px 'Open Sans', sans-serif;
+}
+
+@media screen and (max-width: 436px) {
+	html {
+		font-size: 8px;
+	}
 }
 
 div.ex1{
-	width: 1980px;
+	/* width: 1980px; */
 	background-color:#000;
+}
+
+@media screen and (max-width: 432px) {
+	.scroll-x {
+		overflow: scroll;
+	}
 }
 
 table{
 	border: 1px solid black;
 	border-spacing: 2px;
 	padding: 5px;
-	font-size: 30px;
+	font-size: 2rem;
 }
 
 .resistor-row-dark td {
 	color: white;
 }
 
-td{
-	 
+td{	 
 	border: 1px solid black;
 	border-spacing: 2px;
 	padding-left: 10px;
 	padding-right: 10px;
-	font-size: 18px;
-	height: 32px;
+	font-size: 1.2rem;
+	line-height: 2;
 }
 
 .bandResistor_Hidden{
@@ -38,12 +54,22 @@ td{
 	flex-flow: row nowrap;
 }
 
+@media screen and (max-width: 432px) {
+	.bandResistor_Visible {			
+		flex-flow: column;
+	}
+
+	.bandResistor_Visible select{
+		font-size: 3rem;
+	}	
+}
+
 .bandResistor_Visible > * {
 	flex: 0 1 auto;
 }
 
 .results{
 	border: 1px solid;
-	width: 400px;
+	max-width: 400px;
 	padding-left:10px;
-	}
+}
