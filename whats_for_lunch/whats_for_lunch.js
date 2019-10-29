@@ -1,13 +1,32 @@
 
-
-document.querySelector(".selectAll").onclick = function (){
-	if (document.querySelector(".selectall").input.checked){
-		alert("test");
+document.querySelector(".selectAllOne").onclick = function selected (){
+		//alert("hello");
+	if (document.querySelector(".selectAllOne:checked")){
+		//alert("hi");
+		var makeList = document.querySelectorAll(".restaurant");
+		//console.log(makeList);
+		al = Array.from(makeList);
+		for (ab = 0; ab<9; ++ab){
+			console.log(al[ab]);
+			al[ab].checked = true;
+		}
+	}
+	else if (document.querySelector(".selectAllOne")){
+		var makeList = document.querySelectorAll(".restaurant:checked");
+		//console.log(makeList);
+		al = Array.from(makeList);
+		for (ab = 0; ab<9; ++ab){
+			console.log(al[ab]);
+			al[ab].checked = false;
+		}
 	}
 }
 
 
-document.querySelector(".pickLunch").onclick = function (){
+
+
+
+document.querySelector(".pickLunch").onclick = function pick (){
 	var checkList = document.querySelectorAll(".restaurant:checked");
 		console.log(checkList);
 	checkListArray = Array.from(checkList);
