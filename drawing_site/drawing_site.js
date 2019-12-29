@@ -153,7 +153,7 @@ function move(){
 
 drawingCanvas.addEventListener("mouseup", e=>{
 	if (isDrawing === true){
-		//ctx.stroke();
+		ctx.stroke();
 		ctx.closePath();
 		x = 0;
 		y = 0;
