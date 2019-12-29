@@ -1,0 +1,24 @@
+html {
+	font: 22px 'Open Sans', sans-serif;
+}
+
+#drawingCanvas{
+	display: flex;
+	flex-flow: center;
+	margin: auto;
+	border: 1px solid #000;	
+
+}
+
+.column {
+	justify-content:center;
+	flex: 1 0 0%;
+	flex-wrap: nowrap;	
+	flex-direction: column;
+
+}
+.row {
+	display: flex;
+	flex-direction: row;
+	margin: auto;
+} 

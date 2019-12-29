@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My drawing site</title>
+<!-- <link rel="shortcut icon" href="baba_0_1.png" type="image/x-icon"> --> 
+<link rel="stylesheet" href="drawing_site.css">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap" rel="stylesheet">
+</head>
+
+<p style="text-align:center">Draw</p>
+
+<canvas id="drawingCanvas" width="500px" height="500px"></canvas>
+
+<div class="row">
+
+	<div class="column">
+		<div id="rColorValue">R 000 / #00</div>
+		<input id="rColor" type="range" min="0" max="255" value="0" title="red">
+	</div>
+	
+	<div class="column">
+		<div id="gColorValue">G 000 / #00</div>
+		<input id="gColor" type="range" min="0" max="255" value="0" title="green">
+	</div>
+	
+	<div class="column">
+		<div id="bColorValue">B 000 / #00</div>
+		<input id="bColor" type="range" min="0" max="255" value="0" title="blue">
+	</div>
+	
+	<div class="column">
+		<div id="opacityValue">100%</div>
+		<input id="opacity" type="range" min="0" max="100" value="100" title="opacity">
+	</div>	
+	
+</div>
+
+
+<div></div>
+<canvas id="colorBox" width="100px" height="100px" style="margin-left: 40px"></canvas>
+<div></div>
+
+<button id="clearCanvas">Clear canvas</button>
+
+<div>
+<canvas id="brushBox" width="100px" height="100px" style="border: 1px solid"></canvas>
+</div>
+
+<fieldset id="brushSelect">
+	<input class="brushSelect" type="radio" name="brushChoice" value="1" checked="true">line</input>
+	<input class="brushSelect" type="radio" name="brushChoice" value="2">circle</input>
+	<input class="brushSelect" type="radio" name="brushChoice" value="3">square</input>
+	<input class="brushSelect" type="radio" name="brushChoice" value="4">custom</input>
+</fieldset>
+
+<div id="brushSizeValue">size: 1</div>
+<input id="brushSize" type="range" min="1" max="100" value="16"></input>
+
+
+<script src="drawing_site.js"></script>
