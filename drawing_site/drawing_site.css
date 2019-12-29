@@ -2,6 +2,11 @@ html {
 	font: 22px 'Open Sans', sans-serif;
 }
 
+body{
+	background-color: rgb(73,73,73);
+	color: #eee;
+}
+
 #drawingCanvas{
 	display: flex;
 	flex-flow: center;
