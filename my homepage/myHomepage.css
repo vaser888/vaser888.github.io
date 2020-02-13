@@ -1,0 +1,28 @@
+html {
+	font: 24px 'Open Sans', sans-serif;
+}
+
+.header{
+	padding:    20px;
+	text-align: center;
+}
+
+.leftcolumn{
+	float: left;
+	width: 80%
+}
+
+.rightColumn {
+	float: left;
+	width: 20%;
+	background-color: #eeeeee;
+}
+
+.card {
+	background-color: #efefef;
+}
+
+.game {
+	background-color :#b3b3b3;
+	width: max-content;
+}
