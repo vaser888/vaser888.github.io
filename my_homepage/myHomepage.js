@@ -1,7 +1,7 @@
 
 
 var names = ["vaser888", "TechPony", "lollipony", "TheFloatingTree", "PennyWren", "VanillaGhosties",
-"aemantaslim", "JeNnDyLyOn", "RenardeLouve", "stratodraw", "SPW", "AnderDragon"];
+"aemantaslim", "JeNnDyLyOn", "RenardeLouve", "stratodraw", "SPW", "AnderDragon", "Pucksterv", "TheOtherDash"];
 var numberOfUsers = names.length-1;
 
 
@@ -25,7 +25,7 @@ for (i=0; i<= numberOfUsers; i++) {
 
 				var image = document.createElement("img");
 				image.setAttribute("src", thumbnail);
-				image.setAttribute("style", "width:300px; display: block; margin-left: auto;margin-right: auto");
+				image.setAttribute("style", "width:95%; display: block; margin-left: auto;margin-right: auto");
 				linkElement.appendChild(image);
 
 				document.getElementById("rightColumn").appendChild(linkElement);
@@ -75,7 +75,7 @@ var xmlhttp = new XMLHttpRequest();
 		if (this.readyState == 4 && this.status == 200) {
 			var myObj = JSON.parse(this.responseText);
 			var currentGameId = myObj.teams[0].nextGameSchedule.dates[0].games[0].gamePk;
-			document.getElementById("currentHome").innerHTML = myObj.teams[0].nextGameSchedule.dates[0].games[0].gamePk;
+			//document.getElementById("currentHome").innerHTML = myObj.teams[0].nextGameSchedule.dates[0].games[0].gamePk;
 			document.getElementById("nextHome").innerHTML = myObj.teams[0].nextGameSchedule.dates[0].games[0].teams.home.team.name;
 			document.getElementById("nextAway").innerHTML = myObj.teams[0].nextGameSchedule.dates[0].games[0].teams.away.team.name;
 
@@ -85,8 +85,6 @@ var xmlhttp = new XMLHttpRequest();
 xmlhttp.open("GET", "https://statsapi.web.nhl.com/api/v1/teams/8?expand=team.schedule.next" , true);
 xmlhttp.send();
 
-var t = document.getElementById("currentHome").value;
-console.log(t);
 
 /* var xmlhttp = new XMLHttpRequest();
 	xmlhttp.onreadystatechange = function() {
@@ -100,3 +98,17 @@ console.log(t);
 xmlhttp.open("GET", "https://statsapi.web.nhl.com/api/v1/game/"+  +"/feed/live" , true);
 xmlhttp.send(); */
 
+fetch("https://statsapi.web.nhl.com/api/v1/teams/8?expand=team.schedule.next").then(function (r) { return r.json() }).then(function (json) {
+	console.log(json);
+	var testj = json.teams[0].nextGameSchedule.dates[0].games[0].gamePk;
+	fetch("https://statsapi.web.nhl.com/api/v1/game/"+testj+"/feed/live").then(function (r) { return r.json() }).then(function (json1) {
+		console.log(json1);
+		document.getElementById("currentAway").innerHTML = json1.gameData.teams.away.abbreviation;
+		document.getElementById("currentHome").innerHTML = json1.gameData.teams.home.abbreviation;
+		document.getElementById("currentAwayScore").innerHTML = json1.liveData.boxscore.teams.away.teamStats.teamSkaterStats.goals;
+		document.getElementById("currentHomeScore").innerHTML = json1.liveData.boxscore.teams.home.teamStats.teamSkaterStats.goals;
+		document.getElementById("currentAwayShots").innerHTML = json1.liveData.linescore.teams.away.shotsOnGoal;
+		document.getElementById("currentHomeShots").innerHTML = json1.liveData.linescore.teams.home.shotsOnGoal;	
+	})
+
+})

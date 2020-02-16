@@ -6,6 +6,7 @@ window.onload = function(event){
 	valueUpdateOpacity();
 	valueUpdateBrushSize();
 	valueUpdateBrushSelect();
+	boxtest();
 }
 
 /////// Sliders ///////
@@ -183,5 +184,22 @@ function drawLine(ctx, x1, y1, x2, y2){
 	ctx.lineTo(x2,y2);
 	ctx.stroke();	
 	//console.log(x1,y1,x2,y2);
+}
+
+function boxtest() {
+	var canv1 = document.getElementById("colorTest");
+	ctx3 = canv1.getContext("2d");
+	
+	for (let y=0; y<=255; y++){
+		for (let i=0; i<=255; i++){
+			ctx3.strokeStyle = "rgb("+i+","+y+","+y+")";
+			ctx3.lineWidth = 1;
+			ctx3.beginPath();
+			ctx3.moveTo(i,y);
+			ctx3.lineTo((i+1),y);
+			ctx3.stroke();
+			ctx3.closePath();
+		}
+	}
 }
 
