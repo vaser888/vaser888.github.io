@@ -1,7 +1,8 @@
 
 
 var names = ["vaser888", "TechPony", "lollipony", "TheFloatingTree", "PennyWren", "VanillaGhosties",
-"aemantaslim", "JeNnDyLyOn", "RenardeLouve", "stratodraw", "SPW", "AnderDragon", "Pucksterv", "TheOtherDash"];
+"aemantaslim", "JeNnDyLyOn", "RenardeLouve", "stratodraw", "SPW", "AnderDragon", "Pucksterv", 
+"TheOtherDash"];
 var numberOfUsers = names.length-1;
 
 
@@ -12,8 +13,6 @@ for (i=0; i<= numberOfUsers; i++) {
 	xmlhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
 			var myObj = JSON.parse(this.responseText);
-			//document.getElementById("test").innerHTML = myObj.user_id;
-			//document.getElementById("help").src = t;
 			var thumbnail = myObj.thumbnails.web;
 			var artistName = myObj.name;
 			var onlineTest = myObj.online;
@@ -29,7 +28,6 @@ for (i=0; i<= numberOfUsers; i++) {
 				linkElement.appendChild(image);
 
 				document.getElementById("rightColumn").appendChild(linkElement);
-
 
 				var para = document.createElement('p');
 				para.innerHTML = '<center><a href= https://picarto.tv/' + artistName + ' title="http://example.com">'+artistName+'</a>';
@@ -68,9 +66,7 @@ var xmlhttp = new XMLHttpRequest();
 xmlhttp.open("GET", "https://statsapi.web.nhl.com/api/v1/teams/8?expand=team.schedule.previous" , true);
 xmlhttp.send();
 
-
-
-var xmlhttp = new XMLHttpRequest();
+/* var xmlhttp = new XMLHttpRequest();
 	xmlhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
 			var myObj = JSON.parse(this.responseText);
@@ -83,24 +79,14 @@ var xmlhttp = new XMLHttpRequest();
 
 	};
 xmlhttp.open("GET", "https://statsapi.web.nhl.com/api/v1/teams/8?expand=team.schedule.next" , true);
-xmlhttp.send();
-
-
-/* var xmlhttp = new XMLHttpRequest();
-	xmlhttp.onreadystatechange = function() {
-		if (this.readyState == 4 && this.status == 200) {
-			var myObj = JSON.parse(this.responseText);
-			console.log("hello");
-			
-		}
-
-	};
-xmlhttp.open("GET", "https://statsapi.web.nhl.com/api/v1/game/"+  +"/feed/live" , true);
 xmlhttp.send(); */
 
-fetch("https://statsapi.web.nhl.com/api/v1/teams/8?expand=team.schedule.next").then(function (r) { return r.json() }).then(function (json) {
-	console.log(json);
-	var testj = json.teams[0].nextGameSchedule.dates[0].games[0].gamePk;
+fetch("https://statsapi.web.nhl.com/api/v1/teams/8?expand=team.schedule.next").then(function (r) { return r.json() }).then(function (json0) {
+	//console.log(json);
+	document.getElementById("nextGameDate").innerHTML = "Next game: " + json0.teams[0].nextGameSchedule.dates[0].date;
+	document.getElementById("nextHome").innerHTML =json0.teams[0].nextGameSchedule.dates[0].games[0].teams.home.team.name;
+	document.getElementById("nextAway").innerHTML =json0.teams[0].nextGameSchedule.dates[0].games[0].teams.away.team.name;
+	var testj = json0.teams[0].nextGameSchedule.dates[0].games[0].gamePk;
 	fetch("https://statsapi.web.nhl.com/api/v1/game/"+testj+"/feed/live").then(function (r) { return r.json() }).then(function (json1) {
 		console.log(json1);
 		document.getElementById("currentAway").innerHTML = json1.gameData.teams.away.abbreviation;
