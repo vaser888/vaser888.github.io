@@ -2,6 +2,10 @@ html {
 	font: 24px 'Open Sans', sans-serif;
 }
 
+ul {
+	list-style-type: none;
+}
+
 .header{
 	padding:    20px;
 	text-align: center;
@@ -39,11 +43,6 @@ html {
 	text-align:center;
 }
 
-.links {
-	margin: 24px;
-	background-color: #cfcfcf;
-}
-
 .game {
 	background-color: #b3b3b3;
 	width: max-content;
@@ -54,7 +53,19 @@ html {
 	background-color: #a0a0a0;
 	 margin: 24px 0;
 	padding: 6px;
-	
+}
+
+.links {
+	margin: 24px;
+	background-color: #cfcfcf;
+}
+
+.websiteIcon {
+	width: 96px;
+}
+
+.tile {
+	width: max-content;
 }
 
 @media screen and (max-width: 1432px) {
