@@ -16,29 +16,46 @@ ul {
 .leftColumn{
 	float:left;
 	width: 20%;
-	background-color: #dedede;
+	background-color: #c9dddf/* #dedede */; /* #68827f */
 	height: 100%;
 }
 
 .middleColumn{
 	float: left;
 	width: 60%;
+	background-color: #4e5e5e /* #f9f9f9 */;
+	height: 100%;
 }
 
 .rightColumn {
 	float: left;
 	width: 20%;
-	background-color: #dedede;
+	background-color: #c9dddf/* #dedede */;
 	height: 100%;
+	overflow-y: auto;
+}
+
+.rightColumn .titles center {
+	position: sticky;
+	top: 0;
+}
+
+.rightColumn p center a {
+	text-decoration: none;
 }
 
 .searchBar {
-	background-color: #efefef;
+	background-color: ;
+	margin-top:64px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .card {
-	background-color: #efefef;
-	/* height: 100%; */
+	padding: 24px;
+	background-color: #9eb9b9 /* #efefef */;
+	margin-top:13px;
 }
 
 .card ul {
@@ -46,38 +63,45 @@ ul {
 }
 
 .game {
-	background-color: #b3b3b3;
+	background-color: #9eb7b9/* #b3b3b3 */;
 	width: max-content;
 	margin: 0 auto;
 }
 
 .titles {
-	background-color: #a0a0a0;
-	 margin: 24px 0;
+	background-color: #6c8f93/* #a0a0a0 */;
+	margin: 24px 0;
 	padding: 6px;
 }
 
 .links {
-	margin: 24px;
-	background-color: #cfcfcf;
+	background-color: #ccddd9 /* #cfcfcf */;
 }
 
 .websiteIcon {
 	width: 96px;
 }
 
+.websiteName {
+	font: 18px 'Open Sans', sans-serif;
+}
+
 .tile {
 	width: max-content;
 	padding: 20px;
+}
+.tile a {
+	text-decoration: none;
 }
 
 .links ul li {
 	display: inline-block;
 }
 
+
 @media screen and (max-width: 1432px) {
 	.game {
-		background-color :#b3b3b3;
+		background-color :#9eb7b9;
 		width: auto;
 		margin: 0 auto;
 	}
