@@ -100,9 +100,18 @@ ul {
 
 
 @media screen and (max-width: 1432px) {
-	.game {
-		background-color :#9eb7b9;
+	.row{
+		display: flex;
+		flex-direction: column;
+	}
+	.leftColumn{
 		width: auto;
-		margin: 0 auto;
+		height: auto;
+	}
+	.middleColumn{
+		width: auto ;
+	}
+	.rightColumn{
+		width: auto
 	}
 }
