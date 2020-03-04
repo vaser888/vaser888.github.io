@@ -1,0 +1,47 @@
+html {
+	font: 18px 'Open Sans', sans-serif;
+}
+
+
+.leftColumn{
+	float: left;
+	width: 70%;
+	background-color: #dedede;
+	height: 100%;
+}
+
+
+.rightColumn{
+	float: left;
+	width: 29%;
+	background-color: #939393;	
+	height: 100%;
+	overflow-y: auto;
+}
+
+#picture {
+	display: block;
+	width: 100%;
+	margin: 0px auto; 
+}
+
+.picturePlaceHolder{
+	width:95%;
+	max-height: 50%;
+	background-color: #efefef;
+	margin: 20px auto;
+	overflow-y: auto;
+	overflow-x: auto;	
+}
+
+.pictureCredits{
+	width:95%;
+	margin: 15px auto;
+}
+.box{
+	display: block;
+	width: 95%;
+	height: 100px;
+	margin: 0px auto;
+	resize: none;
+}

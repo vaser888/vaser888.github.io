@@ -16,9 +16,18 @@ for (i=0; i<= numberOfUsers; i++) {
 			var thumbnail = myObj.thumbnails.web;
 			var artistName = myObj.name;
 			var onlineTest = myObj.online;
+			var nsfwTest = myObj.adult;
+			
 			
 			if (onlineTest === true){
-
+				
+				if(nsfwTest === true){
+					var para = document.createElement('p');
+					para.innerHTML = '<center><a href= https://picarto.tv/' + artistName + ' title="http://example.com">'+artistName+'</a>';
+					document.getElementById("rightColumn").appendChild(para);	
+				}
+				
+				else {
 				var linkElement = document.createElement('a');
 				linkElement.href = "https://picarto.tv/" + artistName;
 
@@ -31,8 +40,10 @@ for (i=0; i<= numberOfUsers; i++) {
 
 				var para = document.createElement('p');
 				para.innerHTML = '<center><a href= https://picarto.tv/' + artistName + ' title="http://example.com">'+artistName+'</a>';
-				document.getElementById("rightColumn").appendChild(para);				
+				document.getElementById("rightColumn").appendChild(para);
+				}
 			}
+			
 		}		  
 	};
 	xmlhttp.open("GET", "https://api.picarto.tv/v1/channel/name/" + names[i], true);

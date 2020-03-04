@@ -1,0 +1,48 @@
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Derpi Drawing Site</title>
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap" rel="stylesheet">
+<link rel="shortcut icon" href="" type="image/x-icon">
+<link rel="stylesheet" href="derpiDrawingSite.css">
+</head>
+
+<div class="row">
+	
+	<div class="leftColumn">
+
+
+
+	</div>
+
+	<div class="rightColumn">
+		<div class="picturePlaceHolder">
+			<a id="hrefPicture" target="_blank">
+				<img id="picture">
+			</a>
+		</div>
+		<div class="pictureCredits">
+			Click on the image to go to it's Derpibooru page
+		</div>
+		Filter:
+		<select id="filter">
+			<option value="100073">default</option>
+			<option value="56027">everything</option>
+			<option value="37429">18+ Dark</option>
+			<option value="37432">18+ R34</option>
+		</select>
+		
+		<button id="newImage" onclick="getImage()">Get image</button>
+		<textarea id="boxx" class="box">
+		</textarea>
+		<button id="test" onclick="testE()">encode</button>
+	</div>
+</div>
+
+
+
+
+
+
+
+<script src="derpiDrawingSite.js"></script>
