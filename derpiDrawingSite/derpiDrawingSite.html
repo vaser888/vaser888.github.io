@@ -16,7 +16,7 @@
 	</div>
 
 	<div class="rightColumn">
-		<div class="picturePlaceHolder">
+		<div class="picturePlaceHolder" id="picturePlaceHolder" style="height:50%">
 			<a id="hrefPicture" target="_blank">
 				<img id="picture">
 			</a>
@@ -24,15 +24,37 @@
 		<div class="pictureCredits">
 			Click on the image to go to it's Derpibooru page
 		</div>
-		Filter:
-		<select id="filter">
-			<option value="100073">default</option>
-			<option value="56027">everything</option>
-			<option value="37429">18+ Dark</option>
-			<option value="37432">18+ R34</option>
-		</select>
+		<div id="imagesAvailable">
+			Total possible images with your filters:
+		</div>
 		
+		<p>
 		<button id="newImage" onclick="getImage()">Get image</button>
+		</P>
+		
+		<div id="test3">
+			Filter:
+			<select id="filter">
+				<option onclick="delCustomIdBox()" value="100073">default</option>
+				<option onclick="delCustomIdBox()" value="56027">everything</option>
+				<option onclick="delCustomIdBox()" value="37429">18+ Dark</option>
+				<option onclick="delCustomIdBox()" value="37432">18+ R34</option>
+				<option onclick="customIdBox()" id="customId">Custome</option>
+			</select>
+		</div>
+		
+		<p>
+			Artist: <input id="artistName"></input>
+		</P>
+		<P>
+			Number of Upvotes: <input id="upvotesNumber" type="text" maxlength="4" size="4" value="0" 
+			title="Type in the minimum number of up votes a picture has to have">
+			</input>
+			<button id="test1" onclick="testV()">test</button>
+		</P>
+		<p>
+			Number of Downvotes: <input type="text" maxlength="4" size="4" value="0"></input> 
+		<p>
 		<textarea id="boxx" class="box">
 		</textarea>
 		<button id="test" onclick="testE()">encode</button>
