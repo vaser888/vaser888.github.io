@@ -45,3 +45,8 @@ html {
 	margin: 0px auto;
 	resize: none;
 }
+
+.timer{
+	height: 100px;
+	background-color: #595959;
+}

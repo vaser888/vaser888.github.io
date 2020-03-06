@@ -103,6 +103,21 @@ function testE (){
 }
 
 
+
+function timer (){
+	var setTime =
+	
+	var t = Date.now();
+	t= t/1000
+	console.log(t);
+	setTimeout(timer, 1000);
+}
+
+
+
+
+
+
 //https://derpibooru.org/api/v1/json/search/images?q=safe+AND+twilightsparkle+AND+fluttershy&per_page=1
 
 //artist%3Alollipony
