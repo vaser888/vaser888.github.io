@@ -6,6 +6,7 @@ window.onload = function (){
 var countNumber=0;
 
 function getImage (){
+	document.getElementById("pictureCredits").className="pictureCredits";
 	
 	var filterNumber = document.querySelector("#filter").value;
 	var upvoteNumber = document.getElementById("upvotesNumber").value;
@@ -17,12 +18,14 @@ function getImage (){
 		var artistN = "artist%3A" + artist + "%2C+";
 		//console.log(artistN);
 	}
-	//console.log(upvoteNumber);
+
+	if	(filterNumber === "" || filterNumber === "Custom"){
+		alert("Input a custom filter number or change the filter"); 
+	}
+
 	
 fetch("https://derpibooru.org/api/v1/json/search/images?filter_id=" + filterNumber + "&per_page=1&q=" +artistN+ "upvotes.gte%3A" + upvoteNumber).then(function (r) { return r.json() }).then(function (json0) {
-		
 		//console.log(json0);
-		
 		var maxImageNumber = json0.total;
 		if (maxImageNumber === 0){
 			alert("there are no images available with your current filters. If you have an artist in the artist filter make sure the name is spelled correctly");
@@ -54,33 +57,42 @@ fetch("https://derpibooru.org/api/v1/json/search/images?filter_id=" + filterNumb
 			}
 		})
 	})
-	
-	
 }
-let customBox
+
+
+let customBox;
+let filterHelp;
 var check1 = 0;
 function customIdBox(){
 	if (check1 === 0){
 		customBox = document.createElement("input");
-		document.getElementById("test3").appendChild(customBox);
-		customBox.setAttribute("id", "test5");
+		document.getElementById("selectFilterArea").appendChild(customBox);
+		customBox.setAttribute("id", "customIdInput");
 		customBox.setAttribute("value", "");
+		customBox.setAttribute("size", "8");
 		check1 = 1;
-		document.getElementById("test5").addEventListener("keyup", test6)
-		function test6(){
-			var i = document.getElementById("test5").value;
+		document.getElementById("customIdInput").addEventListener("keyup", function(){
+			var i = document.getElementById("customIdInput").value;
 			document.getElementById("customId").setAttribute("value", i);
-			//console.log(i);
-			
-		}
+			console.log(i);
+		});
+		filterHelp = document.createElement("a");
+		document.getElementById("selectFilterArea").appendChild(filterHelp);
+		filterHelp.setAttribute("id", "filterQuestionMark");
+		filterHelp.setAttribute("target", "_blank");
+		document.getElementById("filterQuestionMark").href = "derpiDrawingSiteInstructions.jpg";
+		document.getElementById("filterQuestionMark").innerHTML = "?";
+		
 	}
 	else {
 		return;
 	}
 }
+
 function delCustomIdBox(){
 	if (check1 === 1){
 		customBox.parentNode.removeChild(customBox);
+		filterHelp.parentNode.removeChild(filterHelp);
 		check1 = 0;
 	}
 	else{
@@ -88,34 +100,22 @@ function delCustomIdBox(){
 	}
 }
 
-
-
-
-function testV(){
-	var t =document.getElementById("upvotesNumber").value;
-	console.log(t);
-}
+document.getElementById("filter").addEventListener('change', (event) => {
+    var filterCheck = event.target.value;
+	var customFilterNumber = document.getElementById("customId").value;
+	if (filterCheck === customFilterNumber){
+		customIdBox();
+	}
+	else {
+		delCustomIdBox();
+	}
+});
 
 
 function testE (){
 	var i = document.getElementById("boxx").value;
 	console.log(encodeURIComponent(i));
 }
-
-
-
-function timer (){
-	var setTime =
-	
-	var t = Date.now();
-	t= t/1000
-	console.log(t);
-	setTimeout(timer, 1000);
-}
-
-
-
-
 
 
 //https://derpibooru.org/api/v1/json/search/images?q=safe+AND+twilightsparkle+AND+fluttershy&per_page=1

@@ -8,12 +8,13 @@ html {
 	width: 70%;
 	background-color: #dedede;
 	height: 100%;
+	overflow-y: auto;
 }
 
 
 .rightColumn{
 	float: left;
-	width: 29%;
+	width: 30%;
 	background-color: #939393;	
 	height: 100%;
 	overflow-y: auto;
@@ -35,18 +36,47 @@ html {
 }
 
 .pictureCredits{
+	display: flex;
 	width:95%;
 	margin: 15px auto;
+	justify-content: center;
 }
-.box{
+
+.pictureCredits_hidden{
+	display: none;
+}
+
+.filterTextArea{
 	display: block;
-	width: 95%;
+	width: 100%;
 	height: 100px;
 	margin: 0px auto;
 	resize: none;
+}
+
+.filterSpace{
+	width: 94%;
+	margin: auto;
+	/* background-color: #b5b5b5; */
+}
+
+#selectFilterArea a{
+	margin-left: 5px;
+	font-size: 20px;
+}
+
+.drawingArea {
+	width: 80%;
+	height: 700px;
+	border: 1px solid #000;
+	display: block;
+	margin: 50px auto;
 }
 
 .timer{
 	height: 100px;
 	background-color: #595959;
 }
+
+
+
