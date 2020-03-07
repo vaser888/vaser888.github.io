@@ -8,9 +8,24 @@ var countNumber=0;
 function getImage (){
 	document.getElementById("pictureCredits").className="pictureCredits";
 	
+	var artist = document.getElementById("artistName").value;
 	var filterNumber = document.querySelector("#filter").value;
 	var upvoteNumber = document.getElementById("upvotesNumber").value;
-	var artist = document.getElementById("artistName").value;
+	var downVoteNumber = document.getElementById("downVotesNumber").value;
+	var score = document.getElementById("scoreNumber").value;
+	var encodedFilterBox = encodeURIComponent(document.getElementById("applyFilterBox").value);
+	
+	if (score === ""){
+		score = 0;
+	}
+	
+	if (upvoteNumber === ""){
+		upvoteNumber = 0;
+	}
+	if (downVoteNumber === ""){
+		downVoteNumber = 0;
+	}
+	
 	if (artist === ""){
 		var artistN = "";
 	}
@@ -18,13 +33,21 @@ function getImage (){
 		var artistN = "artist%3A" + artist + "%2C+";
 		//console.log(artistN);
 	}
+	
+	if (encodedFilterBox === ""){
+		var encodedFilterBoxN = "";
+	}
+	else{
+		var encodedFilterBoxN = "%2C+" + encodedFilterBox;
+	}
+
 
 	if	(filterNumber === "" || filterNumber === "Custom"){
 		alert("Input a custom filter number or change the filter"); 
 	}
 
 	
-fetch("https://derpibooru.org/api/v1/json/search/images?filter_id=" + filterNumber + "&per_page=1&q=" +artistN+ "upvotes.gte%3A" + upvoteNumber).then(function (r) { return r.json() }).then(function (json0) {
+fetch("https://derpibooru.org/api/v1/json/search/images?filter_id=" + filterNumber + "&per_page=1&q=" +artistN+ "upvotes.gte%3A" + upvoteNumber + "%2C+downvotes.gte%3A" + downVoteNumber + "%2C+score.gte%3A" + score + encodedFilterBoxN).then(function (r) { return r.json() }).then(function (json0) {
 		//console.log(json0);
 		var maxImageNumber = json0.total;
 		if (maxImageNumber === 0){
@@ -32,9 +55,9 @@ fetch("https://derpibooru.org/api/v1/json/search/images?filter_id=" + filterNumb
 			return;
 		}
 		document.getElementById("imagesAvailable").innerHTML = "Total possible images with your filters: " + maxImageNumber;
-		var randomImageNumber = Math.floor(Math.random()*maxImageNumber);
+		var randomImageNumber = ((Math.floor(Math.random()*maxImageNumber))+1);
 		
-		fetch("https://derpibooru.org/api/v1/json/search/images?filter_id=" + filterNumber + "&per_page=1&page=" + randomImageNumber + "&q=" +artistN+ "upvotes.gte%3A" + upvoteNumber).then(function (r) { return r.json() }).then(function (json1) {
+		fetch("https://derpibooru.org/api/v1/json/search/images?filter_id=" + filterNumber + "&per_page=1&page=" + randomImageNumber + "&q=" +artistN+ "upvotes.gte%3A" + upvoteNumber + "%2C+downvotes.gte%3A" + downVoteNumber + "%2C+score.gte%3A" + score + encodedFilterBoxN).then(function (r) { return r.json() }).then(function (json1) {
 			
 			var testFormat = json1.images[0].format;
 			var testHidden = json1.images[0].hidden_from_users;
@@ -70,11 +93,12 @@ function customIdBox(){
 		customBox.setAttribute("id", "customIdInput");
 		customBox.setAttribute("value", "");
 		customBox.setAttribute("size", "8");
+		customBox.setAttribute("pattern", "[0-9]+")
 		check1 = 1;
 		document.getElementById("customIdInput").addEventListener("keyup", function(){
 			var i = document.getElementById("customIdInput").value;
 			document.getElementById("customId").setAttribute("value", i);
-			console.log(i);
+			//console.log(i);
 		});
 		filterHelp = document.createElement("a");
 		document.getElementById("selectFilterArea").appendChild(filterHelp);
@@ -112,15 +136,7 @@ document.getElementById("filter").addEventListener('change', (event) => {
 });
 
 
-function testE (){
-	var i = document.getElementById("boxx").value;
-	console.log(encodeURIComponent(i));
-}
-
 
 //https://derpibooru.org/api/v1/json/search/images?q=safe+AND+twilightsparkle+AND+fluttershy&per_page=1
-
-//artist%3Alollipony
-
 //https://derpibooru.org/api/v1/json/search/images?q=explicit+AND+twilightsparkle+AND+fluttershy&per_page=50&filter_id=56027
 

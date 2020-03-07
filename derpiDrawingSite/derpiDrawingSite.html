@@ -18,7 +18,7 @@
 	<div class="rightColumn">
 		
 		<div id="timer" class="timer">
-			
+			TIMER
 		
 		</div>
 	
@@ -54,20 +54,31 @@
 			<p>
 				Artist: <input id="artistName"></input>
 			</P>
-			
+						
 			<P>
-				Number of Upvotes: <input id="upvotesNumber" type="text" maxlength="4" size="4" value="0" 
-				title="Type in the minimum number of up votes a picture has to have">
+				Min Number of Upvotes: <input id="upvotesNumber" type="text" maxlength="4" size="4" value="0" 
+				title="Type in the minimum number of upvotes a picture has to have">
 				</input>
 			</P>
 			
 			<p>
-				Number of Downvotes: <input type="text" maxlength="4" size="4" value="0" disabled></input> 
+				Min Number of Downvotes: <input id="downVotesNumber" type="text" maxlength="4" size="4" value="0"></input> 
 			<p>
 			
-			<textarea id="boxx" class="filterTextArea" disabled></textarea>
-			
-			<button id="test" onclick="testE()">encode</button>
+			<p>
+				Min Score: <input id="scoreNumber" type="text" maxlength="4" size="4" value="0"
+				title="type in the minimum score a picutre has to have">
+				</input>
+			</P>
+			<p> Search Specific Tags:
+				<textarea id="applyFilterBox" class="filterTextArea" placeholder="eg: twilight sparkle, luna, pony"></textarea>
+			</P>
+			<P class="explanationText">
+				- use a commma (",") between different tags or you will get an error. But do not have the last thing be a comma, nothing will happen and no image will load<br> 
+				- For the "Artist" input area  at the top you do not need to put "artist:" in there, simply put the artist name as it is from Derpibooru. It can only search one artist name in that box.<br>
+				- If you want to search for multiple artists collaborating in a piece use artist:"name1", artist:"name2, etc. in the Search Specific Tags area.
+				
+			</P>
 			
 		</div>
 	</div>

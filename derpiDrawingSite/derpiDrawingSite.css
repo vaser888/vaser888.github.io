@@ -65,6 +65,10 @@ html {
 	font-size: 20px;
 }
 
+.explanationText{
+	font: 14px 'Open Sans', sans-serif;
+}
+
 .drawingArea {
 	width: 80%;
 	height: 700px;
@@ -76,6 +80,7 @@ html {
 .timer{
 	height: 100px;
 	background-color: #595959;
+	color: white;
 }
 
 
