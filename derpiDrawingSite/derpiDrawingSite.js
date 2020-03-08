@@ -1,8 +1,75 @@
 
 window.onload = function (){
-
+	//testDraw();
 }
 
+function openSidePanel0(){
+	document.getElementById("sidePanel0").style.width = "20%";
+}
+function closeSidePanel0(){
+	document.getElementById("sidePanel0").style.width = "0";
+}
+
+function test234(){
+	alert("hey");
+}
+
+function saveDrawing(){
+	var imageData = ctx.getImageData(0, 0, 1000, 800);
+	var theDrawing = new Image();
+	var URLImageData = getImageURL(imageData, 1000, 800);
+	theDrawing.src = URLImageData;
+	theDrawing.setAttribute("width", "95%");
+	theDrawing.setAttribute("style", "background-color:white; margin: 20px 0px");
+	document.getElementById("imageSaveArea").appendChild(theDrawing);
+	
+	
+	
+	var drawingButton = document.createElement("a");
+	drawingButton.innerHTML="Save image";
+	drawingButton.setAttribute("href", URLImageData);
+	drawingButton.setAttribute("download", "image.png");
+	document.getElementById("imageSaveArea").appendChild(drawingButton);
+	
+
+	function getImageURL(imgData, width, height){
+		var canv = document.createElement("canvas");
+		var ctx = canv.getContext("2d");
+		canv.width = width;
+		canv.height = height;
+		ctx.putImageData(imgData, 0, 0);
+		return canv.toDataURL();
+	}
+}
+
+//function testDraw(){
+	
+var canv = document.getElementById("drawingArea");
+ctx = canv.getContext("2d");
+
+ctx.clearRect(0, 0, 800, 800);
+
+ctx.strokeStyle = "blue";
+ctx.fillStyle = "red";
+ctx.fillRect(10, 20, 30, 40);
+ctx.strokeRect(10, 20, 30, 40);
+
+ctx.fillStyle = "rgb(200, 0, 0)";
+ctx.fillRect(70, 80, 30, 30);
+ctx.fillStyle = "rgba(0, 0, 200, 0.7)";
+ctx.fillRect(85, 95, 30, 30); //(x, y, length x, length y)
+
+ctx.beginPath();
+ctx.moveTo(0, 20);
+ctx.lineTo(20, 0);
+ctx.lineTo(0,0);
+ctx.closePath();
+ctx.fill();
+//}
+
+/////////
+// Description: Code to get images and handle the filters 
+/////////
 var countNumber=0;
 
 function getImage (){
@@ -134,6 +201,10 @@ document.getElementById("filter").addEventListener('change', (event) => {
 		delCustomIdBox();
 	}
 });
+
+
+
+
 
 
 

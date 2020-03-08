@@ -6,85 +6,130 @@
 <link rel="shortcut icon" href="" type="image/x-icon">
 <link rel="stylesheet" href="derpiDrawingSite.css">
 </head>
-
-<div class="row">
-	
-	<div class="leftColumn">
+<body>
+	<div id="sidePanel0" class="sidePanel0">
+		<a href="javascript:void(0)" class="closeButton" onclick="closeSidePanel0()">x</a>
+		<p>Your saved drawings</P>
 		
-		<canvas class="drawingArea"></canvas>
+		<div id="imageSaveArea" class="imageSaveArea">
+			
+		</div>
 		
 	</div>
 
-	<div class="rightColumn">
+	<div class="row">
 		
-		<div id="timer" class="timer">
-			TIMER
-		
-		</div>
-	
-		<div class="picturePlaceHolder" id="picturePlaceHolder" style="height:50%">
-			<a id="hrefPicture" target="_blank">
-				<img id="picture">
-			</a>
+		<div class="drawingFunctions">
+			<button class="openSidePanelButton" onclick="openSidePanel0()">☰ Your saved drawings</button>
+			<button class="functionsButtonOne" onclick="saveDrawing()">save drawing</button>
 		</div>
 		
-		<div id="pictureCredits" class="pictureCredits_hidden">
-			Click on the image to go to it's Derpibooru page
-		</div>
-		
-		<div class="filterSpace">
-			<div id="imagesAvailable">
-				Total possible images with your filters:
+		<div class="leftColumn">
+			
+			<div>
+				<canvas id="drawingArea" class="drawingArea" width="1000px" height="800px"></canvas>
 			</div>
+		</div>
+
+		<div class="rightColumn">
 			
-			<p>
-			<button id="newImage" onclick="getImage()">Get image</button>
-			</P>
+			<div id="timer" class="timer">
 			
-			<div id="selectFilterArea">
-				Filter:
-				<select id="filter">
-					<option value="100073">default</option>
-					<option value="56027">everything</option>
-					<option value="37429">18+ Dark</option>
-					<option value="37432">18+ R34</option>
-					<option id="customId">Custom</option>
-				</select>
-			</div>
-			<p>
-				Artist: <input id="artistName"></input>
-			</P>
-						
-			<P>
-				Min Number of Upvotes: <input id="upvotesNumber" type="text" maxlength="4" size="4" value="0" 
-				title="Type in the minimum number of upvotes a picture has to have">
-				</input>
-			</P>
-			
-			<p>
-				Min Number of Downvotes: <input id="downVotesNumber" type="text" maxlength="4" size="4" value="0"></input> 
-			<p>
-			
-			<p>
-				Min Score: <input id="scoreNumber" type="text" maxlength="4" size="4" value="0"
-				title="type in the minimum score a picutre has to have">
-				</input>
-			</P>
-			<p> Search Specific Tags:
-				<textarea id="applyFilterBox" class="filterTextArea" placeholder="eg: twilight sparkle, luna, pony"></textarea>
-			</P>
-			<P class="explanationText">
-				- use a commma (",") between different tags or you will get an error. But do not have the last thing be a comma, nothing will happen and no image will load<br> 
-				- For the "Artist" input area  at the top you do not need to put "artist:" in there, simply put the artist name as it is from Derpibooru. It can only search one artist name in that box.<br>
-				- If you want to search for multiple artists collaborating in a piece use artist:"name1", artist:"name2, etc. in the Search Specific Tags area.
+				<div class="timerHand">
+					<button>/\</button>
+					<input id="timerHoursInput" class="timeInputs" type="text" maxlength="2" size="1"></input>
+					<button>\/</button>
+				</div>
+				<div>
+					h
+				</div>
+				<div class="timerHand">
+					<button>/\</button>
+					<input id="timerMinutesInput" class="timeInputs" type="text" maxlength="2" size="1"></input>
+					<button>\/</button>
+				</div>
+				<div>
+					m
+				</div>
+				<div class="timerHand">
+					<button>/\</button>
+					<input id="timerSecondsInput" class="timeInputs" type="text" maxlength="2" size="1"></input>
+					<button>\/</button>
+				</div>
+				<div>
+					s
+				</div>
+				<div class="timerHand">
+					<button>start</button>
+					<button>pause</button>
+				</div>
 				
-			</P>
 			
+			</div>
+		
+			<div class="picturePlaceHolder" id="picturePlaceHolder" style="height:50%">
+				<a id="hrefPicture" target="_blank">
+					<img id="picture">
+				</a>
+			</div>
+			
+			<div id="pictureCredits" class="pictureCredits_hidden">
+				Click on the image to go to it's Derpibooru page
+			</div>
+			
+			<div class="filterSpace">
+				<div id="imagesAvailable">
+					Total possible images with your filters:
+				</div>
+				
+				<p>
+				<button id="newImage" onclick="getImage()">Get image</button>
+				</P>
+				
+				<div id="selectFilterArea">
+					Filter:
+					<select id="filter">
+						<option value="100073">default</option>
+						<option value="56027">everything</option>
+						<option value="37429">18+ Dark</option>
+						<option value="37432">18+ R34</option>
+						<option id="customId">Custom</option>
+					</select>
+				</div>
+				<p>
+					Artist: <input id="artistName"></input>
+				</P>
+							
+				<P>
+					Min Number of Upvotes: <input id="upvotesNumber" type="text" maxlength="4" size="4" value="0" 
+					title="Type in the minimum number of upvotes a picture has to have">
+					</input>
+				</P>
+				
+				<p>
+					Min Number of Downvotes: <input id="downVotesNumber" type="text" maxlength="4" size="4" value="0"></input> 
+				<p>
+				
+				<p>
+					Min Score: <input id="scoreNumber" type="text" maxlength="4" size="4" value="0"
+					title="type in the minimum score a picutre has to have">
+					</input>
+				</P>
+				<p> Search Specific Tags:
+					<textarea id="applyFilterBox" class="filterTextArea" placeholder="eg: twilight sparkle, luna, pony"></textarea>
+				</P>
+				<P class="explanationText">
+					- use a commma (",") between different tags or you will get an error. But do not have the last thing be a comma, nothing will happen and no image will load<br> 
+					- For the "Artist" input area  at the top you do not need to put "artist:" in there, simply put the artist name as it is from Derpibooru. It can only search one artist name in that box.<br>
+					- If you want to search for multiple artists collaborating in a piece use artist:"name1", artist:"name2, etc. in the Search Specific Tags area.
+					
+				</P>
+				
+			</div>
 		</div>
 	</div>
-</div>
 
-
+</body>
 
 
 

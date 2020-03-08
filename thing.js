@@ -219,7 +219,7 @@ ctx.fillRect(0, 0, 100,100);
 var canv = document.getElementById("myCanvas");
 ctx = canv.getContext("2d");
 
-ctx.clearRect(0, 0, 200, 100);
+ctx.clearRect(0, 0, 200, 200);
 
 ctx.strokeStyle = "blue";
 ctx.fillStyle = "red";
