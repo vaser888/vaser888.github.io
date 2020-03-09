@@ -114,11 +114,11 @@ function getImage (){
 	}
 
 	
-fetch("https://derpibooru.org/api/v1/json/search/images?filter_id=" + filterNumber + "&per_page=1&q=" +artistN+ "upvotes.gte%3A" + upvoteNumber + "%2C+downvotes.gte%3A" + downVoteNumber + "%2C+score.gte%3A" + score + encodedFilterBoxN).then(function (r) { return r.json() }).then(function (json0) {
+	fetch("https://derpibooru.org/api/v1/json/search/images?filter_id=" + filterNumber + "&per_page=1&q=" +artistN+ "upvotes.gte%3A" + upvoteNumber + "%2C+downvotes.gte%3A" + downVoteNumber + "%2C+score.gte%3A" + score + encodedFilterBoxN).then(function (r) {return r.json();}).then(function (json0) {
 		//console.log(json0);
 		var maxImageNumber = json0.total;
 		if (maxImageNumber === 0){
-			alert("there are no images available with your current filters. If you have an artist in the artist filter make sure the name is spelled correctly");
+			alert("There are no images available with your current filters.\n\nIf you have tags in the Search Specific Tags area make sure they are spelled correctly.\nIf you have an 'AND' 'OR' 'NOT' in the Search Specific Tags area they have to be all capitalized.\n\nIf you have an artist name in the Artist filter box make sure the name is spelled correctly.");
 			return;
 		}
 		document.getElementById("imagesAvailable").innerHTML = "Total possible images with your filters: " + maxImageNumber;
@@ -132,7 +132,8 @@ fetch("https://derpibooru.org/api/v1/json/search/images?filter_id=" + filterNumb
 			if (testFormat === "webm" || testHidden === true || testFormat === "GIF" || testFormat === "gif"){
 				console.log("that was a bad image");
 				if (countNumber >=10){
-					alert("Infint loop detected. There are too many Gifs or Webm sources where you are searching, I have made it so that they will never display on this site. >>> try lowering the fav or upvote or downvote values <<<");
+					alert("Infint loop detected.\nThere are too many Gifs or Webm sources where you are searching.\nI have made it so that they will never display on this site.\n\nTry lowering the Score or Upvote or Downvote numbers.\nOr\nTry the Get image button or Start button on the timer again.");
+					countNumber = 0;
 					return;
 				}
 				countNumber++;
@@ -147,6 +148,7 @@ fetch("https://derpibooru.org/api/v1/json/search/images?filter_id=" + filterNumb
 			}
 		})
 	})
+	.catch((error) => { alert("There is an imporper character (eg.(),   ) in the Search Specific Tags box.\nOr\nYou have an OR / AND / NOT being the last thing in the search area.");})
 }
 
 
