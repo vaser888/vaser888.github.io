@@ -37,7 +37,7 @@
 			
 				<div class="timerHand">
 					<button>/\</button>
-					<input id="timerHoursInput" class="timeInputs" type="text" maxlength="2" size="1"></input>
+					<input id="timerHoursInput" class="timeInputs" type="text" maxlength="2" size="1" value="00"></input>
 					<button>\/</button>
 				</div>
 				<div>
@@ -45,7 +45,7 @@
 				</div>
 				<div class="timerHand">
 					<button>/\</button>
-					<input id="timerMinutesInput" class="timeInputs" type="text" maxlength="2" size="1"></input>
+					<input id="timerMinutesInput" class="timeInputs" type="text" maxlength="2" size="1" value="00"></input>
 					<button>\/</button>
 				</div>
 				<div>
@@ -53,15 +53,22 @@
 				</div>
 				<div class="timerHand">
 					<button>/\</button>
-					<input id="timerSecondsInput" class="timeInputs" type="text" maxlength="2" size="1"></input>
+					<input id="timerSecondsInput" class="timeInputs" type="text" maxlength="2" size="1" value="10"></input>
 					<button>\/</button>
 				</div>
 				<div>
 					s
 				</div>
 				<div class="timerHand">
-					<button>start</button>
-					<button>pause</button>
+					<button id="startTimer">Start</button>
+					<button id="pauseTimer" disabled>Pause</button>
+					<button id="stopTimer">Stop</button>
+				</div>
+				<div>
+					x
+				</div>
+				<div class="timerHand">
+					<input id="timerNumTimes" class="timeInputs" type="text" maxlength="2" size="1" value="05"></input>
 				</div>
 				
 			
@@ -101,7 +108,7 @@
 				</P>
 							
 				<P>
-					Min Number of Upvotes: <input id="upvotesNumber" type="text" maxlength="4" size="4" value="0" 
+					Min Number of Upvotes: <input id="upVotesNumber" type="text" maxlength="4" size="4" value="0" 
 					title="Type in the minimum number of upvotes a picture has to have">
 					</input>
 				</P>

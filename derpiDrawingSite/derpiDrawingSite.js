@@ -10,9 +10,23 @@ function closeSidePanel0(){
 	document.getElementById("sidePanel0").style.width = "0";
 }
 
-function test234(){
-	alert("hey");
-}
+
+
+
+document.getElementById("upVotesNumber").addEventListener("input", (event) => {
+	var numCheck = /[0-9]+$/;
+	if (document.getElementById("upVotesNumber").value.match(numCheck)){
+		console.log("yes");
+	}
+	else {
+		var t = document.getElementById("upVotesNumber").value;
+		document.getElementById("upVotesNumber").value = t.substring(0, t.length - 1);
+		console.log(t);
+	}
+});
+
+
+
 
 function saveDrawing(){
 	var imageData = ctx.getImageData(0, 0, 1000, 800);
@@ -68,6 +82,138 @@ ctx.fill();
 //}
 
 /////////
+// Timer area
+/////////
+
+var timerPause = 0;
+var loadTimerSetMemory;
+var loadTimerSetMemoryFlag = 0;
+
+document.getElementById("startTimer").addEventListener("click", startTimer);
+function startTimer(){	
+
+	document.getElementById("pauseTimer").disabled = false;
+	document.getElementById("startTimer").innerHTML = "Start";
+	
+	if (timerPause != 1){
+	getImage();
+	}
+	timerPause = 0;
+	
+	var startTime = Date.now(),
+	x = document.getElementById("timerNumTimes").value,
+	timerSet,
+	timerSetMemory,
+	timeRemaining,
+	hours,
+	minutes,
+	seconds;
+	
+	seconds = ((document.getElementById("timerSecondsInput").value) * 1);
+	minutes = ((document.getElementById("timerMinutesInput").value) * 60);
+	hours = ((document.getElementById("timerHoursInput").value) * 3600);
+	timerSet = seconds + minutes + hours;
+
+	timerSetMemory = timerSet;
+	
+	if (timerSet === 0){
+		alert("Timer is set to 0h 0m 0s\n\nPlease input a time");
+		return;
+	}
+		
+	function timer() {
+		
+		timeRemaining = timerSet - Math.floor((Date.now() - startTime) / 1000);
+	
+		hours = Math.floor(timeRemaining / 3600);			
+		minutes = Math.floor((timeRemaining - (3600 * hours)) / 60);
+		seconds = Math.floor(timeRemaining % 60);
+
+		hours = hours < 10 ? "0" + hours : hours;
+		minutes = minutes < 10 ? "0" + minutes : minutes;
+		seconds = seconds < 10 ? "0" + seconds : seconds;
+		//console.log(hours, minutes, seconds);
+		document.getElementById("timerHoursInput").value = hours;
+		document.getElementById("timerMinutesInput").value = minutes;
+		document.getElementById("timerSecondsInput").value = seconds;
+		
+		if (timeRemaining <= 0) {
+			
+			x = x - 1;
+			
+			if (x <= 0){
+				alert("you are all done!");
+				x = 0;
+				document.getElementById("timerNumTimes").value = 0;
+				return;
+			}
+			
+			getImage();
+			alert("Your done this sketch.\n\nOn to the next drawing!");
+			saveDrawing();
+			document.getElementById("timerNumTimes").value = x;
+			clearInterval(stopTimer);
+			timeRemaining = timerSetMemory;
+			if (loadTimerSetMemoryFlag !=0){
+				timerSet = loadTimerSetMemory;
+				timeRemaining = loadTimerSetMemory;
+				timerSetMemory = loadTimerSetMemory;
+			}
+			loadTimerSetMemoryFlag = 0;
+			startTime = Date.now();
+		}
+		
+		
+		
+		
+		
+		
+		if (Number.isNaN(x) === true){
+			document.getElementById("timerNumTimes").value = "0";
+			clearInterval(stopTimer);
+			alert("Oops. You managed to put a letter in the timer 'x' (times) area.\n\nSet a new number.");
+			return;
+		}
+		
+		if (Number.isNaN(seconds) === true || Number.isNaN(minutes) === true || Number.isNaN(hours) === true){
+			clearInterval(stopTimer);
+			document.getElementById("timerSecondsInput").value = "00";
+			document.getElementById("timerMinutesInput").value = "00";
+			document.getElementById("timerHoursInput").value = "00";
+			alert("Oops. You managed to put a letter in the timer.\n\nSet a new time.");
+			return;
+		}
+			
+		
+		document.getElementById("pauseTimer").addEventListener("click", function(){
+			timerPause = 1;
+			loadTimerSetMemoryFlag = 1;
+			loadTimerSetMemory = timerSetMemory;
+			clearTimeout(stopTimer);
+			document.getElementById("pauseTimer").disabled = true;
+			document.getElementById("startTimer").innerHTML = "Continue";
+		});
+		
+		document.getElementById("stopTimer").addEventListener("click", function(){
+			clearTimeout(stopTimer);
+			document.getElementById("pauseTimer").disabled = true;
+			document.getElementById("timerHoursInput").value = "00";
+			document.getElementById("timerMinutesInput").value = "00";
+			document.getElementById("timerSecondsInput").value = "00";
+			return;
+		});
+		var stopTimer = setTimeout(timer, 1000);
+	};
+	timer();
+	
+	
+
+}
+
+
+
+
+/////////
 // Description: Code to get images and handle the filters 
 /////////
 var countNumber=0;
@@ -77,7 +223,7 @@ function getImage (){
 	
 	var artist = document.getElementById("artistName").value;
 	var filterNumber = document.querySelector("#filter").value;
-	var upvoteNumber = document.getElementById("upvotesNumber").value;
+	var upVoteNumber = document.getElementById("upVotesNumber").value;
 	var downVoteNumber = document.getElementById("downVotesNumber").value;
 	var score = document.getElementById("scoreNumber").value;
 	var encodedFilterBox = encodeURIComponent(document.getElementById("applyFilterBox").value);
@@ -86,8 +232,8 @@ function getImage (){
 		score = 0;
 	}
 	
-	if (upvoteNumber === ""){
-		upvoteNumber = 0;
+	if (upVoteNumber === ""){
+		upVoteNumber = 0;
 	}
 	if (downVoteNumber === ""){
 		downVoteNumber = 0;
@@ -114,7 +260,7 @@ function getImage (){
 	}
 
 	
-	fetch("https://derpibooru.org/api/v1/json/search/images?filter_id=" + filterNumber + "&per_page=1&q=" +artistN+ "upvotes.gte%3A" + upvoteNumber + "%2C+downvotes.gte%3A" + downVoteNumber + "%2C+score.gte%3A" + score + encodedFilterBoxN).then(function (r) {return r.json();}).then(function (json0) {
+	fetch("https://derpibooru.org/api/v1/json/search/images?filter_id=" + filterNumber + "&per_page=1&q=" +artistN+ "upvotes.gte%3A" + upVoteNumber + "%2C+downvotes.gte%3A" + downVoteNumber + "%2C+score.gte%3A" + score + encodedFilterBoxN).then(function (r) {return r.json();}).then(function (json0) {
 		//console.log(json0);
 		var maxImageNumber = json0.total;
 		if (maxImageNumber === 0){
@@ -124,7 +270,7 @@ function getImage (){
 		document.getElementById("imagesAvailable").innerHTML = "Total possible images with your filters: " + maxImageNumber;
 		var randomImageNumber = ((Math.floor(Math.random()*maxImageNumber))+1);
 		
-		fetch("https://derpibooru.org/api/v1/json/search/images?filter_id=" + filterNumber + "&per_page=1&page=" + randomImageNumber + "&q=" +artistN+ "upvotes.gte%3A" + upvoteNumber + "%2C+downvotes.gte%3A" + downVoteNumber + "%2C+score.gte%3A" + score + encodedFilterBoxN).then(function (r) { return r.json() }).then(function (json1) {
+		fetch("https://derpibooru.org/api/v1/json/search/images?filter_id=" + filterNumber + "&per_page=1&page=" + randomImageNumber + "&q=" +artistN+ "upvotes.gte%3A" + upVoteNumber + "%2C+downvotes.gte%3A" + downVoteNumber + "%2C+score.gte%3A" + score + encodedFilterBoxN).then(function (r) { return r.json() }).then(function (json1) {
 			
 			var testFormat = json1.images[0].format;
 			var testHidden = json1.images[0].hidden_from_users;
