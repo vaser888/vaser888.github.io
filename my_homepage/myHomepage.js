@@ -2,7 +2,7 @@
 
 var names = ["vaser888", "TechPony", "lollipony", "TheFloatingTree", "PennyWren", "VanillaGhosties",
 "aemantaslim", "JeNnDyLyOn", "RenardeLouve", "stratodraw", "SPW", "AnderDragon", "Pucksterv", 
-"TheOtherDash", "TwoKinds", "bluesound"];
+"TheOtherDash", "TwoKinds", "bluesound", "Igazella"];
 var numberOfUsers = names.length-1;
 
 
@@ -18,6 +18,8 @@ for (i=0; i<= numberOfUsers; i++) {
 			var onlineTest = myObj.online;
 			var nsfwTest = myObj.adult;
 			
+			var videoThumbnail = thumbnail;
+			videoThumbnail = (videoThumbnail.substring(0, videoThumbnail.length - 3)) + "mp4";
 			
 			if (onlineTest === true){
 				
@@ -33,8 +35,21 @@ for (i=0; i<= numberOfUsers; i++) {
 
 				var image = document.createElement("img");
 				image.setAttribute("src", thumbnail);
-				image.setAttribute("style", "width:95%; display: block; margin-left: auto;margin-right: auto");
+				image.setAttribute("style", "width:95%; display: block; margin-left: auto;margin-right: auto;position:relative;");
+				image.style.zIndex = "0";
+				image.setAttribute("onmouseenter", "hide(this)");
+				image.setAttribute("onmouseleave", "unhide(this)");
+				
 				linkElement.appendChild(image);
+				
+				var video = document.createElement("video");
+				video.setAttribute("type", "video/mp4");
+				video.setAttribute("muted", "");
+				video.setAttribute("loop", "");
+				video.setAttribute("autoplay", "");
+				video.setAttribute("src", videoThumbnail);
+				video.setAttribute("style", "width:95%; display: block; margin-left: auto;margin-right: auto;margin-top: -53.8%;");
+				linkElement.appendChild(video);
 
 				document.getElementById("rightColumn").appendChild(linkElement);
 
@@ -109,3 +124,11 @@ fetch("https://statsapi.web.nhl.com/api/v1/teams/8?expand=team.schedule.next").t
 	})
 
 })
+
+
+function hide(x){
+	x.style.opacity = "0";
+}
+function unhide(x){
+	x.style.opacity = "1";
+}
