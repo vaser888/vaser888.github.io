@@ -1,8 +1,8 @@
 
 
 var names = ["vaser888", "TechPony", "lollipony", "TheFloatingTree", "PennyWren", "VanillaGhosties",
-"aemantaslim", "JeNnDyLyOn", "RenardeLouve", "stratodraw", "SPW", "AnderDragon", "Pucksterv", 
-"TheOtherDash", "TwoKinds", "bluesound"];
+"aemantaslim", "JeNnDyLyOn", "RenardeLouve", "SPW", "AnderDragon", "Pucksterv", 
+"TheOtherDash", "TwoKinds", "bluesound", "lilfunkman"];
 var numberOfUsers = names.length-1;
 
 
