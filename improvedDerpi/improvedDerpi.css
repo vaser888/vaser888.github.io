@@ -1,0 +1,62 @@
+body, html  {
+    font: 18px 'Open Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    height: 100%;
+}
+
+.topBar{
+    float: left;
+    width: 100%;
+    background-color: #3d92d0;
+    display: block;
+    height: 36px;
+}
+
+.topBarButton {
+    padding: 6px;
+    width: max-content;
+    cursor: pointer;
+    color: white;
+}
+
+.topBarButton:hover {
+    padding-top: 6px;
+    padding-left: 6px;
+    background-color: #2d80bc;
+}
+
+.imageDisplayArea {
+    float: left;
+    width: 75%;
+    background-color: #f8fafc;
+    height: calc(100% - 36px);
+    overflow-y: auto;
+}
+
+.settingsAndInfo{
+    float: left;
+    width: 25%;
+    background-color: #d5e7f5;
+    height: calc(100% - 36px);
+}
+
+.settingsAndInfo .randomButtonArea{
+    background-color: #62a7d9;
+}
+
+.settingsAndInfo .randomButtonArea .randomButton{
+    font-size: 28px;
+    background-color: #62a7d9;
+    color: white;
+    text-align: center;
+    padding: 10px 10px;
+    cursor: pointer;
+}
+.settingsAndInfo .randomButtonArea .randomButton:hover{
+    background-color: #419cd9;
+}
+
+
+/*#419cd9
