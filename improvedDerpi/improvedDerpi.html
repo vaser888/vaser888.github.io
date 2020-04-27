@@ -20,6 +20,7 @@
 
 <body>
     <div class="topBar">
+        <a href="https://derpibooru.org/"> 
             <div id="realDerpiButton" class="topBarButton">
                 <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iV
                 VRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB
@@ -33,21 +34,49 @@
                 wvdXNlPjwvc3ZnPgo=" height="16px">
                 To the real Derpibooru
             </div>
+        </a>
+            <div class="topBarText">
+                Go to specific image # 
+                <input id="imageNumberSearch"></input>
+                <a href="javascript:void(0)" onclick="goButton()">
+                    <div class="topBarButton" style="display: inline;padding-left: 36px;padding-right: 36px;"> Go</div>
+                </a>
+            </div>
     </div>
 
     <div class="imageDisplayArea">
-        there est
+        <div class="basicPictureInfo">
+            <div id="numberOfUp">
+                Up votes: 
+            </div>
+            <div id="numberOfScore">
+                score: 
+            </div>
+            <div id="numberOfDown">
+                Down votes: 
+            </div>
+        </div>
+        <div id="clickExpand" class="imageAndVideo">
+            <img id="theImage" src="" style="max-width: 100%; max-height: 100%;cursor: pointer;">
+            <video id="theVideo" src="" style="max-width: 100%; max-height: 100%; display: none;" controls="" muted="" loop=""></video> 
+        </div>
 
     </div>
 
     <div class="settingsAndInfo">
-        <div class="randomButtonArea">
-            <div id="randomButton" class="randomButton">
-                Random Image 
-            </div>
-            <div>
-                test
-            </div>
+        <div class="imageSearchArea">
+            <a href="javascript:void(0)" onclick="getRandomImage()">
+                <div id="randomButton" class="randomButton">
+                    Random Image 
+                </div>
+            </a>
+        </div>
+        
+        <div class="info">
+            <p>Total possible images with your filters:</p>
+            <p>Current image #:</p>
+            <p></p>  
+            
         </div>
 
     </div>

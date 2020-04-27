@@ -1,4 +1,4 @@
-body, html  {
+body, html {
     font: 18px 'Open Sans', sans-serif;
     margin: 0;
     padding: 0;
@@ -6,22 +6,32 @@ body, html  {
     height: 100%;
 }
 
-.topBar{
+.topBar {
     float: left;
     width: 100%;
     background-color: #3d92d0;
-    display: block;
     height: 36px;
+    display: flex;
+    justify-content: space-between;
 }
 
-.topBarButton {
+.topBar a {
+    text-decoration: none;
+}
+
+.topBar .topBarText {
+    color: white;
+    padding: 6px 0px 0px 0px;
+}
+
+.topBar .topBarButton {
     padding: 6px;
     width: max-content;
     cursor: pointer;
     color: white;
 }
 
-.topBarButton:hover {
+.topBar .topBarButton:hover {
     padding-top: 6px;
     padding-left: 6px;
     background-color: #2d80bc;
@@ -32,31 +42,59 @@ body, html  {
     width: 75%;
     background-color: #f8fafc;
     height: calc(100% - 36px);
-    overflow-y: auto;
 }
 
-.settingsAndInfo{
+.imageDisplayArea .basicPictureInfo {
+    background-color:#e2ebf2;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+}
+.imageDisplayArea .basicPictureInfo div {
+margin: 4px 14px 0px 14px;
+}
+
+.imageDisplayArea .imageAndVideo{
+    overflow-y: auto;
+   /* background-color: rgb(153, 224, 83);*/
+    height: calc(100% - 32px);
+    max-width: 100%;
+    overflow-y: auto;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.settingsAndInfo {
     float: left;
     width: 25%;
     background-color: #d5e7f5;
     height: calc(100% - 36px);
 }
 
-.settingsAndInfo .randomButtonArea{
-    background-color: #62a7d9;
+.settingsAndInfo .imageSearchArea {
+    background-color: #d5e7f5;
 }
 
-.settingsAndInfo .randomButtonArea .randomButton{
+.settingsAndInfo .imageSearchArea a {
+    text-decoration: none;
+}
+
+.settingsAndInfo .imageSearchArea .randomButton {
     font-size: 28px;
     background-color: #62a7d9;
     color: white;
     text-align: center;
     padding: 10px 10px;
     cursor: pointer;
+    margin: 14px;
 }
-.settingsAndInfo .randomButtonArea .randomButton:hover{
+.settingsAndInfo .imageSearchArea .randomButton:hover {
     background-color: #419cd9;
 }
 
+.settingsAndInfo .info {
+    margin: 14px;
+}
 
 /*#419cd9
