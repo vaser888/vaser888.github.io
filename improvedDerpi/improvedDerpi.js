@@ -56,7 +56,9 @@ function goButton(){
             var sco = imageJson.image.score;
             document.getElementById("numberOfScore").innerHTML = "Score: " + sco;
             var dwnv = imageJson.image.downvotes;
-            document.getElementById("numberOfDown").innerHTML = "Down votes " + dwnv;
+            document.getElementById("numberOfDown").innerHTML = "Down votes: " + dwnv;
+            var fav = imageJson.image.faves;
+            document.getElementById("numberOfFaves").innerHTML = "Faves: " + fav;
         })
         //window.location.href = "https://derpibooru.org/images/" + e;
     }
