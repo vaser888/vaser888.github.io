@@ -4,13 +4,14 @@ body, html {
     padding: 0;
     box-sizing: border-box;
     height: 100%;
+    background-color: #e2ebf2;
 }
 
 .topBar {
     float: left;
     width: 100%;
     background-color: #3d92d0;
-    height: 36px;
+    /*height: 36px;*/
     display: flex;
     justify-content: space-between;
 }
@@ -21,14 +22,16 @@ body, html {
 
 .topBar .topBarText {
     color: white;
-    padding: 6px 0px 0px 0px;
+    /*! padding: 6px 0px 0px 0px; */
 }
 
 .topBar .topBarButton {
+    font: inherit;
     padding: 6px;
     width: max-content;
     cursor: pointer;
     color: white;
+    background-color: #3d92d0;
 }
 
 .topBar .topBarButton:hover {
@@ -38,26 +41,54 @@ body, html {
 }
 
 .imageDisplayArea {
+    transition: 0.3s;
     float: left;
     width: 75%;
     background-color: #f8fafc;
-    height: calc(100% - 36px);
+    height: calc(100% - 68px);
 }
 
-.imageDisplayArea .basicPictureInfo {
+.basicPictureInfo {
+    float: left;
     background-color:#e2ebf2;
-    height: 32px;
+    /*height: 32px;*/
     display: flex;
     justify-content: center;
+    width: 75%;
+    padding-bottom: 4px;
 }
-.imageDisplayArea .basicPictureInfo div {
+.basicPictureInfo div {
 margin: 4px 14px 0px 14px;
+}
+
+.slideMenuControls {
+    background-color: #e2ebf2;
+    float: left;
+    width: 25%;
+    height: ;
+    display: flex;
+}
+.slideMenuControls div {
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: row-reverse;
+}
+
+.slideMenuControls button {
+    font-size: inherit;
+    cursor: pointer;
+    background-color: #e2ebf2;
+    padding:4px 30px;
+    border: none;
+}
+.slideMenuControls button:hover {
+    background-color: #cadae6;
 }
 
 .imageDisplayArea .imageAndVideo{
     overflow-y: auto;
    /* background-color: rgb(153, 224, 83);*/
-    height: calc(100% - 32px);
+    height: 100%;
     max-width: 100%;
     overflow-y: auto;
     display: flex;
@@ -66,21 +97,22 @@ margin: 4px 14px 0px 14px;
 }
 
 .settingsAndInfo {
+    transition: 0.3s;
     float: left;
     width: 25%;
     background-color: #d5e7f5;
-    height: calc(100% - 36px);
+    height: calc(100% - 68px);
 }
 
-.settingsAndInfo .imageSearchArea {
+.settingsAndInfo .slideMenuArea {
     background-color: #d5e7f5;
 }
 
-.settingsAndInfo .imageSearchArea a {
+.settingsAndInfo .slideMenuArea a {
     text-decoration: none;
 }
 
-.settingsAndInfo .imageSearchArea .randomButton {
+.settingsAndInfo .slideMenuArea .randomButton {
     font-size: 28px;
     background-color: #62a7d9;
     color: white;
@@ -89,12 +121,52 @@ margin: 4px 14px 0px 14px;
     cursor: pointer;
     margin: 14px;
 }
-.settingsAndInfo .imageSearchArea .randomButton:hover {
+.settingsAndInfo .slideMenuArea .randomButton:hover {
     background-color: #419cd9;
+}
+
+.settingsAndInfo .slideMenuArea .slideMenuTopMenu {
+    background-color: #62a7d9;;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.settingsAndInfo .slideMenuArea .slideMenuTopMenu button {
+    background-color: #62a7d9;
+    color: white;
+    font-size: inherit;
+    cursor: pointer;
+    border: none;
+    padding: 10px;
+    flex-grow: 2;
+}
+
+.settingsAndInfo .slideMenuArea .slideMenuTopMenu button:hover {
+    background-color: #3d92d0;
 }
 
 .settingsAndInfo .info {
     margin: 14px;
 }
 
-/*#419cd9
+
+/*#419cd9*/
+@media screen and (max-width: 1280px){
+    .settingsAndInfo {
+        height: calc(100% - 90px);
+    }
+
+    .imageDisplayArea {
+        height: calc(100% - 90px);
+    }
+}
+@media screen and (max-width: 1080px){
+    .settingsAndInfo {
+        height: calc(100% - 112px);
+    }
+
+    .imageDisplayArea {
+        height: calc(100% - 112px);
+    }
+}

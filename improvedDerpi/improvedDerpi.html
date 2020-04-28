@@ -36,15 +36,18 @@
             </div>
         </a>
             <div class="topBarText">
-                Go to specific image # 
-                <input id="imageNumberSearch"></input>
+               <form>
+                Go to specific image # <input id="imageNumberSearch" autocomplete="off"></input>
+                <button class="topBarButton" onclick="goButton()" style="display: inline;padding-left: 36px;padding-right: 36px;border: none;">Go</button>
+                </form>
+                <!--
                 <a href="javascript:void(0)" onclick="goButton()">
-                    <div class="topBarButton" style="display: inline;padding-left: 36px;padding-right: 36px;"> Go</div>
+                    <div id="topBarButton" class="topBarButton" style="display: inline;padding-left: 36px;padding-right: 36px;"> Go</div>
                 </a>
+            -->
             </div>
     </div>
-
-    <div class="imageDisplayArea">
+    <div>
         <div class="basicPictureInfo">
             <div id="numberOfFaves" style="color: #c4b246;">
                 Faves:
@@ -59,6 +62,14 @@
                 Down votes: 
             </div>
         </div>
+
+        <div class="slideMenuControls">
+            <button id="slideMenuBtn"> > ☰ Close menu</button>
+            <button onclick="getRandomImage()">Random</button>
+        </div>
+    </div>
+
+    <div id="imageDisplayArea" class="imageDisplayArea" style="width: 75%;">
         <div id="clickExpand" class="imageAndVideo">
             <img id="theImage" src="" style="max-width: 100%; max-height: 100%;cursor: pointer;">
             <video id="theVideo" src="" style="max-width: 100%; max-height: 100%; display: none;" controls="" muted="" loop=""></video> 
@@ -66,22 +77,35 @@
 
     </div>
 
-    <div class="settingsAndInfo">
-        <div class="imageSearchArea">
-            <a href="javascript:void(0)" onclick="getRandomImage()">
-                <div id="randomButton" class="randomButton">
-                    Random Image 
-                </div>
-            </a>
-        </div>
-        
-        <div class="info">
-            <p>Total possible images with your filters:</p>
-            <p>Current image #:</p>
-            <p></p>  
-            
-        </div>
+    <div id="settingsAndInfo" class="settingsAndInfo" style="width: 25%;">
+        <div class="slideMenuArea">
+            <div class="slideMenuTopMenu">             
+                <button id="descriptionBtn" style="background-color:">Description</button>
+                <button id="filtersBtn" style="background-color: #3d92d0;">Filters</button>
+                <button id="commentsBtn" style="background-color:">Comments</button>
+            </div>
 
+            <div id="descriptionArea" class="descriptionArea" style="display: none;">
+
+            </div>
+
+            <div id="filtersArea" class="filtersArea" style="display:;">
+                <a href="javascript:void(0)" onclick="getRandomImage()">
+                    <div id="randomButton" class="randomButton">
+                        Random Image 
+                    </div>
+                </a>
+                <div class="info">
+                    <p>Total possible images with your filters:</p>
+                    <p>Current image #:</p>
+                    <p></p>     
+                </div>
+            </div>
+
+            <div id="commentsArea" class="commentsArea" style="display: none;">
+
+            </div>
+        </div>
     </div>
 
 </body>
