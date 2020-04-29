@@ -67,6 +67,7 @@ margin: 4px 14px 0px 14px;
     width: 25%;
     height: ;
     display: flex;
+    flex-wrap: wrap;
 }
 .slideMenuControls div {
     display: flex;
@@ -75,10 +76,11 @@ margin: 4px 14px 0px 14px;
 }
 
 .slideMenuControls button {
+    flex-grow: 2;
     font-size: inherit;
     cursor: pointer;
     background-color: #e2ebf2;
-    padding:4px 30px;
+    padding:4px 15px;
     border: none;
 }
 .slideMenuControls button:hover {
@@ -152,21 +154,31 @@ margin: 4px 14px 0px 14px;
 
 
 /*#419cd9*/
-@media screen and (max-width: 1280px){
+@media screen and (max-width: 1033px){
     .settingsAndInfo {
-        height: calc(100% - 90px);
+        height: calc(100% - 98px);
     }
 
     .imageDisplayArea {
-        height: calc(100% - 90px);
+        height: calc(100% - 98px);
+    }
+    .settingsAndInfo .slideMenuArea .randomButton {
+        font-size: 18px;
     }
 }
-@media screen and (max-width: 1080px){
-    .settingsAndInfo {
-        height: calc(100% - 112px);
-    }
 
+
+@media screen and (max-width: 662px){
+    .settingsAndInfo {
+        height: calc(100% - 120px);
+    }
     .imageDisplayArea {
-        height: calc(100% - 112px);
+        height: calc(100% - 120px);
+    }
+    .settingsAndInfo .slideMenuArea .randomButton {
+        font-size: 14px;
+    }
+    body, html {
+        font: 12px 'Open Sans', sans-serif;
     }
 }

@@ -77,7 +77,7 @@ function goButton(){
         alert("Please enter a number")
     }
     else{
-        fetch("https://derpibooru.org/api/v1/json/images/" + e).then(function (r) { return r.json() }).then(function (imageJson){
+        fetch("https://derpibooru.org/api/v1/json/images/" + e + "?key=PpzyTx7523PoVv4y9WrG").then(function (r) { return r.json() }).then(function (imageJson){
             var formatType = imageJson.image.format;
             if (formatType === "webm"){
                 document.getElementById("theImage").style.display = "none";
