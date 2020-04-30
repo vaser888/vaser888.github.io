@@ -111,7 +111,7 @@ function searchImage(e){
             document.getElementById("theVideo").style.display= "none";
             document.getElementById("theImage").style.display = "";
             document.getElementById("theImage").src = imageJson.image.representations.full;
-            }
+        }
 
 
         var upv = imageJson.image.upvotes;
@@ -155,6 +155,28 @@ function searchImage(e){
 
 function getComments(e){
     fetch("https://derpibooru.org/api/v1/json/search/comments?q=image_id:"+ e +"&page=1&key=PpzyTx7523PoVv4y9WrG").then(function (r) { return r.json() }).then(function (commentJson){
+
+        var numCom = commentJson.total
+
+        document.getElementById("theComments").remove();
+        var commentArea = document.createElement("div");
+        commentArea.setAttribute("id", "theComments");
+        for (i=0; i<=numCom || i<=24 ; i++){
+            var a = commentJson.comments[i].author;
+            var b = commentJson.comments[i].body;
+            var t = commentJson.comments[i].created_at;
+            var d = new Date(t);
+
+            document.getElementById("commentsArea").appendChild(commentArea);
+            var commentName = document.createElement("div")
+            commentName.setAttribute("style", "background-color:#62a7d9;margin: 9px 12px 0px 12px;color:white;padding-left: 16px;padding-bottom: 1px;");
+            commentName.innerHTML = a + "<br>" + d.toDateString();
+            document.getElementById("theComments").appendChild(commentName);
+            var comment = document.createElement("div");
+            comment.setAttribute("style", "background-color:#ffffff;margin: 0px 12px;padding-left: 8px;padding-bottom: 5px;margin-bottom: 18px;");
+            comment.innerHTML = b;
+            document.getElementById("theComments").appendChild(comment);
+        }
 
     });
 
