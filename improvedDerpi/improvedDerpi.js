@@ -77,33 +77,92 @@ function goButton(){
         alert("Please enter a number")
     }
     else{
-        fetch("https://derpibooru.org/api/v1/json/images/" + e + "?key=PpzyTx7523PoVv4y9WrG").then(function (r) { return r.json() }).then(function (imageJson){
-            var formatType = imageJson.image.format;
-            if (formatType === "webm"){
-                document.getElementById("theImage").style.display = "none";
-                document.getElementById("theVideo").style.display = "";
-                document.getElementById("theVideo").src = imageJson.image.representations.full;
-            }
-            else {
-                document.getElementById("theVideo").style.display= "none";
-                document.getElementById("theImage").style.display = "";
-                document.getElementById("theImage").src = imageJson.image.representations.full;
-            }
-            var upv = imageJson.image.upvotes;
-            document.getElementById("numberOfUp").innerHTML = "Up votes: " + upv;
-            var sco = imageJson.image.score;
-            document.getElementById("numberOfScore").innerHTML = "Score: " + sco;
-            var dwnv = imageJson.image.downvotes;
-            document.getElementById("numberOfDown").innerHTML = "Down votes: " + dwnv;
-            var fav = imageJson.image.faves;
-            document.getElementById("numberOfFaves").innerHTML = "Faves: " + fav;
-        })
-        //window.location.href = "https://derpibooru.org/images/" + e;
+        searchImage(e);
     }
+}
+function searchImage(e){
+    fetch("https://derpibooru.org/api/v1/json/images/" + e + "?key=PpzyTx7523PoVv4y9WrG").then(function (r) { return r.json() }).then(function (imageJson){
+         
+        var testOfDupe = imageJson.image.duplicate_of;
+        //console.log(testOfDupe);
+        if (testOfDupe === null){
+            //do nothing
+        }
+        else{
+            e = testOfDupe;
+            searchImage(e);
+            document.getElementById("imageNumberSearch").value = e;
+        }
+        
+        document.getElementById("toImageDerpiLink").href = "https://derpibooru.org/images/" + e;
+        var i = imageJson.image.source_url;
+        if (i === ""){
+            i = "404-No-Image";
+        }
+        document.getElementById("toImageSourceLink").href = i;
+
+        var formatType = imageJson.image.format;
+        if (formatType === "webm"){
+            document.getElementById("theImage").style.display = "none";
+            document.getElementById("theVideo").style.display = "";
+            document.getElementById("theVideo").src = imageJson.image.representations.full;
+        }
+        else {
+            document.getElementById("theVideo").style.display= "none";
+            document.getElementById("theImage").style.display = "";
+            document.getElementById("theImage").src = imageJson.image.representations.full;
+            }
+
+
+        var upv = imageJson.image.upvotes;
+        document.getElementById("numberOfUp").innerHTML = "Up votes: " + upv;
+       
+        var sco = imageJson.image.score;
+        document.getElementById("numberOfScore").innerHTML = "Score: " + sco;
+       
+        var dwnv = imageJson.image.downvotes;
+        document.getElementById("numberOfDown").innerHTML = "Down votes: " + dwnv;
+       
+        var fav = imageJson.image.faves;
+        document.getElementById("numberOfFaves").innerHTML = "Faves: " + fav;
+       
+        var x = imageJson.image.width;
+        var y = imageJson.image.height;
+        var i = imageJson.image.created_at;
+        var d = new Date(i);
+        document.getElementById("imageInfo").innerHTML = "Date created: " + d.toDateString() + "<br><br>" + "Resolution: " + x + " x " + y;
+
+        var i = imageJson.image.uploader;
+        if (i ===null){
+            i = "A Background Pony"
+        }
+        document.getElementById("uploaderUser").innerHTML = i;
+
+        var i = imageJson.image.description;
+        i = decodeURI(i);
+        document.getElementById("descriptionUser").innerHTML = i;
+
+        getComments(e);
+        
+    }).catch(function(){
+        alert("This page is broken or the image has moved\nlet's try to take you there!");});
+        //window.location.href = "https://derpibooru.org/images/" + e;
 }
 
 ////////
-//  
+// Get comments for an image
+////////
+
+function getComments(e){
+    fetch("https://derpibooru.org/api/v1/json/search/comments?q=image_id:"+ e +"&page=1&key=PpzyTx7523PoVv4y9WrG").then(function (r) { return r.json() }).then(function (commentJson){
+
+    });
+
+}
+
+
+////////
+//  Slide menu top menu button press update and state.
 ////////
 
 document.getElementById("descriptionBtn").addEventListener("click" , (event) => {

@@ -104,6 +104,7 @@ margin: 4px 14px 0px 14px;
     width: 25%;
     background-color: #d5e7f5;
     height: calc(100% - 68px);
+    overflow-y: auto;
 }
 
 .settingsAndInfo .slideMenuArea {
@@ -112,6 +113,13 @@ margin: 4px 14px 0px 14px;
 
 .settingsAndInfo .slideMenuArea a {
     text-decoration: none;
+}
+
+.settingsAndInfo .slideMenuArea footer{
+    position: fixed;
+    bottom: 0px;
+    background-color: lawngreen;
+    width: 100%;
 }
 
 .settingsAndInfo .slideMenuArea .randomButton {
@@ -132,6 +140,8 @@ margin: 4px 14px 0px 14px;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    position: sticky;
+    top: 0;
 }
 
 .settingsAndInfo .slideMenuArea .slideMenuTopMenu button {
@@ -148,10 +158,29 @@ margin: 4px 14px 0px 14px;
     background-color: #3d92d0;
 }
 
-.settingsAndInfo .info {
+.settingsAndInfo .slideMenuArea .filtersArea .info {
     margin: 14px;
+    margin-bottom: 36px;
+}
+.settingsAndInfo .slideMenuArea .descriptionArea {
+
+    margin-bottom: 36px;
 }
 
+.settingsAndInfo .slideMenuArea .descriptionArea .titles{
+    margin-top: 10px;
+    padding: 2px 10px;
+    background-color: #62a7d9;
+    color: white;
+}
+
+.settingsAndInfo .slideMenuArea .descriptionArea .text{
+    margin: 5px 5px;
+}
+
+.settingsAndInfo .slideMenuArea .commentsArea{
+    font-size: 18px;
+}
 
 /*#419cd9*/
 @media screen and (max-width: 1033px){
@@ -165,18 +194,24 @@ margin: 4px 14px 0px 14px;
     .settingsAndInfo .slideMenuArea .randomButton {
         font-size: 18px;
     }
+    .settingsAndInfo .slideMenuArea .commentsArea{
+        font-size: 16px;
+    }
 }
 
 
-@media screen and (max-width: 662px){
+@media screen and (max-width: 678px){
     .settingsAndInfo {
-        height: calc(100% - 120px);
+        height: calc(100% - 78px);
     }
     .imageDisplayArea {
-        height: calc(100% - 120px);
+        height: calc(100% - 78px);
     }
     .settingsAndInfo .slideMenuArea .randomButton {
         font-size: 14px;
+    }
+    .settingsAndInfo .slideMenuArea .commentsArea{
+        font-size: 11px;
     }
     body, html {
         font: 12px 'Open Sans', sans-serif;

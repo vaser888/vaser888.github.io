@@ -35,17 +35,22 @@
                 To the real Derpibooru
             </div>
         </a>
-            <div class="topBarText">
-               <form>
+
+        <div>
+            <div>< test ></div>
+        </div>
+
+        <div class="topBarText">
+            <form>
                 Go to specific image # <input id="imageNumberSearch" autocomplete="off"></input>
                 <button class="topBarButton" onclick="goButton()" style="display: inline;padding-left: 36px;padding-right: 36px;border: none;">Go</button>
-                </form>
-                <!--
-                <a href="javascript:void(0)" onclick="goButton()">
-                    <div id="topBarButton" class="topBarButton" style="display: inline;padding-left: 36px;padding-right: 36px;"> Go</div>
-                </a>
+            </form>
+             <!--
+            <a href="javascript:void(0)" onclick="goButton()">
+            <div id="topBarButton" class="topBarButton" style="display: inline;padding-left: 36px;padding-right: 36px;"> Go</div>
+            </a>
             -->
-            </div>
+        </div>
     </div>
     <div>
         <div class="basicPictureInfo">
@@ -80,13 +85,29 @@
     <div id="settingsAndInfo" class="settingsAndInfo" style="width: 25%;">
         <div class="slideMenuArea">
             <div class="slideMenuTopMenu">             
-                <button id="descriptionBtn" style="background-color:">Description</button>
+                <button id="descriptionBtn" style="background-color:">Description/Info</button>
                 <button id="filtersBtn" style="background-color: #3d92d0;">Filters</button>
                 <button id="commentsBtn" style="background-color:">Comments</button>
             </div>
 
             <div id="descriptionArea" class="descriptionArea" style="display: none;">
-
+                <a id="toImageDerpiLink" target="_blank"> 
+                    <div id="" class="randomButton">
+                        View in derpibooru 
+                    </div>
+                </a>
+                <a id="toImageSourceLink" target="_blank"> 
+                    <div id="" class="randomButton">
+                       View original source 
+                    </div>
+                </a>
+                <div class="titles">Image info:</div>
+                <div id="imageInfo" class="text"></div>
+                <div class="titles"> Uploaded by:</div>
+                <div id="uploaderUser" class="text"></div>
+                <div class="titles">Description:</div>
+                <div id="descriptionUser" class="text"></div>
+                <div class="titles">Image tags</div>
             </div>
 
             <div id="filtersArea" class="filtersArea" style="display:;">
@@ -95,16 +116,35 @@
                         Random Image 
                     </div>
                 </a>
+                <div id="selectFilterArea">
+					Derpibooru Filter:
+					<select id="filter">
+						<option value="100073">default</option>
+						<option value="56027">everything</option>
+						<option value="37429">18+ Dark</option>
+						<option value="37432">18+ R34</option>
+						<option id="customId">Custom</option>
+					</select>
+				</div>
                 <div class="info">
-                    <p>Total possible images with your filters:</p>
-                    <p>Current image #:</p>
-                    <p></p>     
+                    <div>Total possible images with your filters:</div>
+                    <div>Current image #:</div>
+                    <p>test</p>     
                 </div>
             </div>
 
             <div id="commentsArea" class="commentsArea" style="display: none;">
-
+                <div>Page:</div>
+                <div id="theComments">
+                    <div style="background-color:#62a7d9;margin: 9px 12px 0px 12px;color:white;padding-left: 16px;">Name</div>
+                    <div style="background-color:#ffffff;margin: 0px 12px;padding-left: 8px;">hey i love to make comments i wonder how this is going to look like because i am just making up stuff as i go and i want to test out the website to see how it works. i hope it's looking good so far! </div>
+                </div>
             </div>
+
+            <footer>
+                test
+            </footer>
+
         </div>
     </div>
 
