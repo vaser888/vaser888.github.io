@@ -70,6 +70,8 @@ document.getElementById("slideMenuBtn").addEventListener("click", (event)=>{
 //  It also updates info on the page and displays the image or video. 
 ///////
 
+var imageNumberRam;
+
 function goButton(){
     event.preventDefault();
     var e = document.getElementById("imageNumberSearch").value;
@@ -93,6 +95,9 @@ function searchImage(e){
             searchImage(e);
             document.getElementById("imageNumberSearch").value = e;
         }
+
+        imageNumberRam = e;
+        console.log(imageNumberRam);
         
         document.getElementById("toImageDerpiLink").href = "https://derpibooru.org/images/" + e;
         var i = imageJson.image.source_url;
@@ -126,11 +131,15 @@ function searchImage(e){
         var fav = imageJson.image.faves;
         document.getElementById("numberOfFaves").innerHTML = "Faves: " + fav;
        
+        ////////
+        //  Description area
+        ////////
+
         var x = imageJson.image.width;
         var y = imageJson.image.height;
         var i = imageJson.image.created_at;
         var d = new Date(i);
-        document.getElementById("imageInfo").innerHTML = "Date created: " + d.toDateString() + "<br><br>" + "Resolution: " + x + " x " + y;
+        document.getElementById("imageInfo").innerHTML = "<u>Date created:</u> " + d.toDateString() + "<br>" + "<u>Resolution:</u> " + x + " x " + y;
 
         var i = imageJson.image.uploader;
         if (i ===null){
@@ -139,10 +148,15 @@ function searchImage(e){
         document.getElementById("uploaderUser").innerHTML = i;
 
         var i = imageJson.image.description;
-        i = decodeURI(i);
+        //i = decodeURI(i);
         document.getElementById("descriptionUser").innerHTML = i;
 
-        getComments(e);
+        ////////
+        //  Comment area
+        ////////
+        commentPageNumber = 1;
+        document.getElementById("commentNumberPage").innerHTML = "Page: <br>" + commentPageNumber;
+        getComments(e, commentPageNumber);
         
     }).catch(function(){
         alert("This page is broken or the image has moved\nlet's try to take you there!");});
@@ -153,34 +167,76 @@ function searchImage(e){
 // Get comments for an image
 ////////
 
-function getComments(e){
-    fetch("https://derpibooru.org/api/v1/json/search/comments?q=image_id:"+ e +"&page=1&key=PpzyTx7523PoVv4y9WrG").then(function (r) { return r.json() }).then(function (commentJson){
+function getComments(e, commentPageNumber){
+
+    document.getElementById("theComments").remove();
+    var commentArea = document.createElement("div");
+    commentArea.setAttribute("id", "theComments");
+    document.getElementById("commentsArea").appendChild(commentArea);
+
+    fetch("https://derpibooru.org/api/v1/json/search/comments?q=image_id:"+ e +"&page=" + commentPageNumber + "&key=PpzyTx7523PoVv4y9WrG").then(function (r) { return r.json() }).then(function (commentJson){
 
         var numCom = commentJson.total
-
-        document.getElementById("theComments").remove();
-        var commentArea = document.createElement("div");
-        commentArea.setAttribute("id", "theComments");
-        for (i=0; i<=numCom || i<=24 ; i++){
+        if (numCom >= 24){
+            numCom = 25;
+        }
+        for (i = 0; i <= (numCom - 1); i++){
             var a = commentJson.comments[i].author;
             var b = commentJson.comments[i].body;
             var t = commentJson.comments[i].created_at;
+            var p = commentJson.comments[i].avatar;
             var d = new Date(t);
 
-            document.getElementById("commentsArea").appendChild(commentArea);
-            var commentName = document.createElement("div")
-            commentName.setAttribute("style", "background-color:#62a7d9;margin: 9px 12px 0px 12px;color:white;padding-left: 16px;padding-bottom: 1px;");
-            commentName.innerHTML = a + "<br>" + d.toDateString();
+            var commentName = document.createElement("div");
+            commentName.setAttribute("style", "background-color:#62a7d9;margin: 9px 12px 0px 12px;color:white;padding-left: 16px;padding-bottom: 1px;overflow-wrap: break-word;");
+            var profileImg = document.createElement("img");
+            profileImg.setAttribute("class", "commentProfilePic");
+            profileImg.setAttribute("src", p);
+            commentName.appendChild(profileImg);
+            commentName.innerHTML += " " + a + "<br>" + d.toDateString();
             document.getElementById("theComments").appendChild(commentName);
             var comment = document.createElement("div");
-            comment.setAttribute("style", "background-color:#ffffff;margin: 0px 12px;padding-left: 8px;padding-bottom: 5px;margin-bottom: 18px;");
+            comment.setAttribute("style", "background-color:#ffffff;margin: 0px 12px;padding-left: 8px;padding-bottom: 5px;margin-bottom: 18px;overflow-wrap: break-word;");
             comment.innerHTML = b;
             document.getElementById("theComments").appendChild(comment);
         }
 
+    }).catch(function(){
+        var errorMessage = document.createElement("div");
+        errorMessage.setAttribute("style", "color:#cf0001;padding-left:5px;");
+        errorMessage.innerHTML = "Error <br> The comments failed to load <br><br>You have hit the end of the comments, press back to get to the last comments you can veiw on this site<br><br> Try going to the Depribooru page to see the comments";
+        document.getElementById("theComments").appendChild(errorMessage);
     });
 
 }
+
+////////
+//  Comment area Next and back buttons 
+////////
+document.getElementById("previousCommentPage").addEventListener("click", (event) => {
+    
+    if (commentPageNumber <= 1 || commentPageNumber == 0){ 
+        //alert("nothing minused");
+    }
+    else{
+        commentPageNumber = commentPageNumber - 1;
+        document.getElementById("commentNumberPage").innerHTML = "Page: <br>" + commentPageNumber;
+        getComments(imageNumberRam, commentPageNumber);
+    }
+});
+
+document.getElementById("nextCommentPage").addEventListener("click", (event) => {
+    if (commentPageNumber <= 0 ){
+        //alert("nothing added");  
+    }
+    else{
+        commentPageNumber = commentPageNumber + 1;
+        document.getElementById("commentNumberPage").innerHTML = "Page: <br>" + commentPageNumber;
+        getComments(imageNumberRam, commentPageNumber);
+    }
+}); 
+
+
 
 
 ////////
