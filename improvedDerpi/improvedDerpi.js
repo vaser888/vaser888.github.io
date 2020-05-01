@@ -99,7 +99,7 @@ function searchImage(e){
         }
 
         imageNumberRam = e;
-        console.log(imageNumberRam);
+        //console.log(imageNumberRam);
         
         document.getElementById("toImageDerpiLink").href = "https://derpibooru.org/images/" + e;
         var i = imageJson.image.source_url;
@@ -161,7 +161,7 @@ function searchImage(e){
         getComments(e, commentPageNumber);
         
     }).catch(function(){
-        alert("This page is broken or the image has moved\nlet's try to take you there!");});
+        console.log("This page is broken or the image has moved\nlet's try to take you there!");});
         //window.location.href = "https://derpibooru.org/images/" + e;
 }
 
