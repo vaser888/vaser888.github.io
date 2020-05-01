@@ -1,6 +1,8 @@
 
 function getRandomImage(){
-    alert("Nothing here to see yet\n\nUse 'Go to specific image #', that's working ;)");
+    var randomImageNumber = ((Math.floor(Math.random()*2336854))+1);
+    document.getElementById("imageNumberSearch").value = randomImageNumber;
+    searchImage(randomImageNumber);
 };
 
 document.getElementById("realDerpiButton").addEventListener("click", (event)=>{
