@@ -2,7 +2,6 @@
 function getRandomImage(){
     var randomImageNumber = ((Math.floor(Math.random()*2336854))+1);
     document.getElementById("imageNumberSearch").value = randomImageNumber;
-    saveImageNumberToHistory(randomImageNumber);
     searchImage(randomImageNumber);
 };
 
@@ -82,7 +81,6 @@ function goButton(){
         alert("Please enter a number")
     }
     else{
-        saveImageNumberToHistory(e);
         searchImage(e);
     }
 }
@@ -134,6 +132,12 @@ function searchImage(e){
        
         var fav = imageJson.image.faves;
         document.getElementById("numberOfFaves").innerHTML = "Faves: " + fav;
+
+        ////////
+        //  History area
+        ////////
+        var smallImage = imageJson.image.representations.thumb_tiny;
+        saveImageNumberToHistory(imageNumberRam, smallImage);
        
         ////////
         //  Description area
@@ -328,16 +332,20 @@ function slideMenuTopMenuPressed(n){
 
 function historySearch(a){
     event.preventDefault();
-    console.log(a);
     searchImage(a);
 }
 
-function saveImageNumberToHistory(imgNum){
+function saveImageNumberToHistory(imgNum, imgLink){
     var divComment = document.createElement("div");
     var aComment = document.createElement("a");
+    var imgComment = document.createElement("img");
+    divComment.setAttribute("style", "display: flex;justify-content: center;");
+    imgComment.setAttribute("src", imgLink);
+    divComment.appendChild(imgComment);
     aComment.setAttribute("href", "");
     aComment.setAttribute("onclick", "historySearch(this.innerHTML)");
-    aComment.innerHTML = imgNum;
+    aComment.setAttribute
+    aComment.innerHTML += imgNum;
     divComment.appendChild(aComment);
     document.getElementById("imageHistoryArea").appendChild(divComment);
 

@@ -208,9 +208,15 @@ margin: 4px 14px 0px 14px;
 
 .settingsAndInfo .slideMenuArea .imageHistoryArea div{
     padding-top: 7px;
-    padding-left: 10px;;
+    text-align: center;
+    padding-bottom: 10px;
 }
 
+.settingsAndInfo .slideMenuArea .imageHistoryArea a{
+    align-self: center;
+    padding-left: 10px;
+
+}
 
 /*#419cd9*/
 @media screen and (max-width: 1033px){
