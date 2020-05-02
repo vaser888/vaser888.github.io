@@ -116,6 +116,7 @@ function searchImage(e){
         }
         else {
             document.getElementById("theVideo").style.display= "none";
+            document.getElementById("theVideo").pause();
             document.getElementById("theImage").style.display = "";
             document.getElementById("theImage").src = imageJson.image.representations.full;
         }
