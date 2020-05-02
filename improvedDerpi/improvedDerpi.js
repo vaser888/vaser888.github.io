@@ -2,6 +2,7 @@
 function getRandomImage(){
     var randomImageNumber = ((Math.floor(Math.random()*2336854))+1);
     document.getElementById("imageNumberSearch").value = randomImageNumber;
+    saveImageNumberToHistory(randomImageNumber);
     searchImage(randomImageNumber);
 };
 
@@ -81,6 +82,7 @@ function goButton(){
         alert("Please enter a number")
     }
     else{
+        saveImageNumberToHistory(e);
         searchImage(e);
     }
 }
@@ -257,46 +259,86 @@ document.getElementById("commentsBtn").addEventListener("click" , (event) => {
     var n = "3";
     slideMenuTopMenuPressed(n);
 });
+document.getElementById("imageHistoryBtn").addEventListener("click" , (event) => {
+    var n = "4";
+    slideMenuTopMenuPressed(n);
+});
 
 function slideMenuTopMenuPressed(n){
     var a = document.getElementById("descriptionBtn");
     var b = document.getElementById("filtersBtn");
     var c = document.getElementById("commentsBtn");
+    var d = document.getElementById("imageHistoryBtn");
 
     var a1 = document.getElementById("descriptionArea");
     var b1 = document.getElementById("filtersArea");
     var c1 = document.getElementById("commentsArea");
+    var d1 = document.getElementById("imageHistoryArea");
     
     if (n === "1"){
         a.style.backgroundColor = "#3d92d0";
         b.style.backgroundColor = "";
         c.style.backgroundColor = "";
+        d.style.backgroundColor = "";
 
         a1.style.display = "";
         b1.style.display = "none";
         c1.style.display = "none";
+        d1.style.display = "none";
     }
     if (n === "2"){
         a.style.backgroundColor = "";
         b.style.backgroundColor = "#3d92d0";
         c.style.backgroundColor = "";
+        d.style.backgroundColor = "";
 
         a1.style.display = "none";
         b1.style.display = "";
         c1.style.display = "none";
-
+        d1.style.display = "none";
     }
     if (n === "3"){
         a.style.backgroundColor = "";
         b.style.backgroundColor = "";
         c.style.backgroundColor = "#3d92d0";
+        d.style.backgroundColor = "";
 
         a1.style.display = "none";
         b1.style.display = "none";
         c1.style.display = "";
+        d1.style.display = "none";
     }
+    if (n === "4"){
+        a.style.backgroundColor = "";
+        b.style.backgroundColor = "";
+        c.style.backgroundColor = "";
+        d.style.backgroundColor = "#3d92d0";
+
+        a1.style.display = "none";
+        b1.style.display = "none";
+        c1.style.display = "none";
+        d1.style.display = "";
+    }
+}
 
 
-    //"#62a7d9"
-    //"#3d92d0"
+////////
+//  History area code
+////////
+
+function historySearch(a){
+    event.preventDefault();
+    console.log(a);
+    searchImage(a);
+}
+
+function saveImageNumberToHistory(imgNum){
+    var divComment = document.createElement("div");
+    var aComment = document.createElement("a");
+    aComment.setAttribute("href", "");
+    aComment.setAttribute("onclick", "historySearch(this.innerHTML)");
+    aComment.innerHTML = imgNum;
+    divComment.appendChild(aComment);
+    document.getElementById("imageHistoryArea").appendChild(divComment);
+
 }
