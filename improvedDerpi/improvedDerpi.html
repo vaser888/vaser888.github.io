@@ -117,20 +117,69 @@
                         Random Image 
                     </div>
                 </a>
-                <div id="selectFilterArea">
-					Derpibooru Filter:
-					<select id="filter">
+
+                <div class="titles1">
+                    <div>Total possible images with your filters:</div>    
+                </div>
+                <div>
+                    <form class="filterImageSearch">
+                        <input autocomplete="off" size="7"></input>
+                        <div>of 29475918</div>
+                        <button>go</button>
+                    </form>
+                </div>
+
+                <div id="selectFilterArea" class="titles2">
+                    Derpibooru filter:
+
+                </div>
+                <div class="inputs">
+                    <select id="filter">
 						<option value="100073">default</option>
 						<option value="56027">everything</option>
 						<option value="37429">18+ Dark</option>
 						<option value="37432">18+ R34</option>
 						<option id="customId">Custom</option>
 					</select>
-				</div>
-                <div class="info">
-                    <div>Total possible images with your filters:</div>
-                    <div>Current image #:</div>
-                    <p>test</p>     
+                </div>
+
+                <div class="titles2">
+                    Artist:
+                </div>
+                <div class="inputs">
+                    <input id="artistName"></input>
+                </div>
+
+                <div class="titles2">
+					Minimum Score: 
+                </div>
+                <div class="inputs">
+                    <input id="scoreNumber" type="text" maxlength="4" size="4" value="0"
+					title="type in the minimum score a picutre has to have">
+					</input>
+                </div>
+
+                <div class="titles2">
+                    Minimum # of upvotes:
+                </div>
+                <div class="inputs">
+                    <input id="upVotesNumber" type="text" maxlength="4" size="4" value="0" 
+					title="Type in the minimum number of upvotes a picture has to have">
+					</input>
+                </div>
+
+                <div class="titles2">
+                    Minimum # of downvotes: 
+                </div>
+                <div class="inputs">
+                    <input id="downVotesNumber" type="text" maxlength="4" size="4" value="0"></input>
+                </div>
+
+                <div class="titles1">
+                    Search Specific Tags:
+                </div>
+                <div class="inputs">
+                    <textarea id="applyFilterBox" class="filterTagsArea" placeholder="eg: twilight sparkle, luna, pony OR twilight sparkle AND human OR NOT fluttershy"></textarea>
                 </div>
             </div>
 
@@ -149,7 +198,7 @@
             </div>
 
             <div id="imageHistoryArea" class="imageHistoryArea" style="display: none;">
-                <div style="background-color:#62a7d9;margin:14px;color:white;text-align:center;">Images you have seached<br>(automatically deleted when page is refreshed or closed)</div>
+                <div style="background-color:#62a7d9;margin:14px;color:white;text-align:center;">Images you have seached<br><i>(automatically deleted when page is refreshed or closed)</i></div>
                 <!-- <div><a href="" onclick="historySearch(this.innerHTML)">1</a></div> -->
             </div>
 

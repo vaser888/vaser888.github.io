@@ -186,6 +186,12 @@ function getComments(e, commentPageNumber){
     fetch("https://derpibooru.org/api/v1/json/search/comments?q=image_id:"+ e +"&page=" + commentPageNumber + "&key=PpzyTx7523PoVv4y9WrG").then(function (r) { return r.json() }).then(function (commentJson){
 
         var numCom = commentJson.total
+
+        if (numCom === 0){
+            commentPageNumber = 1;
+            document.getElementById("commentNumberPage").innerHTML = "Page: <br>" + commentPageNumber;
+        }
+        
         if (numCom >= 24){
             numCom = 25;
         }
@@ -333,6 +339,7 @@ function slideMenuTopMenuPressed(n){
 
 function historySearch(a){
     event.preventDefault();
+    document.getElementById("imageNumberSearch").value = a;
     searchImage(a);
 }
 

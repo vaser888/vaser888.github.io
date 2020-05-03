@@ -163,8 +163,45 @@ margin: 4px 14px 0px 14px;
     margin: 14px;
     margin-bottom: 36px;
 }
-.settingsAndInfo .slideMenuArea .descriptionArea {
+.settingsAndInfo .slideMenuArea .filtersArea .titles1 {
+    margin-top: 10px;
+    padding: 2px 10px;
+    background-color: #62a7d9;
+    color: white;
+    text-align: center;
+}
 
+.settingsAndInfo .slideMenuArea .filtersArea .titles2 {
+    margin-top: 10px;
+    padding: 6px;
+    background-color: #62a7d9;
+    color: white;
+    text-align: center;
+}
+
+.settingsAndInfo .slideMenuArea .filtersArea .filterImageSearch {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 15px 0px;
+}
+
+.settingsAndInfo .slideMenuArea .filtersArea .filterImageSearch div{
+    margin-left: 4px;
+}
+.settingsAndInfo .slideMenuArea .filtersArea .filterTagsArea {
+    width: 95%;
+    resize: none;
+    height: 100px;
+    border: none;
+}
+.settingsAndInfo .slideMenuArea .filtersArea .inputs {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0px;
+}
+
+.settingsAndInfo .slideMenuArea .descriptionArea {
     margin-bottom: 36px;
 }
 
