@@ -151,12 +151,35 @@ margin: 4px 14px 0px 14px;
     font-size: inherit;
     cursor: pointer;
     border: none;
-    padding: 10px 0px;
+    padding: 10px 5px;
     flex-grow: 2;
 }
 
 .settingsAndInfo .slideMenuArea .slideMenuTopMenu button:hover {
     background-color: #3d92d0;
+}
+
+.settingsAndInfo .slideMenuArea .slideMenuTopMenu .pageSelector{
+    background-color: #62a7d9;
+    display: flex;
+    flex-grow: 2;
+}
+
+.settingsAndInfo .slideMenuArea .slideMenuTopMenu .pageSelector button{
+    background-color: #62a7d9;
+    font-size: inherit;
+    cursor: pointer;
+    border: none;
+    padding: 10px 15px;
+    color: black;
+}
+.settingsAndInfo .slideMenuArea .slideMenuTopMenu .pageSelector button:hover {
+    background-color: #3d92d0;
+}
+
+.settingsAndInfo .slideMenuArea .slideMenuTopMenu .pageSelector div{
+    padding: 0px 20px;
+    text-align: center;
 }
 
 .settingsAndInfo .slideMenuArea .filtersArea .info {
@@ -193,20 +216,22 @@ margin: 4px 14px 0px 14px;
 }
 
 .settingsAndInfo .slideMenuArea .filtersArea .tagButton {
-display: flex;
-align-items: center;
-background-color: #d0e29c;
-border:1px solid #b3cf5d;
-color: #6f8f0e;
-width: max-content;
-margin: 3px 3px;
-min-width: 0;
+    display: flex;
+    align-items: center;
+    background-color: #d0e29c;
+    border:1px solid #b3cf5d;
+    color: #6f8f0e;
+    width: max-content;
+    margin: 3px 3px;
+    min-width: 0;
+    border-radius: 100px;
 }
 
 .settingsAndInfo .slideMenuArea .filtersArea .tagButton button {
     padding: 6px 10px;
     background-color: #b3cf5d;
     border: none;
+    border-radius: 100px;
 }
 
 .settingsAndInfo .slideMenuArea .filtersArea .tagButton button:hover {
@@ -219,6 +244,8 @@ min-width: 0;
     flex-direction: row;
     justify-content: center;
     margin: 15px 0px;
+    flex-wrap: wrap;
+    align-items: baseline;
 }
 
 .settingsAndInfo .slideMenuArea .filtersArea .filterImageSearch div{
@@ -234,6 +261,8 @@ min-width: 0;
     display: flex;
     justify-content: center;
     margin: 10px 0px;
+    flex-wrap: wrap;
+    align-items: baseline;
 }
 
 .settingsAndInfo .slideMenuArea .descriptionArea {
@@ -267,12 +296,14 @@ min-width: 0;
     width: max-content;
     margin: 3px 3px;
     min-width: 0;
+    border-radius: 100px;
 }
 
 .settingsAndInfo .slideMenuArea .descriptionArea .currentImageTags .addTagButton button {
     padding: 6px 10px;
     background-color: #b3cf5d;
     border: none;
+    border-radius: 100px;
 }
 
 .settingsAndInfo .slideMenuArea .descriptionArea .currentImageTags .addTagButton button:hover {
@@ -287,26 +318,26 @@ min-width: 0;
     min-width: 0;
 }
 
-.settingsAndInfo .slideMenuArea .commentsArea{
+.settingsAndInfo .slideMenuArea .commentsArea {
     font-size: 18px;
 }
 
-.settingsAndInfo .slideMenuArea .commentsArea .pageSelector{
-
-    background-color: #62a7d9;
-    display: flex;
+.settingsAndInfo .slideMenuArea .commentsArea .theComments .user {
+    background-color:#62a7d9;
+    margin: 9px 12px 0px 12px;
+    color:white;
+    padding-left: 16px;
+    padding-bottom: 1px;
+    overflow-wrap: break-word;
 }
 
-.settingsAndInfo .slideMenuArea .commentsArea .pageSelector button{
-    background-color: #62a7d9;
-    font-size: inherit;
-    cursor: pointer;
-    border: none;
-    padding: 10px 0px;
-    flex-grow: 1;
-}
-.settingsAndInfo .slideMenuArea .commentsArea .pageSelector button:hover {
-    background-color: #3d92d0;
+.settingsAndInfo .slideMenuArea .commentsArea .theComments .comment {
+    background-color:#ffffff;
+    margin: 0px 12px;
+    padding-left: 8px;
+    padding-bottom: 5px;
+    margin-bottom: 18px;
+    overflow-wrap: break-word;
 }
 
 .commentProfilePic{
@@ -344,7 +375,7 @@ min-width: 0;
 }
 
 
-@media screen and (max-width: 678px){
+@media screen and (max-width: 778px){
     .settingsAndInfo {
         height: calc(100% - 78px);
     }
@@ -352,7 +383,7 @@ min-width: 0;
         height: calc(100% - 78px);
     }
     .settingsAndInfo .slideMenuArea .randomButton {
-        font-size: 14px;
+        font-size: 9px;
     }
     .settingsAndInfo .slideMenuArea .commentsArea{
         font-size: 6px;
@@ -360,9 +391,57 @@ min-width: 0;
     body, html {
         font: 8px 'Open Sans', sans-serif;
     }
+
+    input, select{
+        font-size: inherit;
+        size: 5px;
+    }
+
+    .settingsAndInfo .slideMenuArea .descriptionArea .currentImageTags .addTagButton {
+        margin: 3px 1px;
+    }
+    
+    .settingsAndInfo .slideMenuArea .descriptionArea .currentImageTags .addTagButton button {
+        font-size: inherit;
+        padding: 2px 5px;
+    }
+
+    .settingsAndInfo .slideMenuArea .filtersArea .filterImageSearch button {
+        font-size: inherit;
+    }
+    .settingsAndInfo .slideMenuArea .filtersArea .tagButton button {
+        font-size: inherit;
+        padding: 2px 5px;
+    }
+    .settingsAndInfo .slideMenuArea .slideMenuTopMenu button {
+        padding: 3px 5px;
+    }
+    .settingsAndInfo .slideMenuArea .slideMenuTopMenu .pageSelector button{
+        padding: 3px 10px;
+    }
+    .settingsAndInfo .slideMenuArea .slideMenuTopMenu .pageSelector div{
+        padding: 0px 10px;
+    }
+    .commentProfilePic{
+        height: 15px; 
+        padding-top: 3px; 
+    }
+
+    .settingsAndInfo .slideMenuArea .commentsArea .theComments .user {
+        margin: 3px 6px 0px 6px;
+        padding-left: 3px;
+        padding-bottom: 1px;
+    }
+
+    .settingsAndInfo .slideMenuArea .commentsArea .theComments .comment {
+        margin: 0px 6px;
+        padding-left: 4px;
+        padding-bottom: 5px;
+        margin-bottom: 3px;
+    }
 }
 
 #selectFilterArea a{
 	margin-left: 5px;
-	font-size: 20px;
+	font-size: inherit;
 }

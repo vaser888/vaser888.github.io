@@ -9,15 +9,32 @@ document.getElementById("realDerpiButton").addEventListener("click", (event)=>{
     window.location.href = "https://derpibooru.org/";
 });
 
+
+////////
+//  Things that don't want letters in them
+////////
+
+
 var idValue;
-document.getElementById("imageNumberSearch").addEventListener("input", (event)=> {idValue = "imageNumberSearch"; noLettersHere(idValue); });
+document.getElementById("imageNumberSearch").addEventListener("input", (event)=> {idValue = "imageNumberSearch"; noLettersHere(idValue, 0); });
+document.getElementById("filteredImageNumber").addEventListener("input", (event)=> {idValue = "filteredImageNumber"; noLettersHere(idValue, 0); });
+document.getElementById("filteredScoreNumber").addEventListener("input", (event)=> {idValue = "filteredScoreNumber"; noLettersHere(idValue, 1); });
+document.getElementById("filteredUpVotesNumber").addEventListener("input", (event)=> {idValue = "filteredUpVotesNumber"; noLettersHere(idValue, 1); });
+document.getElementById("filteredDownVotesNumber").addEventListener("input", (event)=> {idValue = "filteredDownVotesNumber"; noLettersHere(idValue, 1); });
+
 
 ////////
 //  Does not allow letters to be input into an Input, only numbers 
 ////////
 
-function noLettersHere(id) {
-    var numCheck = /[0-9]+$/;
+function noLettersHere(id, setting) {
+    if (setting === 0){
+        var numCheck = /[0-9]+$/;
+    }
+    if (setting === 1){
+        var numCheck = /[0-9,-]+$/;
+    }
+
     if (document.getElementById(id).value.match(numCheck)) {
 
     }
@@ -87,98 +104,110 @@ function goButton(){
 
 function searchImage(e){
     fetch("https://derpibooru.org/api/v1/json/images/" + e + "?key=PpzyTx7523PoVv4y9WrG").then(function (r) { return r.json() }).then(function (imageJson){
-         
-        var testOfDupe = imageJson.image.duplicate_of;
-        //console.log(testOfDupe);
-        if (testOfDupe === null){
-            //do nothing
-        }
-        else{
-            e = testOfDupe;
-            searchImage(e);
-            document.getElementById("imageNumberSearch").value = e;
-        }
-
-        imageNumberRam = e;
-        //console.log(imageNumberRam);
         
-        document.getElementById("toImageDerpiLink").href = "https://derpibooru.org/images/" + e;
-        var i = imageJson.image.source_url;
-        if (i === ""){
-            i = "404-No-Image";
-        }
-        document.getElementById("toImageSourceLink").href = i;
+        updateWebsite(imageJson, e);
 
-        var formatType = imageJson.image.format;
-        if (formatType === "webm"){
-            document.getElementById("theImage").style.display = "none";
-            document.getElementById("theVideo").style.display = "";
-            document.getElementById("theVideo").src = imageJson.image.representations.full;
-        }
-        else {
-            document.getElementById("theVideo").style.display= "none";
-            document.getElementById("theVideo").pause();
-            document.getElementById("theImage").style.display = "";
-            document.getElementById("theImage").src = imageJson.image.representations.full;
-        }
-
-
-        var upv = imageJson.image.upvotes;
-        document.getElementById("numberOfUp").innerHTML = "Up votes: " + upv;
-       
-        var sco = imageJson.image.score;
-        document.getElementById("numberOfScore").innerHTML = "Score: " + sco;
-       
-        var dwnv = imageJson.image.downvotes;
-        document.getElementById("numberOfDown").innerHTML = "Down votes: " + dwnv;
-       
-        var fav = imageJson.image.faves;
-        document.getElementById("numberOfFaves").innerHTML = "Faves: " + fav;
-
-        ////////
-        //  History area
-        ////////
-        var smallImage = imageJson.image.representations.thumb_tiny;
-        saveImageNumberToHistory(imageNumberRam, smallImage);
-       
-        ////////
-        //  Description area
-        ////////
-
-        var x = imageJson.image.width;
-        var y = imageJson.image.height;
-        var i = imageJson.image.created_at;
-        var d = new Date(i);
-        document.getElementById("imageInfo").innerHTML = "<u>Date created:</u> " + d.toDateString() + "<br>" + "<u>Resolution:</u> " + x + " x " + y;
-
-        var i = imageJson.image.uploader;
-        if (i ===null){
-            i = "A Background Pony"
-        }
-        document.getElementById("uploaderUser").innerHTML = i;
-
-        var i = imageJson.image.description;
-        //i = decodeURI(i);
-        document.getElementById("descriptionUser").innerHTML = i;
-
-        ////////
-        //  diplay Tags of the image.
-        ////////
-
-        var imgTags = imageJson.image.tags;
-        getIamgeTags(imgTags);
-
-        ////////
-        //  Comment area
-        ////////
-        commentPageNumber = 1;
-        document.getElementById("commentNumberPage").innerHTML = "Page: <br>" + commentPageNumber;
-        getComments(e, commentPageNumber);
-        
     }).catch(function(){
         console.log("This page is broken or the image has moved\nlet's try to take you there!");});
         //window.location.href = "https://derpibooru.org/images/" + e;
 }
+
+////////
+//  Update everything in the website
+////////
+
+function updateWebsite(imageJson, e){
+    //console.log(imageJson);
+    var testOfDupe = imageJson.image.duplicate_of;
+    //console.log(testOfDupe);
+    if (testOfDupe === null){
+        //do nothing
+    }
+    else{
+        e = testOfDupe;
+        searchImage(e);
+        document.getElementById("imageNumberSearch").value = e;
+    }
+
+    imageNumberRam = e;
+    //console.log(imageNumberRam);
+
+    document.getElementById("toImageDerpiLink").href = "https://derpibooru.org/images/" + e;
+    var i = imageJson.image.source_url;
+    if (i === ""){
+        i = "404-No-Image";
+    }
+    document.getElementById("toImageSourceLink").href = i;
+
+    var formatType = imageJson.image.format;
+    if (formatType === "webm"){
+        document.getElementById("theImage").style.display = "none";
+        document.getElementById("theVideo").style.display = "";
+        document.getElementById("theVideo").src = imageJson.image.representations.full;
+    }
+    else {
+        document.getElementById("theVideo").style.display= "none";
+        document.getElementById("theVideo").pause();
+        document.getElementById("theImage").style.display = "";
+        document.getElementById("theImage").src = imageJson.image.representations.full;
+    }
+
+
+    var upv = imageJson.image.upvotes;
+    document.getElementById("numberOfUp").innerHTML = "Up votes: " + upv;
+
+    var sco = imageJson.image.score;
+    document.getElementById("numberOfScore").innerHTML = "Score: " + sco;
+
+    var dwnv = imageJson.image.downvotes;
+    document.getElementById("numberOfDown").innerHTML = "Down votes: " + dwnv;
+
+    var fav = imageJson.image.faves;
+    document.getElementById("numberOfFaves").innerHTML = "Faves: " + fav;
+
+    ////////
+    //  History area
+    ////////
+    var smallImage = imageJson.image.representations.thumb_tiny;
+    saveImageNumberToHistory(imageNumberRam, smallImage);
+
+    ////////
+    //  Description area
+    ////////
+
+    var x = imageJson.image.width;
+    var y = imageJson.image.height;
+    var i = imageJson.image.created_at;
+    var d = new Date(i);
+    document.getElementById("imageInfo").innerHTML = "<u>Date created:</u> " + d.toDateString() + "<br>" + "<u>Resolution:</u> " + x + " x " + y;
+
+    var i = imageJson.image.uploader;
+    if (i ===null){
+        i = "A Background Pony"
+    }
+    document.getElementById("uploaderUser").innerHTML = i;
+    var i = imageJson.image.description;
+    //i = decodeURI(i);
+    if (i === ""){
+        document.getElementById("descriptionUser").innerHTML = "[No Description]"
+    }
+    else{
+    document.getElementById("descriptionUser").innerHTML = i;
+    }
+    ////////
+    //  diplay Tags of the image.
+    ////////
+
+    var imgTags = imageJson.image.tags;
+    getIamgeTags(imgTags);
+
+    ////////
+    //  Comment area
+    ////////
+    commentPageNumber = 1;
+    document.getElementById("commentNumberPage").innerHTML = "Page: <br>" + commentPageNumber;
+    getComments(e, commentPageNumber);
+} 
 
 ////////
 // Get comments for an image
@@ -189,6 +218,7 @@ function getComments(e, commentPageNumber){
     document.getElementById("theComments").remove();
     var commentArea = document.createElement("div");
     commentArea.setAttribute("id", "theComments");
+    commentArea.setAttribute("class", "theComments");
     document.getElementById("commentsArea").appendChild(commentArea);
 
     fetch("https://derpibooru.org/api/v1/json/search/comments?q=image_id:"+ e +"&page=" + commentPageNumber + "&key=PpzyTx7523PoVv4y9WrG").then(function (r) { return r.json() }).then(function (commentJson){
@@ -211,7 +241,7 @@ function getComments(e, commentPageNumber){
             var d = new Date(t);
 
             var commentName = document.createElement("div");
-            commentName.setAttribute("style", "background-color:#62a7d9;margin: 9px 12px 0px 12px;color:white;padding-left: 16px;padding-bottom: 1px;overflow-wrap: break-word;");
+            commentName.setAttribute("class", "user");
             var profileImg = document.createElement("img");
             profileImg.setAttribute("class", "commentProfilePic");
             profileImg.setAttribute("src", p);
@@ -219,7 +249,7 @@ function getComments(e, commentPageNumber){
             commentName.innerHTML += " " + a + "<br>" + d.toDateString();
             document.getElementById("theComments").appendChild(commentName);
             var comment = document.createElement("div");
-            comment.setAttribute("style", "background-color:#ffffff;margin: 0px 12px;padding-left: 8px;padding-bottom: 5px;margin-bottom: 18px;overflow-wrap: break-word;");
+            comment.setAttribute("class", "comment");
             comment.innerHTML = b;
             document.getElementById("theComments").appendChild(comment);
         }
@@ -323,8 +353,10 @@ function slideMenuTopMenuPressed(n){
     var b1 = document.getElementById("filtersArea");
     var c1 = document.getElementById("commentsArea");
     var d1 = document.getElementById("imageHistoryArea");
+    var e1 = document.getElementById("pageSelector");
     
     if (n === "1"){
+        // description/info
         a.style.backgroundColor = "#3d92d0";
         b.style.backgroundColor = "";
         c.style.backgroundColor = "";
@@ -334,8 +366,10 @@ function slideMenuTopMenuPressed(n){
         b1.style.display = "none";
         c1.style.display = "none";
         d1.style.display = "none";
+        e1.style.display = "none"; 
     }
     if (n === "2"){
+        // filters
         a.style.backgroundColor = "";
         b.style.backgroundColor = "#3d92d0";
         c.style.backgroundColor = "";
@@ -345,8 +379,10 @@ function slideMenuTopMenuPressed(n){
         b1.style.display = "";
         c1.style.display = "none";
         d1.style.display = "none";
+        e1.style.display = "none";        
     }
     if (n === "3"){
+        // comments
         a.style.backgroundColor = "";
         b.style.backgroundColor = "";
         c.style.backgroundColor = "#3d92d0";
@@ -356,8 +392,10 @@ function slideMenuTopMenuPressed(n){
         b1.style.display = "none";
         c1.style.display = "";
         d1.style.display = "none";
+        e1.style.display = "";
     }
     if (n === "4"){
+        // history
         a.style.backgroundColor = "";
         b.style.backgroundColor = "";
         c.style.backgroundColor = "";
@@ -367,9 +405,9 @@ function slideMenuTopMenuPressed(n){
         b1.style.display = "none";
         c1.style.display = "none";
         d1.style.display = "";
+        e1.style.display = "none"; 
     }
 }
-
 
 ////////
 //  History area code
@@ -401,8 +439,12 @@ function saveImageNumberToHistory(imgNum, imgLink){
 // Tags filter area
 ////////
 
+
+
 function addTag(a){
     generateTag(a);
+    var q = document.querySelectorAll(".tag");
+    t = Array.from(q);
 }
 
 
@@ -434,6 +476,9 @@ function addTagToTagArea(){
     div1.appendChild(dltButton);
     document.getElementById("yourTagArea").appendChild(div1);
     document.getElementById("tagEnterBoxInput").value = "";
+
+    var q = document.querySelectorAll(".tag");
+    t = Array.from(q);
 }
 
 
@@ -457,7 +502,7 @@ function customIdBox(){
 			var i = document.getElementById("customIdInput").value;
 			document.getElementById("customId").setAttribute("value", i);
             //console.log(i);
-            document.getElementById("customIdInput").addEventListener("input", (event)=> {idValue = "customIdInput"; noLettersHere(idValue); });
+            document.getElementById("customIdInput").addEventListener("input", (event)=> {idValue = "customIdInput"; noLettersHere(idValue, 0); });
 		});
 		filterHelp = document.createElement("a");
 		document.getElementById("selectFilterArea").appendChild(filterHelp);
@@ -501,11 +546,11 @@ document.getElementById("filter").addEventListener('change', (event) => {
 
 function getRandomFilterImage() {
 
-var artist = document.getElementById("artistName").value;
+var artist = document.getElementById("filteredartistName").value;
 var filterNumber = document.querySelector("#filter").value;
-var upVoteNumber = document.getElementById("upVotesNumber").value;
-var downVoteNumber = document.getElementById("downVotesNumber").value;
-var score = document.getElementById("scoreNumber").value;
+var upVoteNumber = document.getElementById("filteredUpVotesNumber").value;
+var downVoteNumber = document.getElementById("filteredDownVotesNumber").value;
+var score = document.getElementById("filteredScoreNumber").value;
 //var encodedFilterBox = encodeURIComponent(document.getElementById("applyFilterBox").value);
 
 }

@@ -32,7 +32,7 @@ document.getElementById("tagEnterBoxInput").addEventListener("input", (function(
     var inputVal = document.getElementById("tagEnterBoxInput").value;
     var first = [];
     first = document.querySelectorAll("#autoTags option");
-    first =initialArray;
+    first = initialArray;
     if (inputVal != "" && inputVal != "undefinded") {
         var options ="";
         for (var i = 0; i < first.length; i++) {
@@ -46,4 +46,6 @@ document.getElementById("tagEnterBoxInput").addEventListener("input", (function(
         document.getElementById("autoTags").innerHTML = "";
         loadTagData();
     }
+    t = "";
 }));
+
