@@ -179,6 +179,41 @@ margin: 4px 14px 0px 14px;
     text-align: center;
 }
 
+.settingsAndInfo .slideMenuArea .filtersArea .yourTagArea {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+}
+
+.settingsAndInfo .slideMenuArea .filtersArea .tag {
+    padding: 0px 5px;
+    overflow-wrap: break-word;
+    margin: 0px 10px;
+    min-width: 0;
+}
+
+.settingsAndInfo .slideMenuArea .filtersArea .tagButton {
+display: flex;
+align-items: center;
+background-color: #d0e29c;
+border:1px solid #b3cf5d;
+color: #6f8f0e;
+width: max-content;
+margin: 3px 3px;
+min-width: 0;
+}
+
+.settingsAndInfo .slideMenuArea .filtersArea .tagButton button {
+    padding: 6px 10px;
+    background-color: #b3cf5d;
+    border: none;
+}
+
+.settingsAndInfo .slideMenuArea .filtersArea .tagButton button:hover {
+    background-color: #9dc12e;
+    cursor: pointer;
+}
+
 .settingsAndInfo .slideMenuArea .filtersArea .filterImageSearch {
     display: flex;
     flex-direction: row;
@@ -210,10 +245,46 @@ margin: 4px 14px 0px 14px;
     padding: 2px 10px;
     background-color: #62a7d9;
     color: white;
+    margin-bottom: 3px;
 }
 
 .settingsAndInfo .slideMenuArea .descriptionArea .text{
     margin: 5px 5px;
+}
+
+.settingsAndInfo .slideMenuArea .descriptionArea .currentImageTags {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+}
+
+.settingsAndInfo .slideMenuArea .descriptionArea .currentImageTags .addTagButton {
+    display: flex;
+    align-items: center;
+    background-color: #d0e29c;
+    border:1px solid #b3cf5d;
+    color: #6f8f0e;
+    width: max-content;
+    margin: 3px 3px;
+    min-width: 0;
+}
+
+.settingsAndInfo .slideMenuArea .descriptionArea .currentImageTags .addTagButton button {
+    padding: 6px 10px;
+    background-color: #b3cf5d;
+    border: none;
+}
+
+.settingsAndInfo .slideMenuArea .descriptionArea .currentImageTags .addTagButton button:hover {
+    background-color: #9dc12e;
+    cursor: pointer;
+}
+
+.settingsAndInfo .slideMenuArea .descriptionArea .currentImageTags .imgTag {
+    padding: 0px 5px;
+    overflow-wrap: break-word;
+    margin: 0px 10px;
+    min-width: 0;
 }
 
 .settingsAndInfo .slideMenuArea .commentsArea{
@@ -289,4 +360,9 @@ margin: 4px 14px 0px 14px;
     body, html {
         font: 8px 'Open Sans', sans-serif;
     }
+}
+
+#selectFilterArea a{
+	margin-left: 5px;
+	font-size: 20px;
 }

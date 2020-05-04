@@ -84,6 +84,7 @@ function goButton(){
         searchImage(e);
     }
 }
+
 function searchImage(e){
     fetch("https://derpibooru.org/api/v1/json/images/" + e + "?key=PpzyTx7523PoVv4y9WrG").then(function (r) { return r.json() }).then(function (imageJson){
          
@@ -161,6 +162,13 @@ function searchImage(e){
         document.getElementById("descriptionUser").innerHTML = i;
 
         ////////
+        //  diplay Tags of the image.
+        ////////
+
+        var imgTags = imageJson.image.tags;
+        getIamgeTags(imgTags);
+
+        ////////
         //  Comment area
         ////////
         commentPageNumber = 1;
@@ -226,6 +234,38 @@ function getComments(e, commentPageNumber){
 }
 
 ////////
+//  Get tags for an image
+////////
+
+function getIamgeTags (t){
+    document.getElementById("currentImageTags").remove();
+    var imageTagArea = document.createElement("div");
+    imageTagArea.setAttribute("id", "currentImageTags");
+    imageTagArea.setAttribute("class", "currentImageTags")
+    document.getElementById("descriptionArea").appendChild(imageTagArea);
+    for (i = 0; i <= t.length - 1; i++){
+        //document.getElementById("currentImageTags").innerHTML += t[i] + "<br>"; 
+    
+    
+        var div1 = document.createElement("div");
+        div1.setAttribute("class", "addTagButton");
+        var div2 = document.createElement("div");
+        div2.innerHTML = t[i];
+        div2.setAttribute("class", "imgTag");
+        div1.appendChild(div2);
+        var addButton = document.createElement("button");
+        addButton.innerHTML = "+";
+        addButton.setAttribute("value", t[i]);
+        addButton.setAttribute("onclick", "addTag(this.value)");
+        div1.appendChild(addButton);
+        document.getElementById("currentImageTags").appendChild(div1);
+    }
+    
+
+}
+
+
+////////
 //  Comment area Next and back buttons 
 ////////
 document.getElementById("previousCommentPage").addEventListener("click", (event) => {
@@ -250,8 +290,6 @@ document.getElementById("nextCommentPage").addEventListener("click", (event) => 
         getComments(imageNumberRam, commentPageNumber);
     }
 }); 
-
-
 
 
 ////////
@@ -356,5 +394,118 @@ function saveImageNumberToHistory(imgNum, imgLink){
     aComment.innerHTML += imgNum;
     divComment.appendChild(aComment);
     document.getElementById("imageHistoryArea").appendChild(divComment);
+
+}
+
+////////
+// Tags filter area
+////////
+
+function addTag(a){
+    generateTag(a);
+}
+
+
+function deleteTag(a){
+    a.remove();
+    var q = document.querySelectorAll(".tag");
+    t = Array.from(q);
+}
+
+function addTagToTagArea(){
+    event.preventDefault();
+    var tagName = document.getElementById("tagEnterBoxInput").value;
+    if (tagName === ""){
+        return;
+    } 
+    generateTag(tagName);
+}
+    function generateTag(tagName){
+    
+    var div1 = document.createElement("div");
+    div1.setAttribute("class", "tagButton");
+    var div2 = document.createElement("div");
+    div2.innerHTML = tagName;
+    div2.setAttribute("class", "tag");
+    div1.appendChild(div2);
+    var dltButton = document.createElement("button");
+    dltButton.innerHTML = "x";
+    dltButton.setAttribute("onclick", "deleteTag(this.parentElement)");
+    div1.appendChild(dltButton);
+    document.getElementById("yourTagArea").appendChild(div1);
+    document.getElementById("tagEnterBoxInput").value = "";
+}
+
+
+////////
+//  Custom ID filter box
+////////
+
+let customBox;
+let filterHelp;
+var check1 = 0;
+function customIdBox(){
+	if (check1 === 0){
+		customBox = document.createElement("input");
+		document.getElementById("selectFilterArea").appendChild(customBox);
+		customBox.setAttribute("id", "customIdInput");
+		customBox.setAttribute("value", "");
+		customBox.setAttribute("size", "6");
+		customBox.setAttribute("pattern", "[0-9]+")
+		check1 = 1;
+		document.getElementById("customIdInput").addEventListener("keyup", function(){
+			var i = document.getElementById("customIdInput").value;
+			document.getElementById("customId").setAttribute("value", i);
+            //console.log(i);
+            document.getElementById("customIdInput").addEventListener("input", (event)=> {idValue = "customIdInput"; noLettersHere(idValue); });
+		});
+		filterHelp = document.createElement("a");
+		document.getElementById("selectFilterArea").appendChild(filterHelp);
+		filterHelp.setAttribute("id", "filterQuestionMark");
+		filterHelp.setAttribute("target", "_blank");
+		document.getElementById("filterQuestionMark").href = "derpiDrawingSiteInstructions.jpg";
+		document.getElementById("filterQuestionMark").innerHTML = "?";
+		
+	}
+	else {
+		return;
+	}
+}
+
+function delCustomIdBox(){
+	if (check1 === 1){
+		customBox.parentNode.removeChild(customBox);
+		filterHelp.parentNode.removeChild(filterHelp);
+		check1 = 0;
+	}
+	else{
+		return;
+	}
+}
+
+document.getElementById("filter").addEventListener('change', (event) => {
+    var filterCheck = event.target.value;
+	var customFilterNumber = document.getElementById("customId").value;
+	if (filterCheck === customFilterNumber){
+		customIdBox();
+	}
+	else {
+		delCustomIdBox();
+	}
+});
+
+
+////////
+//  Random button with filters
+////////
+
+function getRandomFilterImage() {
+
+var artist = document.getElementById("artistName").value;
+var filterNumber = document.querySelector("#filter").value;
+var upVoteNumber = document.getElementById("upVotesNumber").value;
+var downVoteNumber = document.getElementById("downVotesNumber").value;
+var score = document.getElementById("scoreNumber").value;
+//var encodedFilterBox = encodeURIComponent(document.getElementById("applyFilterBox").value);
 
 }

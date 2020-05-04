@@ -109,6 +109,9 @@
                 <div class="titles">Description:</div>
                 <div id="descriptionUser" class="text"></div>
                 <div class="titles">Image tags:</div>
+                <div id="currentImageTags" class="currentImageTags">
+
+                </div>
             </div>
 
             <div id="filtersArea" class="filtersArea" style="display:;">
@@ -129,11 +132,10 @@
                     </form>
                 </div>
 
-                <div id="selectFilterArea" class="titles2">
+                <div class="titles2">
                     Derpibooru filter:
-
                 </div>
-                <div class="inputs">
+                <div id="selectFilterArea" class="inputs">
                     <select id="filter">
 						<option value="100073">default</option>
 						<option value="56027">everything</option>
@@ -178,8 +180,21 @@
                 <div class="titles1">
                     Search Specific Tags:
                 </div>
-                <div class="inputs">
-                    <textarea id="applyFilterBox" class="filterTagsArea" placeholder="eg: twilight sparkle, luna, pony OR twilight sparkle AND human OR NOT fluttershy"></textarea>
+                <div>
+                    <form class="filterImageSearch"> 
+                        <input id="tagEnterBoxInput" list="autoTags" autocomplete="off"></input>
+                        <datalist id="autoTags">
+                            <!--<option value="twilight sparkle"></option>-->
+                        </datalist>
+                        <button onclick="addTagToTagArea()">Add</button>
+                    </form>
+                </div>
+
+                <div id="yourTagArea" class="yourTagArea">
+                    <div class="tagButton">
+                        <div class="tag">test</div>
+                        <button onclick="deleteTag(this.parentElement)">x</button>
+                    </div>
                 </div>
             </div>
 
@@ -214,4 +229,5 @@
 
 
 <script src="improvedDerpi.js"></script>
+<script src="autoTag.js"></script>
 </html>
