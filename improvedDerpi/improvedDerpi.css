@@ -14,6 +14,11 @@ body, html {
     /*height: 36px;*/
     display: flex;
     justify-content: space-between;
+    align-items: baseline;
+}
+
+.dBImage{
+    width: 16px;
 }
 
 .topBar a {
@@ -23,6 +28,13 @@ body, html {
 .topBar .topBarText {
     color: white;
     /*! padding: 6px 0px 0px 0px; */
+}
+.imageNumberSearch{
+    color: white;
+    background-color: #62a7d9;
+    border: none;
+    padding: 3px 5px;
+    font-size: medium;
 }
 
 .topBar .topBarButton {
@@ -39,23 +51,34 @@ body, html {
     padding-left: 6px;
     background-color: #2d80bc;
 }
-
-.imageDisplayArea {
-    transition: 0.3s;
-    float: left;
-    width: 75%;
-    background-color: #f8fafc;
-    height: calc(100% - 68px);
-}
-
-.basicPictureInfo {
+.basicPictureInfoArea{
     float: left;
     background-color:#e2ebf2;
     /*height: 32px;*/
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     width: 75%;
-    padding-bottom: 4px;
+    align-items: center;
+}
+
+.basicPictureInfoArea button {
+    flex-grow: 2;
+    font-size: inherit;
+    cursor: pointer;
+    background-color: #e2ebf2;
+    padding: 5px 15px;
+    border: none;
+}
+.basicPictureInfoArea button:hover {
+    background-color: #cadae6;
+}
+
+.basicPictureInfo {
+    background-color:#e2ebf2;
+    /*height: 32px;*/
+    display: flex;
+    justify-content: center;
+    /*padding-bottom: 4px;*/
 }
 .basicPictureInfo div {
 margin: 4px 14px 0px 14px;
@@ -86,7 +109,15 @@ margin: 4px 14px 0px 14px;
     background-color: #cadae6;
 }
 
-.imageDisplayArea .imageAndVideo{
+.imageDisplayArea {
+    transition: 0.3s;
+    float: left;
+    width: 75%;
+    background-color: #f8fafc;
+    height: calc(100% - 68px);
+}
+
+.imageDisplayArea .imageAndVideo {
     overflow-y: auto;
    /* background-color: rgb(153, 224, 83);*/
     height: 100%;
@@ -95,6 +126,16 @@ margin: 4px 14px 0px 14px;
     display: flex;
     justify-content: center;
     align-items: flex-start;
+}
+
+.imageDisplayArea .imageAndVideo .theImage{
+    max-width: 100%; 
+    max-height: 100%;
+    cursor: pointer;
+}
+.imageDisplayArea .imageAndVideo .theVideo{
+    max-width: 100%; 
+    max-height: 100%; 
 }
 
 .settingsAndInfo {
@@ -278,6 +319,7 @@ margin: 4px 14px 0px 14px;
 
 .settingsAndInfo .slideMenuArea .descriptionArea .text{
     margin: 5px 5px;
+    word-wrap: break-word;
 }
 
 .settingsAndInfo .slideMenuArea .descriptionArea .currentImageTags {
@@ -375,6 +417,12 @@ margin: 4px 14px 0px 14px;
 
 
 @media screen and (max-width: 778px){
+    .imageNumberSearch{
+        font-size: inherit;
+    }
+    .dBImage{
+        width: 8px;
+    }
     .settingsAndInfo {
         height: calc(100% - 78px);
     }

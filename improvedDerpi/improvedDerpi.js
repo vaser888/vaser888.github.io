@@ -6,11 +6,9 @@ document.getElementById("realDerpiButton").addEventListener("click", (event)=>{
     window.location.href = "https://derpibooru.org/";
 });
 
-
 ////////
 //  Things that don't want letters in them
 ////////
-
 
 var idValue;
 document.getElementById("imageNumberSearch").addEventListener("input", (event)=> {idValue = "imageNumberSearch"; noLettersHere(idValue, 0); });
@@ -18,7 +16,6 @@ document.getElementById("filteredImageNumber").addEventListener("input", (event)
 document.getElementById("filteredScoreNumber").addEventListener("input", (event)=> {idValue = "filteredScoreNumber"; noLettersHere(idValue, 1); });
 document.getElementById("filteredUpVotesNumber").addEventListener("input", (event)=> {idValue = "filteredUpVotesNumber"; noLettersHere(idValue, 1); });
 document.getElementById("filteredDownVotesNumber").addEventListener("input", (event)=> {idValue = "filteredDownVotesNumber"; noLettersHere(idValue, 1); });
-
 
 ////////
 //  Does not allow letters to be input into an Input, only numbers 
@@ -33,9 +30,13 @@ function noLettersHere(id, setting) {
     }
 
     if (document.getElementById(id).value.match(numCheck)) {
-
+        if (setting === 1){
+            getFilterPossibilityNumber(0);
+        }
     }
     else{
+   
+ 
         var t = document.getElementById(id).value;
         document.getElementById(id).value = t.substring(0, t.length - 1);
     }
@@ -90,6 +91,7 @@ var imageNumberRam;
 
 function goButton(){
     event.preventDefault();
+    refreshImageAndVideoDivs();
     var e = document.getElementById("imageNumberSearch").value;
     if (e === ""){
         alert("Please enter a number")
@@ -214,7 +216,7 @@ function imagesUpdateWebsite(imageJson, e){
 ////////
 
 function updateWebsite(imageJson, e){
-    console.log(imageJson);
+    //console.log(imageJson);
     var testOfDupe = imageJson.image.duplicate_of;
     //console.log(testOfDupe);
     if (testOfDupe === null){
@@ -391,10 +393,10 @@ function getIamgeTags (t){
 
 }
 
-
 ////////
 //  Comment area Next and back buttons 
 ////////
+
 document.getElementById("previousCommentPage").addEventListener("click", (event) => {
     
     if (commentPageNumber <= 1 || commentPageNumber == 0){ 
@@ -417,7 +419,6 @@ document.getElementById("nextCommentPage").addEventListener("click", (event) => 
         getComments(imageNumberRam, commentPageNumber);
     }
 }); 
-
 
 ////////
 //  Slide menu top menu button press update and state.
@@ -529,14 +530,11 @@ function saveImageNumberToHistory(imgNum, imgLink){
     aComment.innerHTML += imgNum;
     divComment.appendChild(aComment);
     document.getElementById("imageHistoryArea").appendChild(divComment);
-
 }
 
 ////////
 // Tags and filter area
 ////////
-
-
 
 function addTag(a){
     generateTag(a);
@@ -544,7 +542,6 @@ function addTag(a){
     //var q = document.querySelectorAll(".tag");
     //t = Array.from(q);
 }
-
 
 function deleteTag(a){
  
@@ -596,7 +593,6 @@ function generateTag(tagName){
     //t = Array.from(q);
 }
 
-
 ////////
 //  Custom ID filter box
 ////////
@@ -647,27 +643,29 @@ document.getElementById("filter").addEventListener('change', (event) => {
     var filterCheck = event.target.value;
     var customFilterNumber = document.getElementById("customId").value;
     if  (filterCheck === "56027"||filterCheck === "37429"||filterCheck === "37432"){
+        loadTagData();
         alert("By selecting this filter you can access content which is not suitable for everyone, such as sexually explicit, grimdark or gory material.\n\nBy changing away from the default filters, you accept you are legally permitted to view this content in your jurisdiction.\n\nIf in doubt, stick with the recommended default filters.");
     }
 	if (filterCheck === customFilterNumber){
 		customIdBox();
 	}
 	else {
+        
         delCustomIdBox();
         getFilterPossibilityNumber(0);
 	}
 });
-
 
 ////////
 //  Random button with filters
 ////////
 
 function getRandomFilterImage() {
+    refreshImageAndVideoDivs();
     var test = getFilterDataAndEncode(1);
     fetch("https://derpibooru.org/api/v1/json/search/images"+ test).then(function (r) { return r.json() }).then(function (RngImageJson){
         var tNum = RngImageJson.total
-        document.getElementById("possibleFilteredImageNumber").innerHTML = "of " + tNum;
+        document.getElementById("possibleFilteredImageNumber").innerHTML = tNum;
         var randomImageNumber = ((Math.floor(Math.random()*tNum))+1);
         document.getElementById("filteredImageNumber").value = randomImageNumber;
 
@@ -684,13 +682,16 @@ function getRandomFilterImage() {
 //  goto Specific image with filters
 ////////
 
-function goToFilterImage(){
+function goToFilterImage(t){
+    if (t === true){
     event.preventDefault();
+    }
     var sPage = document.getElementById("filteredImageNumber").value;
     if (sPage === ""){
         alert("input a number to the 'Total possible images' input");
         return;
     }
+    refreshImageAndVideoDivs();
     var test = getFilterDataAndEncode(sPage);
     fetch("https://derpibooru.org/api/v1/json/search/images"+ test).then(function (r) { return r.json() }).then(function (thisImageJson){
         var id = thisImageJson.images[0].id;
@@ -698,6 +699,36 @@ function goToFilterImage(){
     });
 }
 
+////////
+//  goto next Specific image with filters
+////////
+function nextFilterImage(){
+    refreshImageAndVideoDivs();
+    var n = document.getElementById("filteredImageNumber").value;
+    var p = document.getElementById("possibleFilteredImageNumber").innerHTML;
+    n = Number(n) + 1;
+    document.getElementById("filteredImageNumber").value = n;
+    if (n === Number(p) + 1){
+        document.getElementById("filteredImageNumber").value = 1;
+    }
+    goToFilterImage(false);
+}
+
+////////
+//  goto previous image with filters
+////////
+
+function previousFilterImage(){
+    refreshImageAndVideoDivs();
+    var n = document.getElementById("filteredImageNumber").value;
+    var p = document.getElementById("possibleFilteredImageNumber").innerHTML;
+    n = Number(n) - 1;
+    document.getElementById("filteredImageNumber").value = n;
+    if (n === 0){
+        document.getElementById("filteredImageNumber").value = p;
+    }
+    goToFilterImage(false);
+}
 
 ////////
 //  Filter possiblities 
@@ -707,12 +738,33 @@ function getFilterPossibilityNumber(sPage) {
     var test = getFilterDataAndEncode(sPage);
     fetch("https://derpibooru.org/api/v1/json/search/images"+ test).then(function (r) { return r.json() }).then(function (assumeFilterJson){
         var tot = assumeFilterJson.total;
-        document.getElementById("possibleFilteredImageNumber").innerHTML = "of " + tot;
-        document.getElementById("filteredImageNumber").value = "";
+        document.getElementById("possibleFilteredImageNumber").innerHTML = tot;
+        document.getElementById("filteredImageNumber").value = "1";
     });
 }
 
+////////
+//  Refesh image and video divs
+////////
 
+function refreshImageAndVideoDivs() {
+    document.getElementById("theImage").remove();
+    document.getElementById("theVideo").remove();
+    div = document.getElementById("clickExpand");
+    var img = document.createElement("img");
+    img.setAttribute("id", "theImage");
+    img.setAttribute("class", "theImage");
+    img.setAttribute("style", "display:'';")
+    div.appendChild(img);
+    var vid = document.createElement("video");
+    vid.setAttribute("id", "theVideo");
+    vid.setAttribute("class", "theVideo");
+    vid.setAttribute("style", "display: none;");
+    vid.setAttribute("controls", "true");
+    vid.setAttribute("muted", "true");
+    vid.setAttribute("loop", "true");
+    div.appendChild(vid);
+}
 
 ////////
 //  grab filter values and encode
