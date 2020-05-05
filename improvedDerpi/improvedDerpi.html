@@ -70,7 +70,7 @@
 
         <div class="slideMenuControls">
             <button id="slideMenuBtn"> > ☰ Close menu</button>
-            <button onclick="getRandomImage()">Random</button>
+            <button onclick="getRandomFilterImage()">Random</button>
         </div>
     </div>
 
@@ -121,7 +121,7 @@
             </div>
 
             <div id="filtersArea" class="filtersArea" style="display:;">
-                <a href="javascript:void(0)" onclick="getRandomImage()">
+                <a href="javascript:void(0)" onclick="getRandomFilterImage()">
                     <div id="randomButton" class="randomButton">
                         Random Image 
                     </div>
@@ -133,7 +133,7 @@
                 <div>
                     <form class="filterImageSearch">
                         <input id="filteredImageNumber" autocomplete="off" size="7"></input>
-                        <div>of 29475918</div>
+                        <div id="possibleFilteredImageNumber">of 29475918</div>
                         <button>go</button>
                     </form>
                 </div>
@@ -149,13 +149,6 @@
 						<option value="37432">18+ R34</option>
 						<option id="customId">Custom</option>
 					</select>
-                </div>
-
-                <div class="titles2">
-                    Artist:
-                </div>
-                <div class="inputs">
-                    <input id="filteredArtistName" size="19"></input>
                 </div>
 
                 <div class="titles2">
@@ -183,6 +176,15 @@
                     <input id="filteredDownVotesNumber" type="text" maxlength="5" size="4" value=""></input>
                 </div>
 
+                <div class="titles2">
+                    Artist:
+                </div>
+                <div>
+                    <form class="filterImageSearch">
+                        <input id="atistNameEnterBoxInput" autocomplete="off" size="19"></input>
+                        <button onclick="addArtistToTagArea()">Add</button>
+                    </form>
+                </div>
                 <div class="titles1">
                     Search Specific Tags:
                 </div>
@@ -202,7 +204,7 @@
                         <button onclick="deleteTag(this.parentElement)">x</button>
                     </div>
                     <div class="tagButton">
-                        <div class="tag">artistvaser888</div>
+                        <div class="tag">artist:vaser888</div>
                         <button onclick="deleteTag(this.parentElement)">x</button>
                     </div>
                 </div>

@@ -25,8 +25,8 @@ function loadTagData() {
 loadTagData();
 
 var initialArray;
-var t = document.querySelectorAll(".tagData");
-initialArray = Array.from(t);
+var ta = document.querySelectorAll(".tagData");
+initialArray = Array.from(ta);
 
 document.getElementById("tagEnterBoxInput").addEventListener("input", (function() {
     var inputVal = document.getElementById("tagEnterBoxInput").value;
@@ -46,6 +46,5 @@ document.getElementById("tagEnterBoxInput").addEventListener("input", (function(
         document.getElementById("autoTags").innerHTML = "";
         loadTagData();
     }
-    t = "";
 }));
 
