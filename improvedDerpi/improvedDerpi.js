@@ -356,7 +356,7 @@ function getComments(e, commentPageNumber){
     }).catch(function(){
         var errorMessage = document.createElement("div");
         errorMessage.setAttribute("style", "color:#cf0001;padding-left:5px;");
-        errorMessage.innerHTML = "Error <br> The comments failed to load <br><br>You have hit the end of the comments, press back to get to the last comments you can veiw on this site<br><br> Try going to the Depribooru page to see the comments";
+        errorMessage.innerHTML = "Error <br> The comments failed to load <br><br>You have hit the end of the comments, press back to get to the last comments you can view on this site<br><br> Try going to the Depribooru page to see the comments if you think there should be more comments.";
         document.getElementById("theComments").appendChild(errorMessage);
     });
 
