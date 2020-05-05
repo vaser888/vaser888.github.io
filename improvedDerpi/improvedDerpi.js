@@ -1,9 +1,6 @@
-
-function getRandomImage(){
-    var randomImageNumber = ((Math.floor(Math.random()*2336854))+1);
-    document.getElementById("imageNumberSearch").value = randomImageNumber;
-    searchImage(randomImageNumber);
-};
+window.onload = function(){
+    getFilterPossibilityNumber(0);
+}
 
 document.getElementById("realDerpiButton").addEventListener("click", (event)=>{
     window.location.href = "https://derpibooru.org/";
@@ -114,7 +111,106 @@ function searchImage(e){
 }
 
 ////////
-//  Update everything in the website
+//  Update everything in the website for random image search
+////////
+
+function imagesUpdateWebsite(imageJson, e){
+    
+    //console.log(imageJson);
+    var testOfDupe = imageJson.images[0].duplicate_of;
+    //console.log(testOfDupe);
+    if (testOfDupe === null){
+        document.getElementById("imageNumberSearch").value = e;
+    }
+    else{
+        e = testOfDupe;
+        searchImage(e);
+        document.getElementById("imageNumberSearch").value = e;
+    }
+    
+
+    imageNumberRam = e;
+    //console.log(imageNumberRam);
+
+    document.getElementById("toImageDerpiLink").href = "https://derpibooru.org/images/" + e;
+    var i = imageJson.images[0].source_url;
+    if (i === ""){
+        i = "404-No-Image";
+    }
+    document.getElementById("toImageSourceLink").href = i;
+
+    var formatType = imageJson.images[0].format;
+    if (formatType === "webm"){
+        document.getElementById("theImage").style.display = "none";
+        document.getElementById("theVideo").style.display = "";
+        document.getElementById("theVideo").src = imageJson.images[0].representations.full;
+    }
+    else {
+        document.getElementById("theVideo").style.display= "none";
+        document.getElementById("theVideo").pause();
+        document.getElementById("theImage").style.display = "";
+        document.getElementById("theImage").src = imageJson.images[0].representations.full;
+    }
+
+
+    var upv = imageJson.images[0].upvotes;
+    document.getElementById("numberOfUp").innerHTML = "Up votes: " + upv;
+
+    var sco = imageJson.images[0].score;
+    document.getElementById("numberOfScore").innerHTML = "Score: " + sco;
+
+    var dwnv = imageJson.images[0].downvotes;
+    document.getElementById("numberOfDown").innerHTML = "Down votes: " + dwnv;
+
+    var fav = imageJson.images[0].faves;
+    document.getElementById("numberOfFaves").innerHTML = "Faves: " + fav;
+
+    ////////
+    //  History area
+    ////////
+    var smallImage = imageJson.images[0].representations.thumb_tiny;
+    saveImageNumberToHistory(imageNumberRam, smallImage);
+
+    ////////
+    //  Description area
+    ////////
+
+    var x = imageJson.images[0].width;
+    var y = imageJson.images[0].height;
+    var i = imageJson.images[0].created_at;
+    var d = new Date(i);
+    document.getElementById("imageInfo").innerHTML = "<u>Date created:</u> " + d.toDateString() + "<br>" + "<u>Resolution:</u> " + x + " x " + y;
+
+    var i = imageJson.images[0].uploader;
+    if (i ===null){
+        i = "A Background Pony"
+    }
+    document.getElementById("uploaderUser").innerHTML = i;
+    var i = imageJson.images[0].description;
+    //i = decodeURI(i);
+    if (i === ""){
+        document.getElementById("descriptionUser").innerHTML = "[No Description]"
+    }
+    else{
+    document.getElementById("descriptionUser").innerHTML = i;
+    }
+    ////////
+    //  diplay Tags of the image.
+    ////////
+
+    var imgTags = imageJson.images[0].tags;
+    getIamgeTags(imgTags);
+
+    ////////
+    //  Comment area
+    ////////
+    commentPageNumber = 1;
+    document.getElementById("commentNumberPage").innerHTML = "Page: <br>" + commentPageNumber;
+    getComments(e, commentPageNumber);
+} 
+
+////////
+//  Update everything in the website for specific image search
 ////////
 
 function updateWebsite(imageJson, e){
@@ -437,22 +533,25 @@ function saveImageNumberToHistory(imgNum, imgLink){
 }
 
 ////////
-// Tags filter area
+// Tags and filter area
 ////////
 
 
 
 function addTag(a){
     generateTag(a);
-    var q = document.querySelectorAll(".tag");
-    t = Array.from(q);
+    getFilterPossibilityNumber(0);
+    //var q = document.querySelectorAll(".tag");
+    //t = Array.from(q);
 }
 
 
 function deleteTag(a){
+ 
     a.remove();
-    var q = document.querySelectorAll(".tag");
-    t = Array.from(q);
+    getFilterPossibilityNumber(0);  
+    //var q = document.querySelectorAll(".tag");
+    //t = Array.from(q);
 }
 
 function addTagToTagArea(){
@@ -463,6 +562,7 @@ function addTagToTagArea(){
     } 
     generateTag(tagName);
     document.getElementById("tagEnterBoxInput").value = "";
+    getFilterPossibilityNumber(0);
 }
 
 function addArtistToTagArea(){
@@ -476,6 +576,7 @@ function addArtistToTagArea(){
     var encodedArtist = "artist:" + artist;
     generateTag(encodedArtist);
     document.getElementById("atistNameEnterBoxInput").value = "";
+    getFilterPossibilityNumber(0);
 }
 
 function generateTag(tagName){
@@ -491,8 +592,8 @@ function generateTag(tagName){
     div1.appendChild(dltButton);
     document.getElementById("yourTagArea").appendChild(div1);
 
-    var q = document.querySelectorAll(".tag");
-    t = Array.from(q);
+    //var q = document.querySelectorAll(".tag");
+    //t = Array.from(q);
 }
 
 
@@ -552,7 +653,8 @@ document.getElementById("filter").addEventListener('change', (event) => {
 		customIdBox();
 	}
 	else {
-		delCustomIdBox();
+        delCustomIdBox();
+        getFilterPossibilityNumber(0);
 	}
 });
 
@@ -579,12 +681,38 @@ function getRandomFilterImage() {
 }
 
 ////////
+//  goto Specific image with filters
+////////
+
+function goToFilterImage(){
+    event.preventDefault();
+    var sPage = document.getElementById("filteredImageNumber").value;
+    if (sPage === ""){
+        alert("input a number to the 'Total possible images' input");
+        return;
+    }
+    var test = getFilterDataAndEncode(sPage);
+    fetch("https://derpibooru.org/api/v1/json/search/images"+ test).then(function (r) { return r.json() }).then(function (thisImageJson){
+        var id = thisImageJson.images[0].id;
+        imagesUpdateWebsite(thisImageJson, id);
+    });
+}
+
+
+////////
 //  Filter possiblities 
 ////////
 
-function getFilterPossibilityNumber() {
-
+function getFilterPossibilityNumber(sPage) {
+    var test = getFilterDataAndEncode(sPage);
+    fetch("https://derpibooru.org/api/v1/json/search/images"+ test).then(function (r) { return r.json() }).then(function (assumeFilterJson){
+        var tot = assumeFilterJson.total;
+        document.getElementById("possibleFilteredImageNumber").innerHTML = "of " + tot;
+        document.getElementById("filteredImageNumber").value = "";
+    });
 }
+
+
 
 ////////
 //  grab filter values and encode
@@ -616,13 +744,13 @@ function getFilterDataAndEncode(page){
         }
     }
     if (score === ""){
-        score = "-9000";
+        score = "-2000";
     }
     if (upVoteNumber === ""){
-        upVoteNumber = "-9000"
+        upVoteNumber = "0"
     }
     if (downVoteNumber === ""){
-        downVoteNumber = "-9000"
+        downVoteNumber = "-2000"
     }
 
     //console.log(filterNumber, score, upVoteNumber, downVoteNumber, tag);
@@ -640,100 +768,3 @@ function getFilterDataAndEncode(page){
 }
 
 
-
-
-
-function imagesUpdateWebsite(imageJson, e){
-    /*
-    //console.log(imageJson);
-    var testOfDupe = imageJson.image[].duplicate_of;
-    //console.log(testOfDupe);
-    if (testOfDupe === null){
-        //do nothing
-    }
-    else{
-        e = testOfDupe;
-        searchImage(e);
-        document.getElementById("imageNumberSearch").value = e;
-    }
-    */
-
-    imageNumberRam = e;
-    //console.log(imageNumberRam);
-
-    document.getElementById("toImageDerpiLink").href = "https://derpibooru.org/images/" + e;
-    var i = imageJson.images[0].source_url;
-    if (i === ""){
-        i = "404-No-Image";
-    }
-    document.getElementById("toImageSourceLink").href = i;
-
-    var formatType = imageJson.images[0].format;
-    if (formatType === "webm"){
-        document.getElementById("theImage").style.display = "none";
-        document.getElementById("theVideo").style.display = "";
-        document.getElementById("theVideo").src = imageJson.images[0].representations.full;
-    }
-    else {
-        document.getElementById("theVideo").style.display= "none";
-        document.getElementById("theVideo").pause();
-        document.getElementById("theImage").style.display = "";
-        document.getElementById("theImage").src = imageJson.images[0].representations.full;
-    }
-
-
-    var upv = imageJson.images[0].upvotes;
-    document.getElementById("numberOfUp").innerHTML = "Up votes: " + upv;
-
-    var sco = imageJson.images[0].score;
-    document.getElementById("numberOfScore").innerHTML = "Score: " + sco;
-
-    var dwnv = imageJson.images[0].downvotes;
-    document.getElementById("numberOfDown").innerHTML = "Down votes: " + dwnv;
-
-    var fav = imageJson.images[0].faves;
-    document.getElementById("numberOfFaves").innerHTML = "Faves: " + fav;
-
-    ////////
-    //  History area
-    ////////
-    var smallImage = imageJson.images[0].representations.thumb_tiny;
-    saveImageNumberToHistory(imageNumberRam, smallImage);
-
-    ////////
-    //  Description area
-    ////////
-
-    var x = imageJson.images[0].width;
-    var y = imageJson.images[0].height;
-    var i = imageJson.images[0].created_at;
-    var d = new Date(i);
-    document.getElementById("imageInfo").innerHTML = "<u>Date created:</u> " + d.toDateString() + "<br>" + "<u>Resolution:</u> " + x + " x " + y;
-
-    var i = imageJson.images[0].uploader;
-    if (i ===null){
-        i = "A Background Pony"
-    }
-    document.getElementById("uploaderUser").innerHTML = i;
-    var i = imageJson.images[0].description;
-    //i = decodeURI(i);
-    if (i === ""){
-        document.getElementById("descriptionUser").innerHTML = "[No Description]"
-    }
-    else{
-    document.getElementById("descriptionUser").innerHTML = i;
-    }
-    ////////
-    //  diplay Tags of the image.
-    ////////
-
-    var imgTags = imageJson.images[0].tags;
-    getIamgeTags(imgTags);
-
-    ////////
-    //  Comment area
-    ////////
-    commentPageNumber = 1;
-    document.getElementById("commentNumberPage").innerHTML = "Page: <br>" + commentPageNumber;
-    getComments(e, commentPageNumber);
-} 

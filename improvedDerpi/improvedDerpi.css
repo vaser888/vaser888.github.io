@@ -65,7 +65,6 @@ margin: 4px 14px 0px 14px;
     background-color: #e2ebf2;
     float: left;
     width: 25%;
-    height: ;
     display: flex;
     flex-wrap: wrap;
 }
@@ -394,7 +393,6 @@ margin: 4px 14px 0px 14px;
 
     input, select{
         font-size: inherit;
-        size: 5px;
     }
 
     .settingsAndInfo .slideMenuArea .descriptionArea .currentImageTags .addTagButton {
