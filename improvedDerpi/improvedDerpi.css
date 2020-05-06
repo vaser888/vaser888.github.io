@@ -55,10 +55,17 @@ body, html {
 .topBar .topBarButton:hover {
     background-color: #2d80bc;
 }
+
+.bottomTopBar{
+    float: left;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
 .basicPictureInfoArea{
     float: left;
     background-color:#e2ebf2;
-    /*height: 32px;*/
     display: flex;
     justify-content: space-between;
     width: 75%;
@@ -79,7 +86,6 @@ body, html {
 
 .basicPictureInfo {
     background-color:#e2ebf2;
-    /*height: 32px;*/
     display: flex;
     justify-content: center;
     /*padding-bottom: 4px;*/
@@ -250,7 +256,7 @@ padding: 0px 10px;
 .settingsAndInfo .slideMenuArea .filtersArea .yourTagArea {
     display: flex;
     flex-wrap: wrap;
-    margin-bottom: 40px;
+    margin-bottom: 150px;
 }
 
 .settingsAndInfo .slideMenuArea .filtersArea .tag {
@@ -330,7 +336,7 @@ padding: 0px 10px;
 .settingsAndInfo .slideMenuArea .descriptionArea .currentImageTags {
     display: flex;
     flex-wrap: wrap;
-    margin-bottom: 40px;
+    margin-bottom: 115px;
 }
 
 .settingsAndInfo .slideMenuArea .descriptionArea .currentImageTags .addTagButton {
@@ -366,6 +372,7 @@ padding: 0px 10px;
 
 .settingsAndInfo .slideMenuArea .commentsArea {
     font-size: 18px;
+    margin-bottom: 100px;
 }
 
 .settingsAndInfo .slideMenuArea .commentsArea .theComments .user {
