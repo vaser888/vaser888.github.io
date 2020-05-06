@@ -277,6 +277,7 @@ function updateWebsite(imageJson, e){
         videosrc.setAttribute("src", mp4Link);
         videosrc.setAttribute("type", "video/mp4");
         document.getElementById("theVideo").appendChild(videosrc);
+        document.getElementById("theVideo").muted = true;
         //document.getElementById("theVideo").src = imageJson.image.representations.full;
     }
     else {
