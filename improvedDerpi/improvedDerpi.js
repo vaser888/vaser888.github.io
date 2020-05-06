@@ -53,6 +53,8 @@ document.getElementById("clickExpand").addEventListener("click", (event)=>{
        document.getElementById("theVideo").style.maxHeight = "none";
    }
    else{
+        document.getElementById("theImageLow").style.display = "none";
+        document.getElementById("theImage").style.display = "block";
         document.getElementById("theImage").style.maxHeight = "100%";
         document.getElementById("theVideo").style.maxHeight = "100%";
    }
@@ -150,8 +152,9 @@ function imagesUpdateWebsite(imageJson, e){
     else {
         document.getElementById("theVideo").style.display= "none";
         document.getElementById("theVideo").pause();
-        document.getElementById("theImage").style.display = "";
-        document.getElementById("theImage").src = imageJson.images[0].representations.full;
+        document.getElementById("theImage").style.display = "none";
+        document.getElementById("theImageLow").src = imageJson.images[0].representations.large;
+        document.getElementById("theImage").src = imageJson.images[0].view_url;
     }
 
 
@@ -180,8 +183,9 @@ function imagesUpdateWebsite(imageJson, e){
     var x = imageJson.images[0].width;
     var y = imageJson.images[0].height;
     var i = imageJson.images[0].created_at;
+    var f = imageJson.images[0].format;
     var d = new Date(i);
-    document.getElementById("imageInfo").innerHTML = "<u>Date created:</u> " + d.toDateString() + "<br>" + "<u>Resolution:</u> " + x + " x " + y;
+    document.getElementById("imageInfo").innerHTML = "<u>Date created:</u> " + d.toDateString() + "<br>" + "<u>Resolution:</u> " + x + " x " + y+ "<br>" + "<u>File type:</u> ." + f;
 
     var i = imageJson.images[0].uploader;
     if (i ===null){
@@ -241,14 +245,16 @@ function updateWebsite(imageJson, e){
     var formatType = imageJson.image.format;
     if (formatType === "webm"){
         document.getElementById("theImage").style.display = "none";
+        document.getElementById("theImageLow").style.display = "none";
         document.getElementById("theVideo").style.display = "";
         document.getElementById("theVideo").src = imageJson.image.representations.full;
     }
     else {
         document.getElementById("theVideo").style.display= "none";
         document.getElementById("theVideo").pause();
-        document.getElementById("theImage").style.display = "";
-        document.getElementById("theImage").src = imageJson.image.representations.full;
+        //document.getElementById("theImage").style.display = "none";
+        document.getElementById("theImageLow").src = imageJson.image.representations.large;
+        document.getElementById("theImage").src = imageJson.image.view_url;
     }
 
 
@@ -277,8 +283,9 @@ function updateWebsite(imageJson, e){
     var x = imageJson.image.width;
     var y = imageJson.image.height;
     var i = imageJson.image.created_at;
+    var f = imageJson.image.format;
     var d = new Date(i);
-    document.getElementById("imageInfo").innerHTML = "<u>Date created:</u> " + d.toDateString() + "<br>" + "<u>Resolution:</u> " + x + " x " + y;
+    document.getElementById("imageInfo").innerHTML = "<u>Date created:</u> " + d.toDateString() + "<br>" + "<u>Resolution:</u> " + x + " x " + y + "<br>" + "<u>File type:</u> ." + f;
 
     var i = imageJson.image.uploader;
     if (i ===null){
@@ -748,13 +755,19 @@ function getFilterPossibilityNumber(sPage) {
 ////////
 
 function refreshImageAndVideoDivs() {
+    document.getElementById("theImageLow").remove();
     document.getElementById("theImage").remove();
     document.getElementById("theVideo").remove();
     div = document.getElementById("clickExpand");
+    var imgLow = document.createElement("img");
+    imgLow.setAttribute("id", "theImageLow");
+    imgLow.setAttribute("class", "theImage");
+    imgLow.setAttribute("style", "display:block"); 
+    div.appendChild(imgLow);
     var img = document.createElement("img");
     img.setAttribute("id", "theImage");
     img.setAttribute("class", "theImage");
-    img.setAttribute("style", "display:'';")
+    img.setAttribute("style", "display: none;");
     div.appendChild(img);
     var vid = document.createElement("video");
     vid.setAttribute("id", "theVideo");
