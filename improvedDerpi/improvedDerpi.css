@@ -86,7 +86,8 @@ body, html {
     /*padding-bottom: 4px;*/
 }
 .basicPictureInfo div {
-margin: 4px 14px 0px 14px;
+/*margin: 4px 14px 0px 14px;*/
+padding: 0px 10px;
 }
 
 .slideMenuControls {
@@ -494,6 +495,10 @@ margin: 4px 14px 0px 14px;
         padding-bottom: 5px;
         margin-bottom: 3px;
     }
+    .basicPictureInfo div {
+        /*margin: 4px 14px 0px 14px;*/
+        padding: 0px 2px;
+        }
 }
 
 #selectFilterArea a{
