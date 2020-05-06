@@ -865,4 +865,9 @@ function getFilterDataAndEncode(page){
     return encodedFilterSearch;
 }
 
+document.getElementById("clickExpand").addEventListener("touchmove", touchTest());
+
+function touchTest(){
+    document.getElementById("test").innerHTML = TouchList.length;
+}
 

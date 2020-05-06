@@ -257,7 +257,7 @@ text-align: center
 .settingsAndInfo .slideMenuArea .filtersArea .yourTagArea {
     display: flex;
     flex-wrap: wrap;
-    margin-bottom: 150px;
+    margin-bottom: 50px;
 }
 
 .settingsAndInfo .slideMenuArea .filtersArea .tag {
@@ -337,7 +337,7 @@ text-align: center
 .settingsAndInfo .slideMenuArea .descriptionArea .currentImageTags {
     display: flex;
     flex-wrap: wrap;
-    margin-bottom: 115px;
+    margin-bottom: 0px;
 }
 
 .settingsAndInfo .slideMenuArea .descriptionArea .currentImageTags .addTagButton {
@@ -373,7 +373,7 @@ text-align: center
 
 .settingsAndInfo .slideMenuArea .commentsArea {
     font-size: 18px;
-    margin-bottom: 115px;
+    margin-bottom: 0px;
 }
 
 .settingsAndInfo .slideMenuArea .commentsArea .theComments .user {
