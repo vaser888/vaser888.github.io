@@ -43,8 +43,9 @@ body, html {
 }
 
 .topBar .topBarButton {
+    border: none;
     font: inherit;
-    padding: 6px;
+    padding: 6px 36px 6px 36px;
     width: max-content;
     cursor: pointer;
     color: white;
@@ -52,8 +53,6 @@ body, html {
 }
 
 .topBar .topBarButton:hover {
-    padding-top: 6px;
-    padding-left: 6px;
     background-color: #2d80bc;
 }
 .basicPictureInfoArea{
@@ -498,7 +497,11 @@ padding: 0px 10px;
     .basicPictureInfo div {
         /*margin: 4px 14px 0px 14px;*/
         padding: 0px 2px;
-        }
+    }
+    .topBar .topBarButton {
+
+        padding: 4px 8px 4px 8px;
+    }    
 }
 
 #selectFilterArea a{
