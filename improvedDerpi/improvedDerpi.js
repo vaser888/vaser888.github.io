@@ -650,7 +650,7 @@ document.getElementById("filter").addEventListener('change', (event) => {
 		customIdBox();
 	}
 	else {
-        
+        loadTagData();
         delCustomIdBox();
         getFilterPossibilityNumber(0);
 	}
@@ -667,7 +667,7 @@ function getRandomFilterImage() {
         var tNum = RngImageJson.total
         document.getElementById("possibleFilteredImageNumber").innerHTML = tNum;
         var randomImageNumber = ((Math.floor(Math.random()*tNum))+1);
-        document.getElementById("filteredImageNumber").value = randomImageNumber;
+        document.getElementById("filteredImageNumber").value = (randomImageNumber);
 
         var test = getFilterDataAndEncode(randomImageNumber);
         fetch("https://derpibooru.org/api/v1/json/search/images"+ test).then(function (r) { return r.json() }).then(function (theImageJson){

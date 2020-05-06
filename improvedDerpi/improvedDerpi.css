@@ -102,7 +102,7 @@ margin: 4px 14px 0px 14px;
     font-size: inherit;
     cursor: pointer;
     background-color: #e2ebf2;
-    padding:4px 15px;
+    padding:4px 10px;
     border: none;
 }
 .slideMenuControls button:hover {
@@ -398,10 +398,30 @@ margin: 4px 14px 0px 14px;
 
 }
 
-/*#419cd9*/
-@media screen and (max-width: 1033px){
+/*#419cd9*//*
+@media screen and (max-width: 1067px){
     .settingsAndInfo {
-        height: calc(100% - 98px);
+        height: calc(100% - 70px);
+    }
+
+    .imageDisplayArea {
+        height: calc(100% - 70px);
+    }
+}
+*/
+@media screen and (max-width: 1060px){
+    .settingsAndInfo {
+        height: calc(100% - 90px);
+    }
+
+    .imageDisplayArea {
+        height: calc(100% - 90px);
+    }
+}
+
+@media screen and (max-width: 990px){
+    .settingsAndInfo {
+        height: calc(100% - 198px);
     }
 
     .imageDisplayArea {
@@ -424,10 +444,10 @@ margin: 4px 14px 0px 14px;
         width: 8px;
     }
     .settingsAndInfo {
-        height: calc(100% - 78px);
+        height: calc(100% - 43px);
     }
     .imageDisplayArea {
-        height: calc(100% - 78px);
+        height: calc(100% - 43px);
     }
     .settingsAndInfo .slideMenuArea .randomButton {
         font-size: 9px;
@@ -484,6 +504,26 @@ margin: 4px 14px 0px 14px;
         padding-left: 4px;
         padding-bottom: 5px;
         margin-bottom: 3px;
+    }
+}
+
+@media screen and (max-width: 545px){
+    .settingsAndInfo {
+        height: calc(100% - 53px);
+    }
+
+    .imageDisplayArea {
+        height: calc(100% - 53px);
+    }
+}
+
+@media screen and (max-width: 513px){
+    .settingsAndInfo {
+        height: calc(100% - 60px);
+    }
+
+    .imageDisplayArea {
+        height: calc(100% - 60px);
     }
 }
 

@@ -1,21 +1,30 @@
 
 function loadTagData() {
+
+    document.getElementById("autoTags").innerHTML = "";
+
     let tags = [
-        "twilight sparkle", "fluttershy", "rainbow dash", "apple jack", "Pinkie Pie", "rarity",
+        "twilight sparkle", "fluttershy", "rainbow dash", "apple jack", "Pinkie Pie", "rarity", "spike",
         "safe", "semi-grimdark", "suggestive",
-        "webm", "gif", "animation", "loop", "prefect loop", 
-        "luna", "celestia ", "flurry heart", "cadance", 
+        "pony", "unicorn", "pegasus", "anthro", "alicorn", "earth pony", "human",
+        "dragon", "bat pony", "changeling", "griffon", "original species",
+        "webm", "gif", "animation", "loop", "prefect loop", "comic", "animated",
+        "mare", "male", "female", "stallion",
+        "luna", "celestia ", "flurry heart", "cadance", "shining armor",
+        "queen chrysalis", "discord", 
         "sandbar", "gallus", "yona", "smolder", "silverstream", "ocellus",
+        "sunset shimmer", "starlight glimmer", 
         "zecora",
-        "lyra heartstrings", "bon bon ", "vinyl scratch", "derpy hooves",
+        "lyra heartstrings", "bon bon ", "vinyl scratch", "derpy hooves", "octavia melody",
         "trixie",
            
     ]
 
     if (document.getElementById("filter").value === "56027"){
         let nsfwTags = [
-            "explicit", "questionable", "grotesque", "grimdark", 
-            
+            "explicit", "questionable", "grotesque", "grimdark",
+            "sex", "cum", "penis", "nipples", "anus", "oral", "vulva",
+
         ]
         tags = tags.concat(nsfwTags);
     }
