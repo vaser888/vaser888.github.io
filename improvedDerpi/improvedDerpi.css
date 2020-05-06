@@ -409,7 +409,8 @@ margin: 4px 14px 0px 14px;
     }
 }
 */
-@media screen and (max-width: 1060px){
+/*
+@media screen and (max-width: 1061px){
     .settingsAndInfo {
         height: calc(100% - 90px);
     }
@@ -419,13 +420,13 @@ margin: 4px 14px 0px 14px;
     }
 }
 
-@media screen and (max-width: 990px){
+@media screen and (max-width: 999px){
     .settingsAndInfo {
-        height: calc(100% - 198px);
+        height: calc(100% - 90px);
     }
 
     .imageDisplayArea {
-        height: calc(100% - 98px);
+        height: calc(100% - 90px);
     }
     .settingsAndInfo .slideMenuArea .randomButton {
         font-size: 18px;
@@ -435,7 +436,16 @@ margin: 4px 14px 0px 14px;
     }
 }
 
+@media screen and (max-width: 980px){
+    .settingsAndInfo {
+        height: calc(100% - 98px);
+    }
 
+    .imageDisplayArea {
+        height: calc(100% - 98px);
+    }
+}
+*/
 @media screen and (max-width: 778px){
     .imageNumberSearch{
         font-size: inherit;
