@@ -147,7 +147,22 @@ function imagesUpdateWebsite(imageJson, e){
     if (formatType === "webm"){
         document.getElementById("theImage").style.display = "none";
         document.getElementById("theVideo").style.display = "";
-        document.getElementById("theVideo").src = imageJson.images[0].representations.full;
+        var webmlink = imageJson.images[0].representations.full;
+        var z = webmlink.length;
+        z = z - 4;
+        var mp4Link = webmlink.substr(0, z) +"mp4";
+        //var mp4Link = videolink
+        console.log(mp4Link);
+        var videosrc = document.createElement("source");
+        videosrc.setAttribute("src", webmlink);
+        videosrc.setAttribute("type", "video/webm");
+        document.getElementById("theVideo").appendChild(videosrc);
+        var videosrc = document.createElement("source");
+        videosrc.setAttribute("src", mp4Link);
+        videosrc.setAttribute("type", "video/mp4");
+        document.getElementById("theVideo").appendChild(videosrc);
+        document.getElementById("theVideo").muted = true;
+        //document.getElementById("theVideo").src = imageJson.images[0].representations.full;
     }
     else {
         document.getElementById("theVideo").style.display= "none";
@@ -159,16 +174,16 @@ function imagesUpdateWebsite(imageJson, e){
 
 
     var upv = imageJson.images[0].upvotes;
-    document.getElementById("numberOfUp").innerHTML = "Up votes: " + upv;
+    document.getElementById("numberOfUp").innerHTML = "Upvotes:<br>" + upv;
 
     var sco = imageJson.images[0].score;
-    document.getElementById("numberOfScore").innerHTML = "Score: " + sco;
+    document.getElementById("numberOfScore").innerHTML = "Score:<br>" + sco;
 
     var dwnv = imageJson.images[0].downvotes;
-    document.getElementById("numberOfDown").innerHTML = "Down votes: " + dwnv;
+    document.getElementById("numberOfDown").innerHTML = "Downvotes:<br>" + dwnv;
 
     var fav = imageJson.images[0].faves;
-    document.getElementById("numberOfFaves").innerHTML = "Faves: " + fav;
+    document.getElementById("numberOfFaves").innerHTML = "Faves:<br>" + fav;
 
     ////////
     //  History area
@@ -247,7 +262,22 @@ function updateWebsite(imageJson, e){
         document.getElementById("theImage").style.display = "none";
         document.getElementById("theImageLow").style.display = "none";
         document.getElementById("theVideo").style.display = "";
-        document.getElementById("theVideo").src = imageJson.image.representations.full;
+        
+        var webmlink = imageJson.image.representations.full;
+        var z = webmlink.length;
+        z = z - 4;
+        var mp4Link = webmlink.substr(0, z) +"mp4";
+        //var mp4Link = videolink
+        console.log(mp4Link);
+        var videosrc = document.createElement("source");
+        videosrc.setAttribute("src", webmlink);
+        videosrc.setAttribute("type", "video/webm");
+        document.getElementById("theVideo").appendChild(videosrc);
+        var videosrc = document.createElement("source");
+        videosrc.setAttribute("src", mp4Link);
+        videosrc.setAttribute("type", "video/mp4");
+        document.getElementById("theVideo").appendChild(videosrc);
+        //document.getElementById("theVideo").src = imageJson.image.representations.full;
     }
     else {
         document.getElementById("theVideo").style.display= "none";
@@ -259,16 +289,16 @@ function updateWebsite(imageJson, e){
 
 
     var upv = imageJson.image.upvotes;
-    document.getElementById("numberOfUp").innerHTML = "Up votes: " + upv;
+    document.getElementById("numberOfUp").innerHTML = "Upvotes:<br>" + upv;
 
     var sco = imageJson.image.score;
-    document.getElementById("numberOfScore").innerHTML = "Score: " + sco;
+    document.getElementById("numberOfScore").innerHTML = "Score:<br>" + sco;
 
     var dwnv = imageJson.image.downvotes;
-    document.getElementById("numberOfDown").innerHTML = "Down votes: " + dwnv;
+    document.getElementById("numberOfDown").innerHTML = "Downvotes:<br>" + dwnv;
 
     var fav = imageJson.image.faves;
-    document.getElementById("numberOfFaves").innerHTML = "Faves: " + fav;
+    document.getElementById("numberOfFaves").innerHTML = "Faves:<br>" + fav;
 
     ////////
     //  History area
@@ -773,9 +803,11 @@ function refreshImageAndVideoDivs() {
     vid.setAttribute("id", "theVideo");
     vid.setAttribute("class", "theVideo");
     vid.setAttribute("style", "display: none;");
-    vid.setAttribute("controls", "true");
-    vid.setAttribute("muted", "true");
-    vid.setAttribute("loop", "true");
+    vid.setAttribute("controls", "");
+    vid.setAttribute("autoplay", "");
+    vid.setAttribute("muted", "");
+    vid.setAttribute("loop", "");
+    vid.setAttribute("playsinline", "");
     div.appendChild(vid);
 }
 

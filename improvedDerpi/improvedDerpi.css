@@ -77,7 +77,7 @@ body, html {
     font-size: inherit;
     cursor: pointer;
     background-color: #e2ebf2;
-    padding: 5px 15px;
+    padding: 13px 15px;
     border: none;
 }
 .basicPictureInfoArea button:hover {
@@ -93,6 +93,7 @@ body, html {
 .basicPictureInfo div {
 /*margin: 4px 14px 0px 14px;*/
 padding: 0px 10px;
+text-align: center
 }
 
 .slideMenuControls {
@@ -113,7 +114,7 @@ padding: 0px 10px;
     font-size: inherit;
     cursor: pointer;
     background-color: #e2ebf2;
-    padding: 4px 10px;
+    padding: 6px 10px;
     border: none;
 }
 .slideMenuControls button:hover {
@@ -372,7 +373,7 @@ padding: 0px 10px;
 
 .settingsAndInfo .slideMenuArea .commentsArea {
     font-size: 18px;
-    margin-bottom: 100px;
+    margin-bottom: 115px;
 }
 
 .settingsAndInfo .slideMenuArea .commentsArea .theComments .user {
@@ -413,20 +414,29 @@ padding: 0px 10px;
 /*#419cd9*/
 
 @media screen and (max-width: 1488px){
-    /*
+    
     .settingsAndInfo {
-        height: calc(100% - 98px);
+        height: calc(100% - 84px);
     }
 
     .imageDisplayArea {
-        height: calc(100% - 98px);
+        height: calc(100% - 84px);
     }
-    */
+    
     .settingsAndInfo .slideMenuArea .randomButton {
         font-size: 18px;
     }
     .settingsAndInfo .slideMenuArea .commentsArea{
         font-size: 16px;
+    }
+}
+
+@media screen and (max-width: 953px){
+    .imageDisplayArea {
+        height: calc(100% - 106px);
+    }
+    .settingsAndInfo {
+        height: calc(100% - 106px);
     }
 }
 
@@ -441,10 +451,15 @@ padding: 0px 10px;
     .settingsAndInfo {
         height: calc(100% - 43px);
     }
-    .imageDisplayArea {
-        height: calc(100% - 43px);
-    }
     */
+    .imageDisplayArea {
+        height: calc(100% - 55px);
+    }
+    
+    .settingsAndInfo {
+        height: calc(100% - 55px);
+    }
+
     .settingsAndInfo .slideMenuArea .randomButton {
         font-size: 9px;
     }
@@ -509,6 +524,15 @@ padding: 0px 10px;
 
         padding: 4px 8px 4px 8px;
     }    
+}
+
+@media screen and (max-width: 512px){
+    .imageDisplayArea {
+        height: calc(100% - 64px);
+    }
+    .settingsAndInfo {
+        height: calc(100% - 64px);
+    }
 }
 
 #selectFilterArea a{
