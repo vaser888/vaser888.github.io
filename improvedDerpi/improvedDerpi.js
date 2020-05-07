@@ -865,18 +865,45 @@ function getFilterDataAndEncode(page){
     return encodedFilterSearch;
 }
 
-let testh = 1;
+////////
+//  Touch code
+////////
+
+var touchAlertRam = true;
 document.getElementById("imageDisplayArea").addEventListener("touchstart", function(e){
  
-    testh = (testh + 1);
- 
-    switch (e.touches.length) {
-        case 1: //alert("hey"); break;
-        case 2: //alert("hi"); break;
-        case 3: //alert("three works"); break;
-        default: document.getElementById("test").innerHTML = testh; break;
+    if (e.touches.length === 3) {
+        hideAllUi();
+        if (touchAlertRam === true){
+            alert("use 3 fingers on the screen to bring back UI");
+            touchAlertRam = false;
+        }
     }
 },false);
 
+////////
+//  remove all ui but image
+////////
 
+function hideAllUi(){
+
+    tb = document.getElementById("topBar");
+    btb = document.getElementById("bottomTopBar");
+    sm = document.getElementById("settingsAndInfo");
+    tbw = document.getElementById("topBar").style.width;
+
+    if (tbw === "100%"){
+        tb.style.width = "0%";
+        btb.style.width = "0%";
+        sm.style.width = "0%";
+        document.getElementById("imageDisplayArea").setAttribute("class", "fullWindowImage");
+        document.getElementById("imageDisplayArea").style.width = "100%";
+    }
+    else{
+        tb.style.width = "100%";
+        btb.style.width = "100%";
+        document.getElementById("imageDisplayArea").setAttribute("class", "imageDisplayArea");
+        document.getElementById("slideMenuBtn").innerHTML = "< ☰ Open menu";
+    }
+}
 
