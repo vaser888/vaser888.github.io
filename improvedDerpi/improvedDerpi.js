@@ -865,12 +865,16 @@ function getFilterDataAndEncode(page){
     return encodedFilterSearch;
 }
 
+let testh = 1;
 document.getElementById("imageDisplayArea").addEventListener("touchstart", function(e){
+ 
+    testh = (testh + 1);
+ 
     switch (e.touches.length) {
-        //case 1: alert("hey"); break;
+        case 1: alert("hey"); break;
         case 2:alert("hi"); break;
-        case 3: handle_three_touches(e); break;
-        default: document.getElementById("test").innerHTML = "Not supported"; break;
+        case 3: alert("three works"); break;
+        default: document.getElementById("test").innerHTML = testh; break;
     }
 },false);
 
