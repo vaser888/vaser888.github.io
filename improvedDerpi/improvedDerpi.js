@@ -865,9 +865,14 @@ function getFilterDataAndEncode(page){
     return encodedFilterSearch;
 }
 
-document.getElementById("clickExpand").addEventListener("touchmove", touchTest());
+document.getElementById("imageDisplayArea").addEventListener("touchstart", function(e){
+    switch (e.touches.length) {
+        //case 1: alert("hey"); break;
+        case 2:alert("hi"); break;
+        case 3: handle_three_touches(e); break;
+        default: console.log("Not supported"); break;
+    }
+},false);
 
-function touchTest(){
-    document.getElementById("test").innerHTML = TouchList.length;
-}
+
 
