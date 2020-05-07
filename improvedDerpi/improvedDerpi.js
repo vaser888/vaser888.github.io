@@ -907,3 +907,57 @@ function hideAllUi(){
     }
 }
 
+////////
+//  Swipe for next button
+////////
+/*
+document.getElementById("imageDisplayArea").addEventListener("touchstart", testing());
+
+function testing(){
+    var t = Event.clientX; 
+    console.log(t);
+}
+
+*/
+/*
+document.getElementById("imageDisplayArea").addEventListener("touchstart", function swipeNextImage(e){
+    var imageDisplayAreaWidth = document.getElementById("imageDisplayArea").clientWidth;
+    var xIni = e.touches[0].clientX;
+    var swipePercentPos = Math.floor(0.77 * imageDisplayAreaWidth);
+    var swipePercentNeg =swipePercentPos * -1;
+    console.log(imageDisplayAreaWidth, xIni, swipePercentPos, swipePercentNeg);
+    var bangRam = false;
+
+});
+
+document.getElementById("imageDisplayArea").addEventListener("touchmove", function(f){
+    var x = f.touches[0].clientX;
+    var distanceTravled = xIni - x; 
+    console.log("x:"+distanceTravled);
+    if (bangRam === false){
+        if (distanceTravled <= swipePercentNeg){
+            alert("bang");
+            bangRam = true
+        }
+    }
+    
+});
+*/
+
+////////
+//  Use Keyboard to control site. 
+////////
+
+document.onkeydown = function (event) {
+    var keyPressed = event.keyCode;
+    console.log(event.keyCode);
+    if (keyPressed === 59){
+        hideAllUi();
+    }
+    if (keyPressed === 190){
+        nextFilterImage();
+    }
+    if (keyPressed === 188){
+        previousFilterImage();
+    }
+}
