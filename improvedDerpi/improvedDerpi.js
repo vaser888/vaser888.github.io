@@ -870,7 +870,7 @@ document.getElementById("imageDisplayArea").addEventListener("touchstart", funct
         //case 1: alert("hey"); break;
         case 2:alert("hi"); break;
         case 3: handle_three_touches(e); break;
-        default: console.log("Not supported"); break;
+        default: document.getElementById("test").innerHTML = "Not supported"; break;
     }
 },false);
 
