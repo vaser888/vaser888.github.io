@@ -873,7 +873,7 @@ document.getElementById("imageDisplayArea").addEventListener("touchstart", funct
     switch (e.touches.length) {
         case 1: //alert("hey"); break;
         case 2: //alert("hi"); break;
-        case 3: alert("three works"); break;
+        case 3: //alert("three works"); break;
         default: document.getElementById("test").innerHTML = testh; break;
     }
 },false);
