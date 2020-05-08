@@ -81,6 +81,10 @@ body, html {
     background-color: #cadae6;
 }
 
+.basicPictureInfoArea .buttonNextSwipe, .basicPictureInfoArea .buttonPreviousSwipe {
+    background-color: #cadae6;
+}
+
 .basicPictureInfo {
     background-color:#e2ebf2;
     display: flex;

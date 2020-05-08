@@ -912,39 +912,60 @@ function hideAllUi(){
 ////////
 //  Swipe for next button
 ////////
-/*
-document.getElementById("imageDisplayArea").addEventListener("touchstart", testing());
 
-function testing(){
-    var t = Event.clientX; 
-    console.log(t);
-}
+var isMoving = false;
+var xIni, imageDisplayAreaWidth, swipePercentPos, swipePercentNeg;
+var nextRam, previousRam;
 
-*/
-/*
-document.getElementById("imageDisplayArea").addEventListener("touchstart", function swipeNextImage(e){
-    var imageDisplayAreaWidth = document.getElementById("imageDisplayArea").clientWidth;
-    var xIni = e.touches[0].clientX;
-    var swipePercentPos = Math.floor(0.77 * imageDisplayAreaWidth);
-    var swipePercentNeg =swipePercentPos * -1;
-    console.log(imageDisplayAreaWidth, xIni, swipePercentPos, swipePercentNeg);
-    var bangRam = false;
-
+document.getElementById("imageDisplayArea").addEventListener("touchstart", function(e){
+    xIni = e.touches[0].clientX;
+    imageDisplayAreaWidth = document.getElementById("imageDisplayArea").clientWidth;
+    swipePercentPos = Math.floor(0.77 * imageDisplayAreaWidth);
+    swipePercentNeg =swipePercentPos * -1;  
+    isMoving = true;
+    nextRam = false;
+    previousRam = false;
 });
 
-document.getElementById("imageDisplayArea").addEventListener("touchmove", function(f){
-    var x = f.touches[0].clientX;
-    var distanceTravled = xIni - x; 
-    console.log("x:"+distanceTravled);
-    if (bangRam === false){
-        if (distanceTravled <= swipePercentNeg){
-            alert("bang");
-            bangRam = true
+document.getElementById("imageDisplayArea").addEventListener("touchmove", function(e){
+    if (isMoving === true){
+        //console.log("hey", xIni,imageDisplayAreaWidth);
+        var x = e.touches[0].clientX;
+        var distanceTravled = xIni - x; 
+        //console.log("x:"+distanceTravled);
+
+        if (distanceTravled >= swipePercentPos){
+            nextRam = true;
+            document.getElementById("nextImageSwipe").className = "buttonNextSwipe";
         }
+        else if (distanceTravled <= swipePercentNeg){
+            previousRam = true;
+            document.getElementById("PreviousImageSwipe").className = "buttonPreviousSwipe"; 
+        }
+        else{
+            document.getElementById("nextImageSwipe").className = "";
+            document.getElementById("PreviousImageSwipe").className = "";
+            nextRam = false;
+            previousRam = false;
+        } 
+
     }
-    
+    else{
+        isMoving = false;
+    }
 });
-*/
+
+document.getElementById("imageDisplayArea").addEventListener("touchend", function(e){
+    if (nextRam === true){
+        nextFilterImage();
+    }
+    if (previousRam === true){
+        previousFilterImage();
+    }
+    document.getElementById("nextImageSwipe").className = "";
+    document.getElementById("PreviousImageSwipe").className = "";
+    isMoving = false;
+});
 
 ////////
 //  Use Keyboard to control site. 
