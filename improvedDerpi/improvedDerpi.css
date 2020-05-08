@@ -138,6 +138,26 @@ text-align: center
     flex-direction: column;
     text-align: center;
     position: relative;
+    transition: 0.3s;
+
+}
+
+.closeOptionsButton {
+    transition: 0.3s;
+    opacity: 0.5;
+    font-size: 36px;
+    position: absolute;
+    top: 0px;
+    right: 25px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: white;
+    padding: 0px 10px;
+    margin: 0px;
+}
+.closeOptionsButton:hover{
+    opacity: 1;
 }
 
 .imageAndVideo {

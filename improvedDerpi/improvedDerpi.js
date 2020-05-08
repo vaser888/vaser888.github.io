@@ -1,5 +1,6 @@
 window.onload = function(){
     getFilterPossibilityNumber(0);
+    //siteOptions();
 }
 
 document.getElementById("realDerpiButton").addEventListener("click", (event)=>{
@@ -68,11 +69,13 @@ document.getElementById("slideMenuBtn").addEventListener("click", sideMenuToggle
 
 function sideMenuToggle(){
     a = document.getElementById("imageDisplayArea");
+    a2 = document.getElementById("optionsDisplayArea");
     b = document.getElementById("settingsAndInfo");
     h = document.getElementById("imageDisplayArea").style.width;
     
     if (h === "75%"){
         a.style.width = "100%";
+        a2.style.width = "100%";
         b.style.width = "0%";
         b.style.display = "none";
         document.getElementById("slideMenuBtn").innerHTML = "< ☰ Open menu";
@@ -81,6 +84,7 @@ function sideMenuToggle(){
         setTimeout( (event)=> {b.style.display = "";}, 300);
         b.style.width = "25%";
         a.style.width = "75%";
+        a2.style.width = "75%";
         document.getElementById("slideMenuBtn").innerHTML = "> ☰ Close menu";
 
     }
@@ -990,6 +994,17 @@ document.onkeydown = function (event) {
 ////////
 
 function siteOptions() {
-
+    document.getElementById("optionsDisplayArea").style.display = "";
+    document.getElementById("imageDisplayArea").style.display = "none"; 
 }
 
+////////
+//  close site Options
+////////
+
+document.getElementById("closeOptionsButton").addEventListener("click", closeSiteOptions);
+
+function closeSiteOptions() {
+    document.getElementById("optionsDisplayArea").style.display = "none";
+    document.getElementById("imageDisplayArea").style.display = ""; 
+}
