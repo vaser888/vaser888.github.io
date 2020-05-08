@@ -126,6 +126,16 @@ text-align: center
     height: 100% ;*/
 }
 
+.optionsDisplayArea {
+    float: left;
+    width: 75%;
+    background-color: #3d92d0;
+    height: 100% ;
+    flex-direction: column;
+    text-align: center;
+    position: relative;
+}
+
 .imageAndVideo {
     overflow-y: auto;
    /* background-color: rgb(153, 224, 83);*/

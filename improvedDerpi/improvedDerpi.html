@@ -66,7 +66,7 @@
                     Upvotes:<br>0
                 </div>
                 <div id="numberOfScore">
-                    score:<br>0
+                    Score:<br>0
                 </div>
                 <div id="numberOfDown" style="color: #cf0001;">
                     Downvotes:<br>0
@@ -83,7 +83,13 @@
         </div>
     </div>
 
-    <div id="imageDisplayArea" class="imageDisplayArea" style="width: 75%;">
+    <div class="optionsDisplayArea" style="width: 75%; display: none;">
+        <a style="position: absolute; top: 0; right: 25px;">as</a>
+        <div class="titles">a</div>
+        <div>hello</div>
+    </div>
+
+    <div id="imageDisplayArea" class="imageDisplayArea" style="width: 75%; display:;">
         <div id="clickExpand" class="imageAndVideo">
             <img id="theImageLow" class="theImage" style="display: true;">
             <img id="theImage" class="theImage"  style="display: none;">
@@ -91,7 +97,6 @@
                 
             </video> 
         </div>
-
     </div>
 
     <div id="settingsAndInfo" class="settingsAndInfo" style="width: 25%;">
@@ -110,6 +115,13 @@
             </div>
 
             <div id="descriptionArea" class="descriptionArea" style="display: none;">
+                
+                <div class="titles">Site Options:</div>
+                <a>
+                    <div class="randomButton" onclick="siteOptions()">Options / site info</div>
+                </a>
+
+                <div class="titles">Image sources:</div>
                 <a id="toImageDerpiLink" target="_blank"> 
                     <div id="" class="randomButton">
                         View in derpibooru 

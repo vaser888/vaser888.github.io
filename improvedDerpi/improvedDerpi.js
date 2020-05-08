@@ -64,7 +64,9 @@ document.getElementById("clickExpand").addEventListener("click", (event)=>{
 //  Slide menu button
 ////////
 
-document.getElementById("slideMenuBtn").addEventListener("click", (event)=>{
+document.getElementById("slideMenuBtn").addEventListener("click", sideMenuToggle);
+
+function sideMenuToggle(){
     a = document.getElementById("imageDisplayArea");
     b = document.getElementById("settingsAndInfo");
     h = document.getElementById("imageDisplayArea").style.width;
@@ -82,7 +84,7 @@ document.getElementById("slideMenuBtn").addEventListener("click", (event)=>{
         document.getElementById("slideMenuBtn").innerHTML = "> ☰ Close menu";
 
     }
-});
+}
 
 ////////
 //  top bar go button. It searches for specific images by an image number from Derpibooru.
@@ -903,7 +905,7 @@ function hideAllUi(){
         tb.style.width = "100%";
         btb.style.width = "100%";
         document.getElementById("imageDisplayArea").setAttribute("class", "imageDisplayArea");
-        document.getElementById("slideMenuBtn").innerHTML = "< ☰ Open menu";
+        sideMenuToggle();
     }
 }
 
@@ -950,7 +952,7 @@ document.getElementById("imageDisplayArea").addEventListener("touchmove", functi
 
 document.onkeydown = function (event) {
     var keyPressed = event.keyCode;
-    console.log(event.keyCode);
+    //console.log(event.keyCode);
     if (keyPressed === 59){
         hideAllUi();
     }
@@ -961,3 +963,12 @@ document.onkeydown = function (event) {
         previousFilterImage();
     }
 }
+
+////////
+//  Site Options
+////////
+
+function siteOptions() {
+
+}
+
