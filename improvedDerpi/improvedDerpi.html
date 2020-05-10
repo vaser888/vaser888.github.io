@@ -42,7 +42,7 @@
 
         <div class="topBarText">
             <form>
-                Go to specific image # <input id="imageNumberSearch" class="imageNumberSearch" autocomplete="off" placeholder="Number"></input>
+                Go to specific image # <input id="imageNumberSearch" class="imageNumberSearch" autocomplete="off" placeholder="Number" type="search"></input>
                 <button class="topBarButton" onclick="goButton()">Go</button>
             </form>
              <!--
@@ -85,12 +85,14 @@
 
     <div id="optionsDisplayArea" class="optionsDisplayArea" style="width: 75%; display: none;">
         <button id="closeOptionsButton" class="closeOptionsButton">x</button>
-        <div class="titles">Desktop</div>
-        <div>Use keyboard keys ">" for next image, "<" for previous image and ";" to toggle the UI on and off</div>
-        <div>Mobile</div>
-        <div>swipe right for enxt image, swip left for previous image and touch 3 fingers on the display to toggle UI on and off</div>        
-        <div>About</div>
-        <div>This page was made by Vaser88</div>
+        <div class="optionsArea">
+            <div class="titles">Desktop</div>
+            <div>Use keyboard keys ">" for next image, "<" for previous image and ";" to toggle the UI on and off</div>
+            <div>Mobile</div>
+            <div>swipe right for enxt image, swip left for previous image and touch 3 fingers on the display to toggle UI on and off</div>        
+            <div>About</div>
+            <div>This page was made by Vaser88</div>
+        </div>
     </div>
 
     <div id="imageDisplayArea" class="imageDisplayArea" style="width: 75%; display:;">
@@ -161,7 +163,7 @@
                 </div>
                 <div>
                     <form class="filterImageSearch">
-                        <input id="filteredImageNumber" autocomplete="off" size="7"></input>
+                        <input id="filteredImageNumber" autocomplete="off" size="7" type="search"></input>
                         <div>of </div>
                         <div id="possibleFilteredImageNumber"></div>
                         <button onclick="goToFilterImage(true)">go</button>
@@ -186,7 +188,7 @@
                 </div>
                 <div class="inputs">
                     <input id="filteredScoreNumber" type="text" maxlength="5" size="4" value=""
-					title="type in the minimum score a picture has to have">
+					title="type in the minimum score a picture has to have" type="search">
 					</input>
                 </div>
 
@@ -195,7 +197,7 @@
                 </div>
                 <div class="inputs">
                     <input id="filteredUpVotesNumber" type="text" maxlength="5" size="4" value="" 
-					title="Type in the minimum number of upvotes a picture has to have">
+					title="Type in the minimum number of upvotes a picture has to have" type="search">
 					</input>
                 </div>
 
@@ -204,7 +206,7 @@
                 </div>
                 <div class="inputs">
                     <input id="filteredDownVotesNumber" type="text" maxlength="5" size="4" value=""
-                    title="Type in the minimum number of downvotes a picture has to have">
+                    title="Type in the minimum number of downvotes a picture has to have" type="search">
                 </input>
                 </div>
 
@@ -213,7 +215,7 @@
                 </div>
                 <div>
                     <form class="filterImageSearch">
-                        <input id="atistNameEnterBoxInput" autocomplete="true" size="19"></input>
+                        <input id="atistNameEnterBoxInput" autocomplete="true" size="19" type="search"></input>
                         <button onclick="addArtistToTagArea()">Add</button>
                     </form>
                 </div>
@@ -222,7 +224,7 @@
                 </div>
                 <div>
                     <form class="filterImageSearch"> 
-                        <input id="tagEnterBoxInput" list="autoTags" autocomplete="off" size="19"></input>
+                        <input id="tagEnterBoxInput" list="autoTags" autocomplete="off" size="19" type="search"></input>
                         <datalist id="autoTags">
                             <!--<option value="twilight sparkle"></option>-->
                         </datalist>

@@ -994,7 +994,7 @@ document.onkeydown = function (event) {
 ////////
 
 function siteOptions() {
-    document.getElementById("optionsDisplayArea").style.display = "";
+    document.getElementById("optionsDisplayArea").style.display = "flex";
     document.getElementById("imageDisplayArea").style.display = "none"; 
 }
 

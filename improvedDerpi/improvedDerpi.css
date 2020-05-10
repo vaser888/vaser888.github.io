@@ -12,6 +12,11 @@ body, html {
     position:fixed;
 }
 
+::placeholder {
+    color: white;
+    /*opacity: ;  Firefox */
+  }
+
 .topBar {
     float: left;
     background-color: #3d92d0;
@@ -127,19 +132,28 @@ text-align: center
     float: left;
     width: 75%;
     background-color: #f8fafc;
-    height: 100% ;*/
+    height: 100% ;
 }
 
 .optionsDisplayArea {
     float: left;
     width: 75%;
-    background-color: #3d92d0;
+    background-color: #4787b5;
     height: 100% ;
-    flex-direction: column;
-    text-align: center;
     position: relative;
     transition: 0.3s;
+    justify-content: center;
+}
 
+.optionsDisplayArea .optionsArea {
+ 
+    background-color: #f8fafc;
+    margin: 2%;
+    margin-top: 50px;
+
+    display: flex;
+    flex-direction: column;
+    width: 100%
 }
 
 .closeOptionsButton {
@@ -445,13 +459,13 @@ text-align: center
 
 /*#419cd9*/
 
-@media screen and (max-width: 1488px){
+@media screen and (max-width: 1488px) {
     
     .settingsAndInfo {
         height: calc(100% - 84px);
     }
 
-    .imageDisplayArea {
+    .imageDisplayArea, .optionsDisplayArea {
         height: calc(100% - 84px);
     }
     
@@ -463,8 +477,8 @@ text-align: center
     }
 }
 
-@media screen and (max-width: 953px){
-    .imageDisplayArea {
+@media screen and (max-width: 953px) {
+    .imageDisplayArea, .optionsDisplayArea {
         height: calc(100% - 106px);
     }
     .settingsAndInfo {
@@ -472,7 +486,7 @@ text-align: center
     }
 }
 
-@media screen and (max-width: 778px){
+@media screen and (max-width: 778px) {
     .imageNumberSearch{
         font-size: inherit;
     }
@@ -484,7 +498,7 @@ text-align: center
         height: calc(100% - 43px);
     }
     */
-    .imageDisplayArea {
+    .imageDisplayArea, .optionsDisplayArea {
         height: calc(100% - 55px);
     }
     
@@ -559,7 +573,7 @@ text-align: center
 }
 
 @media screen and (max-width: 512px){
-    .imageDisplayArea {
+    .imageDisplayArea, .optionsDisplayArea {
         height: calc(100% - 64px);
     }
     .settingsAndInfo {
