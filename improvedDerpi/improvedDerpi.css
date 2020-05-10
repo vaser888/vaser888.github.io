@@ -25,6 +25,10 @@ body, html {
     align-items: baseline;
 }
 
+input[type="search"] {
+    -webkit-appearance: textfield;
+  }
+
 .dBImage{
     width: 16px;
 }
