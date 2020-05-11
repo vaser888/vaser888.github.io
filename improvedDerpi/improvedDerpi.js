@@ -1,6 +1,7 @@
 window.onload = function(){
     getFilterPossibilityNumber(0);
     //siteOptions();
+    setupSiteWithOptions();
 }
 
 document.getElementById("realDerpiButton").addEventListener("click", (event)=>{
@@ -583,7 +584,7 @@ function checkHistoryLimit(){
         var q = document.querySelectorAll(".historyStyle");
         t = Array.from(q);
         //console.log(r,t);
-        if (t.length >= (Number(r) + 1)){
+        if (t.length > r){
             document.querySelector(".historyStyle").remove();
         }
     }
@@ -917,7 +918,7 @@ function hideAllUi(){
         sm.style.width = "0%";
         document.getElementById("imageDisplayArea").setAttribute("class", "fullWindowImage");
         document.getElementById("imageDisplayArea").style.width = "100%";
-        document.getElementById("optionsDisplayArea").setAttribute("class", "fullWindowImage");
+        document.getElementById("optionsDisplayArea").setAttribute("class", "fullWindowDescription");
         document.getElementById("optionsDisplayArea").style.width = "100%";
     }
     else{
@@ -993,8 +994,8 @@ document.getElementById("imageDisplayArea").addEventListener("touchend", functio
 
 document.onkeydown = function (event) {
     var keyPressed = event.keyCode;
-    //console.log(event.keyCode);
-    if (keyPressed === 59){
+    console.log(event.keyCode);
+    if (keyPressed === 59 || keyPressed === 186){
         hideAllUi();
     }
     if (keyPressed === 190){
@@ -1023,4 +1024,18 @@ document.getElementById("closeOptionsButton").addEventListener("click", closeSit
 function closeSiteOptions() {
     document.getElementById("optionsDisplayArea").style.display = "none";
     document.getElementById("imageDisplayArea").style.display = ""; 
+}
+
+////////
+//  Site options excecute
+////////
+
+function setupSiteWithOptions() {
+    var ifTrueTest = document.getElementById("safeTag").value;
+    //console.log(ifTrueTest);
+    document.getElementById("historyMemoryLength").value = 20;
+    if (ifTrueTest === "true"){
+        document.getElementById("tagEnterBoxInput").value = "safe";
+        addTagToTagArea();
+    }
 }

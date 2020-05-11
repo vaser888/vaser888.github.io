@@ -103,20 +103,28 @@
                 </ul>
             </div>
             <div class="titles">Options</div>
-            <div class="text">History length
-                <select id="historyMemoryLength">
-                    <option value="5">5</option>
-                    <option value="10">10</option>
-                    <option value="20">20</option>
-                    <option value="25" selected>25</option>
-                    <option value="30">30</option>
-                    <option value="40">40</option>
-                    <option value="50">50</option>
-                    <option value="infinite">Infinite</option>
-                    
-                </select>
-                
-            </div>
+            <form>
+                <div class="text">
+                    History length
+                    <select id="historyMemoryLength">
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                        <option value="25">25</option>
+                        <option value="30">30</option>
+                        <option value="40">40</option>
+                        <option value="50">50</option>
+                        <option value="infinite">Infinite</option>              
+                    </select>
+                </div>
+                <div class="text">Open site with safe filter by default 
+                    <select id="safeTag">
+                        <option value="true">Yes</option>
+                        <option value="false">No</option>
+                    </select>
+                </div>
+
+            </form>
             <div class="titles">About</div>
             <div style="text-align: center;">This site was made by Vaser888</div>
         </div>
@@ -151,7 +159,7 @@
                 
                 <div class="titles">Site Options:</div>
                 <a href="javascript:void(0)" onclick="siteOptions()">
-                    <div class="randomButton">Options / site info</div>
+                    <div class="optionsButton">Options / Site info</div>
                 </a>
 
                 <div class="titles">Image sources:</div>
@@ -260,12 +268,12 @@
                 </div>
 
                 <div id="yourTagArea" class="yourTagArea">
-                    
+                    <!--
                     <div class="tagButton">
                         <div class="tag">safe</div>
                         <button onclick="deleteTag(this.parentElement)">x</button>
                     </div>
-                    
+                    -->
                 </div>
             </div>
 

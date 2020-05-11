@@ -15,7 +15,17 @@ body, html {
 ::placeholder {
     color: white;
     /*opacity: ;  Firefox */
-  }
+}
+:-ms-input-placeholder {
+    color: white;
+}
+::-ms-input-placeholder {
+    color: white;
+}
+
+input[type="search"] {
+    -webkit-appearance: textfield;
+}
 
 .topBar {
     float: left;
@@ -24,10 +34,6 @@ body, html {
     justify-content: space-between;
     align-items: baseline;
 }
-
-input[type="search"] {
-    -webkit-appearance: textfield;
-  }
 
 .dBImage{
     width: 16px;
@@ -136,20 +142,20 @@ text-align: center
     float: left;
     width: 75%;
     background-color: #f8fafc;
-    height: 100% ;
+    height: calc(100% - 84px) ;
 }
 
 .optionsDisplayArea {
     float: left;
     width: 75%;
     background-color: #d5e7f5;
-    height: 100% ;
+    height: calc(100% - 84px);
     position: relative;
     transition: 0.3s;
     justify-content: center;
 }
 
-.optionsDisplayArea .optionsArea, .fullWindowImage .optionsArea{
+.optionsDisplayArea .optionsArea, .fullWindowDescription .optionsArea{
     border: 4px #62a7d9 solid;
     background-color: #f8fafc;
     margin: 2%;
@@ -161,13 +167,13 @@ text-align: center
     overflow-y: auto;
 }
 
-.optionsDisplayArea .optionsArea .titles, .fullWindowImage .optionsArea .titles {
+.optionsDisplayArea .optionsArea .titles, .fullWindowDescription .optionsArea .titles {
     text-align: center;
     background-color: #62a7d9;
     padding: 1% 0px;
 }
 
-.optionsDisplayArea .optionsArea .text, .fullWindowImage .optionsArea .text {
+.optionsDisplayArea .optionsArea .text, .fullWindowDescription .optionsArea .text {
     margin-top: 1%;
     margin-left: 2%;
     margin-bottom: 1%;
@@ -218,7 +224,7 @@ text-align: center
     float: left;
     width: 25%;
     background-color: #d5e7f5;
-    height: 100%;
+    height: calc(100% - 84px);
     overflow-y: auto;
 }
 
@@ -246,8 +252,23 @@ text-align: center
     cursor: pointer;
     margin: 14px;
 }
+
+.settingsAndInfo .slideMenuArea .optionsButton {
+    font-size: 28px;
+    background-color: #5bc8b6;
+    color: white;
+    text-align: center;
+    padding: 10px 10px;
+    cursor: pointer;
+    margin: 14px;
+}
+
 .settingsAndInfo .slideMenuArea .randomButton:hover {
     background-color: #419cd9;
+}
+
+.settingsAndInfo .slideMenuArea .optionsButton:hover {
+    background-color: #34b7a1;
 }
 
 .settingsAndInfo .slideMenuArea .slideMenuTopMenu {
@@ -490,9 +511,10 @@ text-align: center
         height: calc(100% - 84px);
     }
     
-    .settingsAndInfo .slideMenuArea .randomButton {
+    .settingsAndInfo .slideMenuArea .randomButton, .settingsAndInfo .slideMenuArea .optionsButton {
         font-size: 18px;
     }
+
     .settingsAndInfo .slideMenuArea .commentsArea{
         font-size: 16px;
     }
@@ -527,7 +549,7 @@ text-align: center
         height: calc(100% - 55px);
     }
 
-    .settingsAndInfo .slideMenuArea .randomButton {
+    .settingsAndInfo .slideMenuArea .randomButton, , .settingsAndInfo .slideMenuArea .optionsButton {
         font-size: 9px;
     }
     .settingsAndInfo .slideMenuArea .commentsArea{
@@ -611,4 +633,10 @@ text-align: center
     height: 100%;
     float: left;
     background-color: #f8fafc;
+}
+
+.fullWindowDescription {
+    height: 100%;
+    float: left;
+    background-color: #d5e7f5;
 }
