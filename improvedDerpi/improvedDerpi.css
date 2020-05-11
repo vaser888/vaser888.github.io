@@ -142,22 +142,35 @@ text-align: center
 .optionsDisplayArea {
     float: left;
     width: 75%;
-    background-color: #4787b5;
+    background-color: #d5e7f5;
     height: 100% ;
     position: relative;
     transition: 0.3s;
     justify-content: center;
 }
 
-.optionsDisplayArea .optionsArea {
- 
+.optionsDisplayArea .optionsArea, .fullWindowImage .optionsArea{
+    border: 4px #62a7d9 solid;
     background-color: #f8fafc;
     margin: 2%;
     margin-top: 50px;
 
     display: flex;
     flex-direction: column;
-    width: 100%
+    width: 100%;
+    overflow-y: auto;
+}
+
+.optionsDisplayArea .optionsArea .titles, .fullWindowImage .optionsArea .titles {
+    text-align: center;
+    background-color: #62a7d9;
+    padding: 1% 0px;
+}
+
+.optionsDisplayArea .optionsArea .text, .fullWindowImage .optionsArea .text {
+    margin-top: 1%;
+    margin-left: 2%;
+    margin-bottom: 1%;
 }
 
 .closeOptionsButton {
@@ -170,12 +183,12 @@ text-align: center
     background: none;
     border: none;
     cursor: pointer;
-    color: white;
+    color: black;
     padding: 0px 10px;
     margin: 0px;
 }
 .closeOptionsButton:hover{
-    opacity: 1;
+    opacity: 0.9;
 }
 
 .imageAndVideo {
@@ -458,7 +471,11 @@ text-align: center
 .settingsAndInfo .slideMenuArea .imageHistoryArea a{
     align-self: center;
     padding-left: 10px;
+}
 
+.historyStyle {
+    display: flex;
+    justify-content: center;
 }
 
 /*#419cd9*/

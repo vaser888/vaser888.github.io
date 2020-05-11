@@ -562,18 +562,31 @@ function historySearch(a){
 }
 
 function saveImageNumberToHistory(imgNum, imgLink){
-    var divComment = document.createElement("div");
-    var aComment = document.createElement("a");
-    var imgComment = document.createElement("img");
-    divComment.setAttribute("style", "display: flex;justify-content: center;");
-    imgComment.setAttribute("src", imgLink);
-    divComment.appendChild(imgComment);
-    aComment.setAttribute("href", "");
-    aComment.setAttribute("onclick", "historySearch(this.innerHTML)");
-    aComment.setAttribute
-    aComment.innerHTML += imgNum;
-    divComment.appendChild(aComment);
-    document.getElementById("imageHistoryArea").appendChild(divComment);
+    var divHist = document.createElement("div");
+    var aHist = document.createElement("a");
+    var imgHist = document.createElement("img");
+    divHist.setAttribute("class", "historyStyle");
+    imgHist.setAttribute("src", imgLink);
+    divHist.appendChild(imgHist);
+    aHist.setAttribute("href", "");
+    aHist.setAttribute("onclick", "historySearch(this.innerHTML)");
+    aHist.setAttribute
+    aHist.innerHTML += imgNum;
+    divHist.appendChild(aHist);
+    document.getElementById("imageHistoryArea").appendChild(divHist);
+    checkHistoryLimit();
+}
+
+function checkHistoryLimit(){
+    var r = document.getElementById("historyMemoryLength").value;
+    if (r != "infinite") {
+        var q = document.querySelectorAll(".historyStyle");
+        t = Array.from(q);
+        //console.log(r,t);
+        if (t.length >= (Number(r) + 1)){
+            document.querySelector(".historyStyle").remove();
+        }
+    }
 }
 
 ////////
@@ -904,11 +917,14 @@ function hideAllUi(){
         sm.style.width = "0%";
         document.getElementById("imageDisplayArea").setAttribute("class", "fullWindowImage");
         document.getElementById("imageDisplayArea").style.width = "100%";
+        document.getElementById("optionsDisplayArea").setAttribute("class", "fullWindowImage");
+        document.getElementById("optionsDisplayArea").style.width = "100%";
     }
     else{
         tb.style.width = "100%";
         btb.style.width = "100%";
         document.getElementById("imageDisplayArea").setAttribute("class", "imageDisplayArea");
+        document.getElementById("optionsDisplayArea").setAttribute("class", "optionsDisplayArea");
         sideMenuToggle();
     }
 }
