@@ -1,6 +1,6 @@
 window.onload = function(){
     getFilterPossibilityNumber(0);
-    //siteOptions();
+    siteOptions();
     setupSiteWithOptions();
 }
 
@@ -941,8 +941,8 @@ var nextRam, previousRam;
 document.getElementById("imageDisplayArea").addEventListener("touchstart", function(e){
     xIni = e.touches[0].clientX;
     imageDisplayAreaWidth = document.getElementById("imageDisplayArea").clientWidth;
-    swipePercentPos = Math.floor(0.77 * imageDisplayAreaWidth);
-    swipePercentNeg =swipePercentPos * -1;  
+    swipePercentPos = Math.floor(SwipeSensitivityValue * imageDisplayAreaWidth);
+    swipePercentNeg = swipePercentPos * -1;  
     isMoving = true;
     nextRam = false;
     previousRam = false;
@@ -994,7 +994,7 @@ document.getElementById("imageDisplayArea").addEventListener("touchend", functio
 
 document.onkeydown = function (event) {
     var keyPressed = event.keyCode;
-    console.log(event.keyCode);
+    //console.log(event.keyCode);
     if (keyPressed === 59 || keyPressed === 186){
         hideAllUi();
     }
@@ -1027,15 +1027,92 @@ function closeSiteOptions() {
 }
 
 ////////
-//  Site options excecute
+//  Get and create cookie data
 ////////
 
+function setCookie(cName, cData, numDays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (numDays*24*60*60*1000));
+    var CookieExpires = "expires=" + d.toUTCString();
+    document.cookie = cName + "=" + cData + ";" + CookieExpires + ";path=/";
+}
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i = 0; i < ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0) == ' ') {      
+        c = c.substring(1);
+      }
+      if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+      }
+    }
+    return "";
+  }
+
+////////
+//  Site options test and load
+////////
+
+var SwipeSensitivityValue;
+
+function testForOptionsCookie(){
+    var cookie = getCookie("siteSettings");
+    if (cookie != ""){
+        //cookie is there already 
+    }
+    else {
+        document.getElementById("historyMemoryLength").value = 25;
+        document.getElementById("safeTag").value = "true";
+        document.getElementById("swipeSensitivity").value = 78;
+        var d = compressCookieData();
+        setCookie("siteSettings", d, 730);
+    }
+
+}
+
 function setupSiteWithOptions() {
-    var ifTrueTest = document.getElementById("safeTag").value;
-    //console.log(ifTrueTest);
-    document.getElementById("historyMemoryLength").value = 20;
-    if (ifTrueTest === "true"){
+
+    testForOptionsCookie();
+
+    var optionsCookie = getCookie("siteSettings");
+    var data = JSON.parse(optionsCookie);
+    console.log(data);
+
+    document.getElementById("historyMemoryLength").value = data.historyLength;
+    document.getElementById("safeTag").value = data.safeFilter;
+    document.getElementById("swipeSensitivity").value = data.SwipeSensitivity;
+    
+    var b = data.SwipeSensitivity;
+    SwipeSensitivityValue = (((b - 100)* -1)/100);
+
+    if (data.safeFilter === "true"){
         document.getElementById("tagEnterBoxInput").value = "safe";
         addTagToTagArea();
     }
+}
+
+////////
+//  Save options into cookie
+////////
+
+function compressCookieData(){
+    var k0 = document.getElementById("historyMemoryLength").value;
+    var k1 = document.getElementById("safeTag").value;
+    var k2 = document.getElementById("swipeSensitivity").value;
+    var cookieData0 = JSON.stringify({
+        historyLength: k0,
+        safeFilter: k1,
+        SwipeSensitivity: k2
+    }) 
+    return cookieData0;
+}
+
+function saveOptionsCookie() {
+    event.preventDefault();
+    var d = compressCookieData();
+    setCookie("siteSettings", d, 730);
+    alert("saved"); 
 }

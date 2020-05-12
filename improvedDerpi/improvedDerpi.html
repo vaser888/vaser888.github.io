@@ -105,7 +105,7 @@
             <div class="titles">Options</div>
             <form>
                 <div class="text">
-                    History length
+                    History length:
                     <select id="historyMemoryLength">
                         <option value="5">5</option>
                         <option value="10">10</option>
@@ -117,12 +117,20 @@
                         <option value="infinite">Infinite</option>              
                     </select>
                 </div>
-                <div class="text">Open site with safe filter by default 
+                <div class="text">
+                    Open site with safe filter by default: 
                     <select id="safeTag">
                         <option value="true">Yes</option>
                         <option value="false">No</option>
                     </select>
                 </div>
+                <div class="text">
+                    Swipe sensitivity:<br><br>
+                    <Input id="swipeSensitivity" type="range" min="0" max="99"></Input>
+
+                </div>
+
+                <button onclick="saveOptionsCookie()">Save</button>
 
             </form>
             <div class="titles">About</div>
