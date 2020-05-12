@@ -1,6 +1,6 @@
 window.onload = function(){
     getFilterPossibilityNumber(0);
-    siteOptions();
+    //siteOptions();
     setupSiteWithOptions();
 }
 
