@@ -597,6 +597,7 @@ function checkHistoryLimit(){
 function addTag(a){
     generateTag(a);
     getFilterPossibilityNumber(0);
+    giveTagsAValue();
     //var q = document.querySelectorAll(".tag");
     //t = Array.from(q);
 }
@@ -604,7 +605,8 @@ function addTag(a){
 function deleteTag(a){
  
     a.remove();
-    getFilterPossibilityNumber(0);  
+    getFilterPossibilityNumber(0);
+    giveTagsAValue();  
     //var q = document.querySelectorAll(".tag");
     //t = Array.from(q);
 }
@@ -618,6 +620,7 @@ function addTagToTagArea(){
     generateTag(tagName);
     document.getElementById("tagEnterBoxInput").value = "";
     getFilterPossibilityNumber(0);
+    giveTagsAValue();
 }
 
 function addArtistToTagArea(){
@@ -632,11 +635,16 @@ function addArtistToTagArea(){
     generateTag(encodedArtist);
     document.getElementById("atistNameEnterBoxInput").value = "";
     getFilterPossibilityNumber(0);
+    giveTagsAValue();
 }
 
 function generateTag(tagName){
     var div1 = document.createElement("div");
     div1.setAttribute("class", "tagButton");
+    div1.setAttribute("id", tagName);
+    div1.setAttribute("draggable", "true");
+    div1.setAttribute("ondragstart", "drag(event)");
+    div1.setAttribute("onmouseover", "hoverValue(this)")
     var div2 = document.createElement("div");
     div2.innerHTML = tagName;
     div2.setAttribute("class", "tag");
@@ -1079,7 +1087,7 @@ function setupSiteWithOptions() {
 
     var optionsCookie = getCookie("siteSettings");
     var data = JSON.parse(optionsCookie);
-    console.log(data);
+    //console.log(data);
 
     document.getElementById("historyMemoryLength").value = data.historyLength;
     document.getElementById("safeTag").value = data.safeFilter;
@@ -1115,4 +1123,48 @@ function saveOptionsCookie() {
     var d = compressCookieData();
     setCookie("siteSettings", d, 730);
     alert("saved"); 
+}
+
+////////
+//  Drag and Drop
+////////
+
+function allowDrop(ev) {
+    ev.preventDefault();
+}
+
+function drag(ev) {
+    ev.dataTransfer.setData("tagBubble", ev.target.id);
+}
+
+function drop(ev) {
+    ev.preventDefault();
+    var data = ev.dataTransfer.getData("tagBubble");
+    var something = document.getElementById(data);
+    var tagArea = document.getElementById("yourTagArea");
+    
+    setTimeout((event) => {
+        tagArea.insertBefore(something, tagArea.childNodes[tagDropRam]);
+        giveTagsAValue();
+    }, 100);
+}
+
+var tagDropRam;
+
+function hoverValue(ev) {
+    tagDropRam = ev.getAttribute("data-order")
+    //console.log(tagDropRam); 
+}
+
+////////
+//  assign tags values
+////////
+
+function giveTagsAValue() {
+    var q = document.querySelectorAll(".tagButton");
+    a = Array.from(q);
+    for (i = 0; i <= a.length - 1; i++){
+        document.getElementById(a[i].id).setAttribute("data-order", i); 
+    }
+
 }

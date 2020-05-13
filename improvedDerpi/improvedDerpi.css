@@ -341,7 +341,7 @@ text-align: center
 .settingsAndInfo .slideMenuArea .filtersArea .yourTagArea {
     display: flex;
     flex-wrap: wrap;
-    margin-bottom: 50px;
+    padding-bottom: 50px;
 }
 
 .settingsAndInfo .slideMenuArea .filtersArea .tag {
@@ -352,6 +352,7 @@ text-align: center
 }
 
 .settingsAndInfo .slideMenuArea .filtersArea .tagButton {
+    cursor: move;
     display: flex;
     align-items: center;
     background-color: #d0e29c;
