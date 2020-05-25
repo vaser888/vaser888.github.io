@@ -10,6 +10,7 @@ body, html {
     left:0;
     right:0;
     position:fixed;
+    overflow: hidden;
 }
 
 ::placeholder {
@@ -177,6 +178,26 @@ text-align: center
     margin-top: 1%;
     margin-left: 2%;
     margin-bottom: 1%;
+}
+
+.optionsDisplayArea .optionsArea .text .swipeSlider {
+    display: flex;
+    align-items: center;
+    margin-top: 1%;
+    margin-left: 2%;
+}
+.optionsDisplayArea .optionsArea .text .swipeSlider input{
+    margin: 0px 10px;
+}
+
+.optionsDisplayArea .optionsArea .saveOptionsCookieButton {
+    display: flex;
+    justify-content: center;
+    margin: 15px;
+}
+
+.optionsDisplayArea .optionsArea .saveOptionsCookieButton button {
+    font: inherit;
 }
 
 .closeOptionsButton {
@@ -374,6 +395,19 @@ text-align: center
 .settingsAndInfo .slideMenuArea .filtersArea .tagButton button:hover {
     background-color: #9dc12e;
     cursor: pointer;
+}
+
+.settingsAndInfo .slideMenuArea .filtersArea .filterImageOrButton {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 15px 0px;
+}
+
+.settingsAndInfo .slideMenuArea .filtersArea .filterImageOrButton button {
+    flex-grow: 1;
+
 }
 
 .settingsAndInfo .slideMenuArea .filtersArea .filterImageSearch {
@@ -574,6 +608,9 @@ text-align: center
     }
 
     .settingsAndInfo .slideMenuArea .filtersArea .filterImageSearch button {
+        font-size: inherit;
+    }
+    .settingsAndInfo .slideMenuArea .filtersArea .filterImageOrButton button {
         font-size: inherit;
     }
     .settingsAndInfo .slideMenuArea .filtersArea .tagButton button {

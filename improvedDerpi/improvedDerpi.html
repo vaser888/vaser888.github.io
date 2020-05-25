@@ -125,13 +125,29 @@
                     </select>
                 </div>
                 <div class="text">
-                    Swipe sensitivity:<br><br>
-                    <Input id="swipeSensitivity" type="range" min="0" max="99"></Input>
-
+                    <div>Swipe sensitivity:</div>
+                    <div class="swipeSlider">
+                        <div>Less sensitive</div>
+                        <Input id="swipeSensitivity" type="range" min="0" max="99"></Input>
+                        <div>More sensitive</div>
+                    </div>
                 </div>
 
-                <button onclick="saveOptionsCookie()">Save</button>
+                <div id="savedFilterArea" class="text">
+                    Starting filter: 
+                    <select id="savedFilter">
+						<option value="100073">default</option>
+						<option value="56027">everything</option>
+						<option value="37429">18+ Dark</option>
+						<option value="37432">18+ R34</option>
+						<option id="customId">Custom</option>
+					</select>
+                </div>
 
+                <div class="saveOptionsCookieButton">
+                    <button onclick="saveOptionsCookie()">Save</button>
+                </div>
+                
             </form>
             <div class="titles">About</div>
             <div style="text-align: center;">This site was made by Vaser888</div>
@@ -266,7 +282,10 @@
                     Search Specific Tags:
                 </div>
                 <div>
-                    <form class="filterImageSearch"> 
+                    <div class="filterImageOrButton">
+                        <button>OR</button>
+                    </div> 
+                    <form class="filterImageSearch">
                         <input id="tagEnterBoxInput" list="autoTags" autocomplete="off" size="19" type="search"></input>
                         <datalist id="autoTags">
                             <!--<option value="twilight sparkle"></option>-->
@@ -300,7 +319,6 @@
 
 </body>
 
-
-<script src="improvedDerpi.js"></script>
 <script src="autoTag.js"></script>
+<script src="improvedDerpi.js"></script>
 </html>

@@ -4,7 +4,7 @@ function loadTagData() {
     document.getElementById("autoTags").innerHTML = "";
 
     let tags = [
-        "twilight sparkle", "fluttershy", "rainbow dash", "apple jack", "Pinkie Pie", "rarity", "spike",
+        "twilight sparkle", "fluttershy", "rainbow dash", "apple jack", "pinkie Pie", "rarity", "spike",
         "safe", "semi-grimdark", "suggestive",
         "pony", "unicorn", "pegasus", "anthro", "alicorn", "earth pony", "human",
         "dragon", "bat pony", "changeling", "griffon", "original species",
@@ -15,7 +15,7 @@ function loadTagData() {
         "sandbar", "gallus", "yona", "smolder", "silverstream", "ocellus",
         "sunset shimmer", "starlight glimmer", 
         "zecora",
-        "lyra heartstrings", "bon bon ", "vinyl scratch", "derpy hooves", "octavia melody",
+        "lyra heartstrings", "bon bon", "vinyl scratch", "derpy hooves", "octavia melody",
         "trixie",
            
     ]

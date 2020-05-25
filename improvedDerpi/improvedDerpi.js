@@ -1,8 +1,12 @@
 window.onload = function(){
-    getFilterPossibilityNumber(0);
     //siteOptions();
+
     setupSiteWithOptions();
+    loadIdBox(); //getFilterPossibilityNumber(0) is in the loadIdBo
+    setupCustomIdBox();
+    getFilterPossibilityNumber(0);
 }
+var alrtRAM = true;
 
 document.getElementById("realDerpiButton").addEventListener("click", (event)=>{
     window.location.href = "https://derpibooru.org/";
@@ -420,7 +424,6 @@ function getIamgeTags (t){
     for (i = 0; i <= t.length - 1; i++){
         //document.getElementById("currentImageTags").innerHTML += t[i] + "<br>"; 
     
-    
         var div1 = document.createElement("div");
         div1.setAttribute("class", "addTagButton");
         var div2 = document.createElement("div");
@@ -434,8 +437,6 @@ function getIamgeTags (t){
         div1.appendChild(addButton);
         document.getElementById("currentImageTags").appendChild(div1);
     }
-    
-
 }
 
 ////////
@@ -663,63 +664,88 @@ function generateTag(tagName){
 //  Custom ID filter box
 ////////
 
-let customBox;
-let filterHelp;
-var check1 = 0;
-function customIdBox(){
-	if (check1 === 0){
-		customBox = document.createElement("input");
-		document.getElementById("selectFilterArea").appendChild(customBox);
-		customBox.setAttribute("id", "customIdInput");
-		customBox.setAttribute("value", "");
-		customBox.setAttribute("size", "6");
-		customBox.setAttribute("pattern", "[0-9]+")
-		check1 = 1;
-		document.getElementById("customIdInput").addEventListener("keyup", function(){
-			var i = document.getElementById("customIdInput").value;
-			document.getElementById("customId").setAttribute("value", i);
-            //console.log(i);
-            document.getElementById("customIdInput").addEventListener("input", (event)=> {idValue = "customIdInput"; noLettersHere(idValue, 0); });
-		});
-		filterHelp = document.createElement("a");
-		document.getElementById("selectFilterArea").appendChild(filterHelp);
-		filterHelp.setAttribute("id", "filterQuestionMark");
-		filterHelp.setAttribute("target", "_blank");
-		document.getElementById("filterQuestionMark").href = "derpiDrawingSiteInstructions.jpg";
-		document.getElementById("filterQuestionMark").innerHTML = "?";
-		
-	}
-	else {
-		return;
-	}
+function customIdBox(inputIdName, area, qMark) {
+	customBox = document.createElement("input");
+	document.getElementById(area).appendChild(customBox);
+	customBox.setAttribute("id", inputIdName);
+	customBox.setAttribute("value", "");
+	customBox.setAttribute("size", "6");
+	customBox.setAttribute("pattern", "[0-9]+")
+	check1 = 1;
+	document.getElementById(inputIdName).addEventListener("keyup", function(){
+		var i = document.getElementById(inputIdName).value;
+		//document.getElementById("customId").setAttribute("value", i);
+        //console.log(i);
+        document.getElementById(inputIdName).addEventListener("input", (event)=> {idValue = inputIdName; noLettersHere(idValue, 0); });
+	});
+	filterHelp = document.createElement("a");
+	document.getElementById(area).appendChild(filterHelp);
+	filterHelp.setAttribute("id", qMark);
+	filterHelp.setAttribute("target", "_blank");
+	document.getElementById(qMark).href = "derpiDrawingSiteInstructions.jpg";
+	document.getElementById(qMark).innerHTML = "?";	
 }
 
-function delCustomIdBox(){
-	if (check1 === 1){
-		customBox.parentNode.removeChild(customBox);
-		filterHelp.parentNode.removeChild(filterHelp);
-		check1 = 0;
-	}
+function delCustomIdBox(check){
+	if (check === 1){
+        var myEle = document.getElementById("customIdInput");
+        if (myEle){
+            document.getElementById("customIdInput").remove();
+            document.getElementById("filterQuestionMark").remove(); //customBox.parentNode.removeChild(customBox);filterHelp.parentNode.removeChild(filterHelp);
+        }
+    }
+    if (check === 2){
+        var myEle = document.getElementById("savedIdInput");
+        if (myEle){
+            document.getElementById("savedIdInput").remove();
+            document.getElementById("optionsQuestionMark").remove();
+        }
+    }
 	else{
 		return;
 	}
 }
 
-document.getElementById("filter").addEventListener('change', (event) => {
-    var filterCheck = event.target.value;
+document.getElementById("filter").addEventListener("change", loadIdBox);
+
+function loadIdBox() {
+
+    var filterCheck = document.getElementById("filter").value;  //event.target.value;
+    var optionsFilterCheck = document.getElementById("savedFilter").value;
     var customFilterNumber = document.getElementById("customId").value;
+
     if  (filterCheck === "56027"||filterCheck === "37429"||filterCheck === "37432"){
         loadTagData();
-        alert("By selecting this filter you can access content which is not suitable for everyone, such as sexually explicit, grimdark or gory material.\n\nBy changing away from the default filters, you accept you are legally permitted to view this content in your jurisdiction.\n\nIf in doubt, stick with the recommended default filters.");
+        if( alrtRAM === true){
+            alrtRAM = false;
+        }
+        else{
+            alert("By selecting this filter you can access content which is not suitable for everyone, such as sexually explicit, grimdark or gory material.\n\nBy changing away from the default filters, you accept you are legally permitted to view this content in your jurisdiction.\n\nIf in doubt, stick with the recommended default filters.");
+        }
     }
-	if (filterCheck === customFilterNumber){
-		customIdBox();
-	}
 	else {
         loadTagData();
-        delCustomIdBox();
+        delCustomIdBox(1);
+
+        if (filterCheck === customFilterNumber) {
+            customIdBox("customIdInput", "selectFilterArea", "filterQuestionMark");
+        }
+        if (optionsFilterCheck === "Custom") {
+            customIdBox("savedIdInput", "savedFilterArea", "optionsQuestionMark");
+        }
         getFilterPossibilityNumber(0);
-	}
+    }
+}
+
+document.getElementById("savedFilter").addEventListener("change", (event) => {
+    var filterCheck = event.target.value;
+    console.log(filterCheck);
+    if (filterCheck === "Custom") {
+        customIdBox("savedIdInput", "savedFilterArea", "optionsQuestionMark");
+    }
+    else {
+        delCustomIdBox(2);
+    }
 });
 
 ////////
@@ -851,10 +877,13 @@ function getFilterDataAndEncode(page){
     var downVoteNumber = document.getElementById("filteredDownVotesNumber").value;
     var q = document.querySelectorAll(".tag");
     t = Array.from(q);
-
-    if(filterNumber === "Custom"|| filterNumber === ""){
-        alert("Insert you custom fitler number\nOr\nChange the fitler to one of the 4 choices");
-        return;
+    //console.log(filterNumber);
+    if(filterNumber === "Custom"){
+        filterNumber = document.getElementById("customIdInput").value;
+        if (filterNumber === ""){
+            filterNumber = 0
+        }
+        //alert("Insert your custom filter number\nOr\nChange the filter to one of the 4 choices");
     }
 
     if (t.length === 0){
@@ -1069,12 +1098,14 @@ var SwipeSensitivityValue;
 function testForOptionsCookie(){
     var cookie = getCookie("siteSettings");
     if (cookie != ""){
-        //cookie is there already 
+        //cookie is there already
+        //update cookie date
     }
     else {
         document.getElementById("historyMemoryLength").value = 25;
         document.getElementById("safeTag").value = "true";
         document.getElementById("swipeSensitivity").value = 78;
+        document.getElementById("savedFilter").value = 100073;
         var d = compressCookieData();
         setCookie("siteSettings", d, 730);
     }
@@ -1084,7 +1115,24 @@ function testForOptionsCookie(){
 function setupSiteWithOptions() {
 
     testForOptionsCookie();
+    data = setOptions();
+    
+    if (data.safeFilter === "true"){
+        document.getElementById("tagEnterBoxInput").value = "safe";
+        addTagToTagArea(); // make a version of this so that you can input many tags into the area then search for the JSON
+    }
+    document.getElementById("filter").value = data.startDFilter;
 
+}
+
+function setupCustomIdBox() {
+    if (data.startDFilter === "Custom"){
+        document.getElementById("savedIdInput").value = data.customFilterNumber;
+        document.getElementById("customIdInput").value = data.customFilterNumber;
+    }
+}
+
+function setOptions () {
     var optionsCookie = getCookie("siteSettings");
     var data = JSON.parse(optionsCookie);
     //console.log(data);
@@ -1092,14 +1140,13 @@ function setupSiteWithOptions() {
     document.getElementById("historyMemoryLength").value = data.historyLength;
     document.getElementById("safeTag").value = data.safeFilter;
     document.getElementById("swipeSensitivity").value = data.SwipeSensitivity;
+    document.getElementById("savedFilter").value = data.startDFilter;
+
     
     var b = data.SwipeSensitivity;
     SwipeSensitivityValue = (((b - 100)* -1)/100);
 
-    if (data.safeFilter === "true"){
-        document.getElementById("tagEnterBoxInput").value = "safe";
-        addTagToTagArea();
-    }
+    return data;
 }
 
 ////////
@@ -1110,11 +1157,24 @@ function compressCookieData(){
     var k0 = document.getElementById("historyMemoryLength").value;
     var k1 = document.getElementById("safeTag").value;
     var k2 = document.getElementById("swipeSensitivity").value;
+    var k3 = document.getElementById("savedFilter").value;
+
+    if (k3 === "Custom"){
+        var myEle = document.getElementById("savedIdInput");
+        if (myEle){
+            var k4 = document.getElementById("savedIdInput").value;
+        }
+        
+    }
+
     var cookieData0 = JSON.stringify({
         historyLength: k0,
         safeFilter: k1,
-        SwipeSensitivity: k2
+        SwipeSensitivity: k2,
+        startDFilter: k3,
+        customFilterNumber: k4
     }) 
+    console.log(cookieData0);
     return cookieData0;
 }
 
@@ -1122,6 +1182,7 @@ function saveOptionsCookie() {
     event.preventDefault();
     var d = compressCookieData();
     setCookie("siteSettings", d, 730);
+    setOptions();
     alert("saved"); 
 }
 
@@ -1146,7 +1207,7 @@ function drop(ev) {
     setTimeout((event) => {
         tagArea.insertBefore(something, tagArea.childNodes[tagDropRam]);
         giveTagsAValue();
-    }, 100);
+    }, 200);
 }
 
 var tagDropRam;
@@ -1167,4 +1228,9 @@ function giveTagsAValue() {
         document.getElementById(a[i].id).setAttribute("data-order", i); 
     }
 
+}
+
+if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
+    loadIdBox();
+    // bug where you refresh the page and it removes the custom filter boxes
 }
