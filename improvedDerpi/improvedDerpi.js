@@ -75,12 +75,14 @@ document.getElementById("slideMenuBtn").addEventListener("click", sideMenuToggle
 function sideMenuToggle(){
     a = document.getElementById("imageDisplayArea");
     a2 = document.getElementById("optionsDisplayArea");
+    a3 = document.getElementById("gridDisplayArea");
     b = document.getElementById("settingsAndInfo");
     h = document.getElementById("imageDisplayArea").style.width;
     
     if (h === "75%"){
         a.style.width = "100%";
         a2.style.width = "100%";
+        a3.style.width = "100%";
         b.style.width = "0%";
         b.style.display = "none";
         document.getElementById("slideMenuBtn").innerHTML = "< ☰ Open menu";
@@ -90,6 +92,7 @@ function sideMenuToggle(){
         b.style.width = "25%";
         a.style.width = "75%";
         a2.style.width = "75%";
+        a3.style.width = "75%";
         document.getElementById("slideMenuBtn").innerHTML = "> ☰ Close menu";
 
     }
@@ -105,6 +108,7 @@ var imageNumberRam;
 function goButton(){
     event.preventDefault();
     refreshImageAndVideoDivs();
+    turnOffGrid();
     var e = document.getElementById("imageNumberSearch").value;
     if (e === ""){
         alert("Please enter a number")
@@ -664,20 +668,17 @@ function generateTag(tagName){
 //  Custom ID filter box
 ////////
 
-function customIdBox(inputIdName, area, qMark) {
+function customIdBox(inputIdName, area, qMark, update) {
 	customBox = document.createElement("input");
 	document.getElementById(area).appendChild(customBox);
 	customBox.setAttribute("id", inputIdName);
 	customBox.setAttribute("value", "");
 	customBox.setAttribute("size", "6");
 	customBox.setAttribute("pattern", "[0-9]+")
-	check1 = 1;
-	document.getElementById(inputIdName).addEventListener("keyup", function(){
-		var i = document.getElementById(inputIdName).value;
-		//document.getElementById("customId").setAttribute("value", i);
-        //console.log(i);
-        document.getElementById(inputIdName).addEventListener("input", (event)=> {idValue = inputIdName; noLettersHere(idValue, 0); });
-	});
+    check1 = 1;
+    if (update === true){
+        document.getElementById(inputIdName).addEventListener("input", (event)=> {idValue = inputIdName; noLettersHere(idValue, 0); getFilterPossibilityNumber(0);});
+    }
 	filterHelp = document.createElement("a");
 	document.getElementById(area).appendChild(filterHelp);
 	filterHelp.setAttribute("id", qMark);
@@ -706,7 +707,7 @@ function delCustomIdBox(check){
 	}
 }
 
-document.getElementById("filter").addEventListener("change", loadIdBox);
+document.getElementById("filter").addEventListener("change", loadIdBoxAndGetPossibNum);
 
 function loadIdBox() {
 
@@ -723,25 +724,29 @@ function loadIdBox() {
             alert("By selecting this filter you can access content which is not suitable for everyone, such as sexually explicit, grimdark or gory material.\n\nBy changing away from the default filters, you accept you are legally permitted to view this content in your jurisdiction.\n\nIf in doubt, stick with the recommended default filters.");
         }
     }
-	else {
+	else { // this is a bit cluncky and I should fix this up at some point 
         loadTagData();
         delCustomIdBox(1);
 
         if (filterCheck === customFilterNumber) {
-            customIdBox("customIdInput", "selectFilterArea", "filterQuestionMark");
+            customIdBox("customIdInput", "selectFilterArea", "filterQuestionMark", true);
         }
         if (optionsFilterCheck === "Custom") {
-            customIdBox("savedIdInput", "savedFilterArea", "optionsQuestionMark");
+            customIdBox("savedIdInput", "savedFilterArea", "optionsQuestionMark", false);
         }
-        getFilterPossibilityNumber(0);
     }
+}
+
+function loadIdBoxAndGetPossibNum() {
+    loadIdBox();
+    getFilterPossibilityNumber(0);
 }
 
 document.getElementById("savedFilter").addEventListener("change", (event) => {
     var filterCheck = event.target.value;
     console.log(filterCheck);
     if (filterCheck === "Custom") {
-        customIdBox("savedIdInput", "savedFilterArea", "optionsQuestionMark");
+        customIdBox("savedIdInput", "savedFilterArea", "optionsQuestionMark", false);
     }
     else {
         delCustomIdBox(2);
@@ -832,6 +837,10 @@ function getFilterPossibilityNumber(sPage) {
         var tot = assumeFilterJson.total;
         document.getElementById("possibleFilteredImageNumber").innerHTML = tot;
         document.getElementById("filteredImageNumber").value = "1";
+
+        var pn = (Math.floor(tot/gridDisplayValue)) + 1
+        document.getElementById("possibleFilteredPagesNumber").innerHTML = pn;
+        document.getElementById("currentFilteredPageNumber").value = "1";  
     });
 }
 
@@ -955,6 +964,9 @@ function hideAllUi(){
         sm.style.width = "0%";
         document.getElementById("imageDisplayArea").setAttribute("class", "fullWindowImage");
         document.getElementById("imageDisplayArea").style.width = "100%";
+        document.getElementById("gridDisplayArea").setAttribute("class", "fullWindowImage");
+        document.getElementById("gridDisplayArea").style.width = "100%";
+
         document.getElementById("optionsDisplayArea").setAttribute("class", "fullWindowDescription");
         document.getElementById("optionsDisplayArea").style.width = "100%";
     }
@@ -963,6 +975,7 @@ function hideAllUi(){
         btb.style.width = "100%";
         document.getElementById("imageDisplayArea").setAttribute("class", "imageDisplayArea");
         document.getElementById("optionsDisplayArea").setAttribute("class", "optionsDisplayArea");
+        document.getElementById("gridDisplayArea").setAttribute("class", "gridDisplayArea");
         sideMenuToggle();
     }
 }
@@ -978,7 +991,7 @@ var nextRam, previousRam;
 document.getElementById("imageDisplayArea").addEventListener("touchstart", function(e){
     xIni = e.touches[0].clientX;
     imageDisplayAreaWidth = document.getElementById("imageDisplayArea").clientWidth;
-    swipePercentPos = Math.floor(SwipeSensitivityValue * imageDisplayAreaWidth);
+    swipePercentPos = Math.floor(swipeSensitivityValue * imageDisplayAreaWidth);
     swipePercentNeg = swipePercentPos * -1;  
     isMoving = true;
     nextRam = false;
@@ -1035,11 +1048,14 @@ document.onkeydown = function (event) {
     if (keyPressed === 59 || keyPressed === 186){
         hideAllUi();
     }
-    if (keyPressed === 190){
-        nextFilterImage();
-    }
-    if (keyPressed === 188){
-        previousFilterImage();
+    var thisButton =  document.getElementById("changeImageLayoutButton");
+    if (thisButton.innerHTML === "▦"){
+        if (keyPressed === 190){
+            nextFilterImage();
+        }
+        if (keyPressed === 188){
+            previousFilterImage();
+        }
     }
 }
 
@@ -1049,7 +1065,8 @@ document.onkeydown = function (event) {
 
 function siteOptions() {
     document.getElementById("optionsDisplayArea").style.display = "flex";
-    document.getElementById("imageDisplayArea").style.display = "none"; 
+    document.getElementById("imageDisplayArea").style.display = "none";
+    document.getElementById("gridDisplayArea").style.display = "none"; 
 }
 
 ////////
@@ -1060,7 +1077,14 @@ document.getElementById("closeOptionsButton").addEventListener("click", closeSit
 
 function closeSiteOptions() {
     document.getElementById("optionsDisplayArea").style.display = "none";
-    document.getElementById("imageDisplayArea").style.display = ""; 
+
+    var thisButton =  document.getElementById("changeImageLayoutButton");
+    if (thisButton.innerHTML === "▦"){
+        document.getElementById("imageDisplayArea").style.display = ""; 
+    }
+    else {
+        document.getElementById("gridDisplayArea").style.display = ""; 
+    }
 }
 
 ////////
@@ -1071,7 +1095,7 @@ function setCookie(cName, cData, numDays) {
     var d = new Date();
     d.setTime(d.getTime() + (numDays*24*60*60*1000));
     var CookieExpires = "expires=" + d.toUTCString();
-    document.cookie = cName + "=" + cData + ";" + CookieExpires + ";path=/";
+    document.cookie = cName + "=" + cData + ";" + CookieExpires + ";path=/; SameSite=Strict";
 }
 
 function getCookie(cname) {
@@ -1093,7 +1117,8 @@ function getCookie(cname) {
 //  Site options test and load
 ////////
 
-var SwipeSensitivityValue;
+var swipeSensitivityValue;
+var gridDisplayValue;
 
 function testForOptionsCookie(){
     var cookie = getCookie("siteSettings");
@@ -1106,23 +1131,22 @@ function testForOptionsCookie(){
         document.getElementById("safeTag").value = "true";
         document.getElementById("swipeSensitivity").value = 78;
         document.getElementById("savedFilter").value = 100073;
+        document.getElementById("gridDisplayNumberSlider").value = 15;
         var d = compressCookieData();
         setCookie("siteSettings", d, 730);
     }
-
 }
 
 function setupSiteWithOptions() {
-
     testForOptionsCookie();
     data = setOptions();
-    
+    checkIntegrityOfCookie(data);
     if (data.safeFilter === "true"){
-        document.getElementById("tagEnterBoxInput").value = "safe";
-        addTagToTagArea(); // make a version of this so that you can input many tags into the area then search for the JSON
+        generateTag("safe");
+        giveTagsAValue();
     }
     document.getElementById("filter").value = data.startDFilter;
-
+    updateGridDisplayNumberValue();
 }
 
 function setupCustomIdBox() {
@@ -1139,13 +1163,13 @@ function setOptions () {
 
     document.getElementById("historyMemoryLength").value = data.historyLength;
     document.getElementById("safeTag").value = data.safeFilter;
-    document.getElementById("swipeSensitivity").value = data.SwipeSensitivity;
+    document.getElementById("swipeSensitivity").value = data.swipeSensitivity;
     document.getElementById("savedFilter").value = data.startDFilter;
+    document.getElementById("gridDisplayNumberSlider").value = data.numGridDisplay;
 
-    
-    var b = data.SwipeSensitivity;
-    SwipeSensitivityValue = (((b - 100)* -1)/100);
-
+    var b = data.swipeSensitivity;
+    swipeSensitivityValue = (((b - 100)* -1)/100);
+    gridDisplayValue = data.numGridDisplay;
     return data;
 }
 
@@ -1164,17 +1188,19 @@ function compressCookieData(){
         if (myEle){
             var k4 = document.getElementById("savedIdInput").value;
         }
-        
     }
+
+    var k5 = document.getElementById("gridDisplayNumberSlider").value;
 
     var cookieData0 = JSON.stringify({
         historyLength: k0,
         safeFilter: k1,
-        SwipeSensitivity: k2,
+        swipeSensitivity: k2,
         startDFilter: k3,
-        customFilterNumber: k4
+        customFilterNumber: k4,
+        numGridDisplay: k5
     }) 
-    console.log(cookieData0);
+    //console.log(cookieData0);
     return cookieData0;
 }
 
@@ -1185,6 +1211,31 @@ function saveOptionsCookie() {
     setOptions();
     alert("saved"); 
 }
+
+////////
+//  Make sure everything is in cookie and update cookie expire date
+////////
+
+function checkIntegrityOfCookie(c) {
+    //console.log(c);
+    if (typeof c.historyLength === "undefined"){
+        document.getElementById("historyMemoryLength").value = 25;
+    }
+    if (typeof c.safeFilter === "undefined"){
+        document.getElementById("safeTag").value = "true";
+    }
+    if (typeof c.swipeSensitivity === "undefined"){
+        document.getElementById("swipeSensitivity").value = 78;
+    }
+    if (typeof c.startDFilter === "undefined"){
+        document.getElementById("savedFilter").value = 100073;
+    }
+    if (typeof c.numGridDisplay === "undefined"){
+        document.getElementById("gridDisplayNumberSlider").value = 15;
+    }
+    var d = compressCookieData();
+    setCookie("siteSettings", d, 730);
+} 
 
 ////////
 //  Drag and Drop
@@ -1230,7 +1281,69 @@ function giveTagsAValue() {
 
 }
 
+////////
+//  Change site to multi-image view 
+////////
+
+function toggleImageLayoutButton() {
+    if(document.getElementById("optionsDisplayArea").style.display === "flex"){
+        //do nothing
+    }
+    else{
+        var thisButton =  document.getElementById("changeImageLayoutButton");
+        if (thisButton.innerHTML === "▦"){
+            thisButton.innerHTML = "▣";
+
+            document.getElementById("gridDisplayArea").style.display = "flex";
+            document.getElementById("imageDisplayArea").style.display = "none";
+            document.getElementById("gridControlsArea").style.display = "flex";
+            document.getElementById("basicPictureInfo").style.display = "none";
+            document.getElementById("filteredImageNumber").disabled = true;
+            document.getElementById("goFilterButton").disabled = true; 
+        }
+        else {
+            thisButton.innerHTML = "▦";
+            document.getElementById("gridDisplayArea").style.display = "none";
+            document.getElementById("imageDisplayArea").style.display = "";
+            document.getElementById("gridControlsArea").style.display ="none";
+            document.getElementById("basicPictureInfo").style.display = "flex";
+            document.getElementById("filteredImageNumber").disabled = false;
+            document.getElementById("goFilterButton").disabled = false;
+        }
+    }
+}
+function turnOffGrid () {
+    if(document.getElementById("optionsDisplayArea").style.display === "flex"){
+        //do nothing
+    }
+    else{
+        document.getElementById("changeImageLayoutButton").innerHTML = "▦"
+        document.getElementById("gridDisplayArea").style.display = "none";
+        document.getElementById("imageDisplayArea").style.display = "";
+        document.getElementById("gridControlsArea").style.display ="none";
+        document.getElementById("basicPictureInfo").style.display = "flex";
+        document.getElementById("filteredImageNumber").disabled = false;
+        document.getElementById("goFilterButton").disabled = false;
+    }
+}
+
+////////
+//  Update slider in options  
+////////
+
+document.getElementById("gridDisplayNumberSlider").addEventListener("input", updateGridDisplayNumberValue);
+
+function updateGridDisplayNumberValue() {
+    var i = document.getElementById("gridDisplayNumberSlider").value;
+    document.getElementById("gridDisplayNumberValue").innerHTML = i;
+}
+
+////////
+//
+////////
+
+
+
 if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
     loadIdBox();
-    // bug where you refresh the page and it removes the custom filter boxes
 }

@@ -36,9 +36,8 @@
             </div>
         </a>
 
-        <div>
-            <!--<div>< test ></div>-->
-        </div>
+            <button id="changeImageLayoutButton" class="changeImageLayoutButton" onclick="toggleImageLayoutButton()">▦</button>
+ 
 
         <div class="topBarText">
             <form>
@@ -53,10 +52,9 @@
         </div>
     </div>
     <div id="bottomTopBar" class="bottomTopBar" style="width: 100%;">
-        <div class="basicPictureInfoArea">
-            
-            <button id="PreviousImageSwipe" onclick="previousFilterImage()"> < Previous image</button>
-            
+        
+        <div id ="basicPictureInfo" class="basicPictureInfoArea" style="display:flex;">
+            <button id="PreviousImageSwipe" onclick="previousFilterImage()"> < Previous image</button>  
             <div class="basicPictureInfo">
             
                 <div id="numberOfFaves" style="color: #c4b246;">
@@ -71,10 +69,21 @@
                 <div id="numberOfDown" style="color: #cf0001;">
                     Downvotes:<br>0
                 </div>
+            </div> 
+            <button id="nextImageSwipe" onclick="nextFilterImage()">Next image > </button>     
+        </div>
+
+        <div id="gridControlsArea" class="gridControlsArea" style="display: none;">
+            <button> < Previous page</button>
+            <div class="gridPageInfo">
+                <input id="currentFilteredPageNumber" size="5">
+                
+                <div> of</div>
+                <div id="possibleFilteredPagesNumber">x</div> 
+                <div>pages</div>
+                <button>go</button> 
             </div>
-            
-            <button id="nextImageSwipe" onclick="nextFilterImage()">Next image > </button>
-            
+            <button>Next page > </button>
         </div>
 
         <div class="slideMenuControls">
@@ -144,6 +153,14 @@
 					</select>
                 </div>
 
+                <div class="text">
+                    <div>Number of images in grid view:</div>
+                    <div class="swipeSlider">
+                        <input id="gridDisplayNumberSlider" type="range" min="4" max="50">
+                        <div id="gridDisplayNumberValue"></div>
+                    </div>
+                </div>
+
                 <div class="saveOptionsCookieButton">
                     <button onclick="saveOptionsCookie()">Save</button>
                 </div>
@@ -154,7 +171,11 @@
         </div>
     </div>
 
-    <div id="imageDisplayArea" class="imageDisplayArea" style="width: 75%; display:;">
+    <div id="gridDisplayArea" class="gridDisplayArea" style="width: 75%; display: none;">
+        test
+    </div>
+
+    <div id="imageDisplayArea" class="imageDisplayArea" style="width: 75%;">
         <div id="clickExpand" class="imageAndVideo">
             <img id="theImageLow" class="theImage" style="display: true;">
             <img id="theImage" class="theImage"  style="display: none;">
@@ -167,10 +188,10 @@
     <div id="settingsAndInfo" class="settingsAndInfo" style="width: 25%;">
         <div class="slideMenuArea">
             <div class="slideMenuTopMenu">             
-                <button id="descriptionBtn" style="background-color:">Description/Info</button>
+                <button id="descriptionBtn">Description/Info</button>
                 <button id="filtersBtn" style="background-color: #3d92d0;">Filters</button>
-                <button id="commentsBtn" style="background-color:">Comments</button>
-                <button id="imageHistoryBtn" style="background-color:">History</button>
+                <button id="commentsBtn">Comments</button>
+                <button id="imageHistoryBtn">History</button>
                 
                 <div id="pageSelector" class="pageSelector" style="display: none;">
                     <button id="previousCommentPage"> < </button>
@@ -225,7 +246,7 @@
                         <input id="filteredImageNumber" autocomplete="off" size="7" type="search"></input>
                         <div>of </div>
                         <div id="possibleFilteredImageNumber"></div>
-                        <button onclick="goToFilterImage(true)">go</button>
+                        <button id="goFilterButton" onclick="goToFilterImage(true)">go</button>
                     </form>
                 </div>
 

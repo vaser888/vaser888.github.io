@@ -44,11 +44,23 @@ input[type="search"] {
     text-decoration: none;
 }
 
+.topBar .changeImageLayoutButton {
+    border: none;
+    font: inherit;
+    padding: 6px 0px;
+    width: max-content;
+    cursor: pointer;
+    color: white;
+    background-color: #3d92d0;
+    flex-grow: 3;
+}
+
 .topBar .topBarText {
+    padding-left: 24px ;
     color: white;
     /*! padding: 6px 0px 0px 0px; */
 }
-.imageNumberSearch{
+.imageNumberSearch {
     color: white;
     background-color: #62a7d9;
     border: none;
@@ -59,24 +71,46 @@ input[type="search"] {
 .topBar .topBarButton {
     border: none;
     font: inherit;
-    padding: 6px 36px 6px 36px;
+    padding: 6px 32px 6px 32px;
     width: max-content;
     cursor: pointer;
     color: white;
     background-color: #3d92d0;
 }
 
-.topBar .topBarButton:hover {
+.topBar .topBarButton:hover, 
+.topBar .changeImageLayoutButton:hover {
     background-color: #2d80bc;
 }
 
-.bottomTopBar{
+.bottomTopBar {
     float: left;
     display: flex;
     align-items: center;
 }
 
-.basicPictureInfoArea{
+.gridControlsArea {
+    width: 75%;
+    justify-content: space-between;
+    background-color:#e2ebf2;
+    align-items: center;
+}
+
+.gridControlsArea .gridPageInfo {
+    display: flex;
+    align-items: baseline;
+    padding: 0px 10px;
+}
+
+.gridControlsArea .gridPageInfo input {
+    text-align: center;
+}
+
+.gridControlsArea .gridPageInfo div {
+    margin-left: 5px;
+}
+
+.basicPictureInfoArea {
     float: left;
     background-color:#e2ebf2;
     display: flex;
@@ -85,7 +119,8 @@ input[type="search"] {
     align-items: center;
 }
 
-.basicPictureInfoArea button {
+.basicPictureInfoArea button, 
+.gridControlsArea button {
     flex-grow: 2;
     font-size: inherit;
     cursor: pointer;
@@ -93,21 +128,24 @@ input[type="search"] {
     padding: 13px 15px;
     border: none;
 }
-.basicPictureInfoArea button:hover {
+
+.basicPictureInfoArea button:hover, 
+.gridControlsArea button:hover {
     background-color: #cadae6;
 }
 
-.basicPictureInfoArea .buttonNextSwipe, .basicPictureInfoArea .buttonPreviousSwipe {
+.basicPictureInfoArea .buttonNextSwipe, 
+.basicPictureInfoArea .buttonPreviousSwipe {
     background-color: #cadae6;
 }
 
-.basicPictureInfo {
+.basicPictureInfoArea .basicPictureInfo {
     background-color:#e2ebf2;
     display: flex;
     justify-content: center;
     /*padding-bottom: 4px;*/
 }
-.basicPictureInfo div {
+.basicPictureInfoArea .basicPictureInfo div {
 /*margin: 4px 14px 0px 14px;*/
 padding: 0px 10px;
 text-align: center
@@ -146,6 +184,16 @@ text-align: center
     height: calc(100% - 84px) ;
 }
 
+.gridDisplayArea {
+    transition: 0.3s;
+    float: left;
+    width: 75%;
+    background-color: lawngreen;
+    height: calc(100% - 84px) ;
+}
+
+
+
 .optionsDisplayArea {
     float: left;
     width: 75%;
@@ -156,7 +204,8 @@ text-align: center
     justify-content: center;
 }
 
-.optionsDisplayArea .optionsArea, .fullWindowDescription .optionsArea{
+.optionsDisplayArea .optionsArea, 
+.fullWindowDescription .optionsArea {
     border: 4px #62a7d9 solid;
     background-color: #f8fafc;
     margin: 2%;
@@ -168,13 +217,15 @@ text-align: center
     overflow-y: auto;
 }
 
-.optionsDisplayArea .optionsArea .titles, .fullWindowDescription .optionsArea .titles {
+.optionsDisplayArea .optionsArea .titles, 
+.fullWindowDescription .optionsArea .titles {
     text-align: center;
     background-color: #62a7d9;
     padding: 1% 0px;
 }
 
-.optionsDisplayArea .optionsArea .text, .fullWindowDescription .optionsArea .text {
+.optionsDisplayArea .optionsArea .text, 
+.fullWindowDescription .optionsArea .text {
     margin-top: 1%;
     margin-left: 2%;
     margin-bottom: 1%;
@@ -293,7 +344,7 @@ text-align: center
 }
 
 .settingsAndInfo .slideMenuArea .slideMenuTopMenu {
-    background-color: #62a7d9;;
+    background-color: #62a7d9;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
@@ -546,7 +597,8 @@ text-align: center
         height: calc(100% - 84px);
     }
     
-    .settingsAndInfo .slideMenuArea .randomButton, .settingsAndInfo .slideMenuArea .optionsButton {
+    .settingsAndInfo .slideMenuArea .randomButton, 
+    .settingsAndInfo .slideMenuArea .optionsButton {
         font-size: 18px;
     }
 
@@ -556,7 +608,8 @@ text-align: center
 }
 
 @media screen and (max-width: 953px) {
-    .imageDisplayArea, .optionsDisplayArea {
+    .imageDisplayArea, 
+    .optionsDisplayArea {
         height: calc(100% - 106px);
     }
     .settingsAndInfo {
@@ -576,7 +629,8 @@ text-align: center
         height: calc(100% - 43px);
     }
     */
-    .imageDisplayArea, .optionsDisplayArea {
+    .imageDisplayArea, 
+    .optionsDisplayArea {
         height: calc(100% - 55px);
     }
     
@@ -584,7 +638,8 @@ text-align: center
         height: calc(100% - 55px);
     }
 
-    .settingsAndInfo .slideMenuArea .randomButton, .settingsAndInfo .slideMenuArea .optionsButton {
+    .settingsAndInfo .slideMenuArea .randomButton, 
+    .settingsAndInfo .slideMenuArea .optionsButton {
         font-size: 9px;
     }
     .settingsAndInfo .slideMenuArea .commentsArea{
@@ -654,7 +709,8 @@ text-align: center
 }
 
 @media screen and (max-width: 512px){
-    .imageDisplayArea, .optionsDisplayArea {
+    .imageDisplayArea, 
+    .optionsDisplayArea {
         height: calc(100% - 64px);
     }
     .settingsAndInfo {
