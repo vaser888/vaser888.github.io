@@ -805,7 +805,7 @@ function previousFilterImage(){
     var p = document.getElementById("possibleFilteredImageNumber").innerHTML;
     n = Number(n) - 1;
     document.getElementById("filteredImageNumber").value = n;
-    if (n === 0){
+    if (n <= 0){
         document.getElementById("filteredImageNumber").value = p;
     }
     goToFilterImage(false);
