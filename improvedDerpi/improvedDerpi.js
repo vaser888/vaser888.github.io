@@ -825,6 +825,7 @@ function getFilterPossibilityNumber(sPage) {
         var pn = (Math.floor(tot/gridDisplayValue)) + 1
         document.getElementById("possibleFilteredPagesNumber").innerHTML = pn;
         document.getElementById("currentFilteredPageNumber").value = "1";  
+        goToFilterImage(false); //load page with first image
     });
 }
 
