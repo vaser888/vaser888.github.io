@@ -2,11 +2,8 @@ window.onload = function(){
     //siteOptions();
 
     setupSiteWithOptions();
-    loadIdBox(); //getFilterPossibilityNumber(0) is in the loadIdBo
-    setupCustomIdBox();
     getFilterPossibilityNumber(0);
 }
-var alrtRAM = true;
 
 document.getElementById("realDerpiButton").addEventListener("click", (event)=>{
     window.location.href = "https://derpibooru.org/";
@@ -94,7 +91,6 @@ function sideMenuToggle(){
         a2.style.width = "75%";
         a3.style.width = "75%";
         document.getElementById("slideMenuBtn").innerHTML = "> ☰ Close menu";
-
     }
 }
 
@@ -709,42 +705,30 @@ function delCustomIdBox(check){
 
 document.getElementById("filter").addEventListener("change", loadIdBoxAndGetPossibNum);
 
-function loadIdBox() {
-
-    var filterCheck = document.getElementById("filter").value;  //event.target.value;
-    var optionsFilterCheck = document.getElementById("savedFilter").value;
-    var customFilterNumber = document.getElementById("customId").value;
-
-    if  (filterCheck === "56027"||filterCheck === "37429"||filterCheck === "37432"){
-        loadTagData();
-        if( alrtRAM === true){
-            alrtRAM = false;
-        }
-        else{
-            alert("By selecting this filter you can access content which is not suitable for everyone, such as sexually explicit, grimdark or gory material.\n\nBy changing away from the default filters, you accept you are legally permitted to view this content in your jurisdiction.\n\nIf in doubt, stick with the recommended default filters.");
-        }
-    }
-	else { // this is a bit cluncky and I should fix this up at some point 
-        loadTagData();
-        delCustomIdBox(1);
-
-        if (filterCheck === customFilterNumber) {
-            customIdBox("customIdInput", "selectFilterArea", "filterQuestionMark", true);
-        }
-        if (optionsFilterCheck === "Custom") {
-            customIdBox("savedIdInput", "savedFilterArea", "optionsQuestionMark", false);
-        }
-    }
-}
-
 function loadIdBoxAndGetPossibNum() {
     loadIdBox();
     getFilterPossibilityNumber(0);
 }
 
+function loadIdBox() {
+
+    var filterCheck = document.getElementById("filter").value;  //event.target.value;
+
+    if  (filterCheck === "56027"||filterCheck === "37429"||filterCheck === "37432"){
+        alert("By selecting this filter you can access content which is not suitable for everyone, such as sexually explicit, grimdark or gory material.\n\nBy changing away from the default filters, you accept you are legally permitted to view this content in your jurisdiction.\n\nIf in doubt, stick with the recommended default filters.");
+    }
+    if (filterCheck === "Custom"){
+        customIdBox("customIdInput", "selectFilterArea", "filterQuestionMark", true);
+    }
+    else{
+        delCustomIdBox(1);
+    }
+    loadTagData();
+}
+
 document.getElementById("savedFilter").addEventListener("change", (event) => {
     var filterCheck = event.target.value;
-    console.log(filterCheck);
+    //console.log(filterCheck);
     if (filterCheck === "Custom") {
         customIdBox("savedIdInput", "savedFilterArea", "optionsQuestionMark", false);
     }
@@ -1076,9 +1060,11 @@ function siteOptions() {
 document.getElementById("closeOptionsButton").addEventListener("click", closeSiteOptions);
 
 function closeSiteOptions() {
+
+    testIfYouChangedASettingAndForgotToSave();
     document.getElementById("optionsDisplayArea").style.display = "none";
 
-    var thisButton =  document.getElementById("changeImageLayoutButton");
+    var thisButton =  document.getElementById("changeImageLayoutButton"); // check if 
     if (thisButton.innerHTML === "▦"){
         document.getElementById("imageDisplayArea").style.display = ""; 
     }
@@ -1138,7 +1124,7 @@ function testForOptionsCookie(){
 }
 
 function setupSiteWithOptions() {
-    testForOptionsCookie();
+    testForOptionsCookie(); // creates cookie if no cookie is found
     data = setOptions();
     checkIntegrityOfCookie(data);
     if (data.safeFilter === "true"){
@@ -1147,13 +1133,6 @@ function setupSiteWithOptions() {
     }
     document.getElementById("filter").value = data.startDFilter;
     updateGridDisplayNumberValue();
-}
-
-function setupCustomIdBox() {
-    if (data.startDFilter === "Custom"){
-        document.getElementById("savedIdInput").value = data.customFilterNumber;
-        document.getElementById("customIdInput").value = data.customFilterNumber;
-    }
 }
 
 function setOptions () {
@@ -1166,6 +1145,16 @@ function setOptions () {
     document.getElementById("swipeSensitivity").value = data.swipeSensitivity;
     document.getElementById("savedFilter").value = data.startDFilter;
     document.getElementById("gridDisplayNumberSlider").value = data.numGridDisplay;
+
+    if (data.startDFilter === "Custom") {
+        delCustomIdBox(1);
+        delCustomIdBox(2);
+        customIdBox("savedIdInput", "savedFilterArea", "optionsQuestionMark", false);
+        customIdBox("customIdInput", "selectFilterArea", "filterQuestionMark", true);
+        document.getElementById("savedIdInput").value = data.customFilterNumber;
+        document.getElementById("customIdInput").value = data.customFilterNumber;
+        document.getElementById("filter").value = data.startDFilter;
+    }
 
     var b = data.swipeSensitivity;
     swipeSensitivityValue = (((b - 100)* -1)/100);
@@ -1236,6 +1225,31 @@ function checkIntegrityOfCookie(c) {
     var d = compressCookieData();
     setCookie("siteSettings", d, 730);
 } 
+
+////////
+//  Test if you saved before leaving options and if no then give prompt 
+////////
+
+function testIfYouChangedASettingAndForgotToSave() {
+    var currentSettings = compressCookieData();
+    var cookieSettings = getCookie("siteSettings");
+    //console.log(currentSettings);
+    //console.log(cookieSettings);
+    if (currentSettings === cookieSettings){
+        //do nothing
+    }
+    else{
+        var i = confirm("You changed settings and forgot to press save\n\nDo you want me to save changes?");
+        if (i === true){
+            saveOptionsCookie();
+        }
+        else{
+            setOptions();
+            updateGridDisplayNumberValue();
+            delCustomIdBox(2);
+        }
+    }
+}
 
 ////////
 //  Drag and Drop
@@ -1312,7 +1326,8 @@ function toggleImageLayoutButton() {
         }
     }
 }
-function turnOffGrid () {
+
+function turnOffGrid() {
     if(document.getElementById("optionsDisplayArea").style.display === "flex"){
         //do nothing
     }
@@ -1343,7 +1358,10 @@ function updateGridDisplayNumberValue() {
 ////////
 
 
+/*
+// i don't need this anymore because i fixed my problmes and everything is working fine but this is cool code and could be useful in the future.
 
 if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
-    loadIdBox();
+    //loadIdBox();
 }
+*/
