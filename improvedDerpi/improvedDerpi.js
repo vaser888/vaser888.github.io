@@ -3,6 +3,7 @@ window.onload = function(){
 
     setupSiteWithOptions();
     getFilterPossibilityNumber(0);
+    //toggleImageLayoutButton();
 }
 
 document.getElementById("realDerpiButton").addEventListener("click", (event)=>{
@@ -19,7 +20,7 @@ document.getElementById("filteredImageNumber").addEventListener("input", (event)
 document.getElementById("filteredScoreNumber").addEventListener("input", (event)=> {idValue = "filteredScoreNumber"; noLettersHere(idValue, 1); });
 document.getElementById("filteredUpVotesNumber").addEventListener("input", (event)=> {idValue = "filteredUpVotesNumber"; noLettersHere(idValue, 1); });
 document.getElementById("filteredDownVotesNumber").addEventListener("input", (event)=> {idValue = "filteredDownVotesNumber"; noLettersHere(idValue, 1); });
-
+document.getElementById("currentFilteredPageNumber").addEventListener("input", (event)=> {idValue = "currentFilteredPageNumber"; noLettersHere(idValue, 0)});
 ////////
 //  Does not allow letters to be input into an Input, only numbers 
 ////////
@@ -743,14 +744,15 @@ document.getElementById("savedFilter").addEventListener("change", (event) => {
 
 function getRandomFilterImage() {
     refreshImageAndVideoDivs();
-    var test = getFilterDataAndEncode(1);
+    turnOffGrid();
+    var test = getFilterDataAndEncode(1, 1);
     fetch("https://derpibooru.org/api/v1/json/search/images"+ test).then(function (r) { return r.json() }).then(function (RngImageJson){
         var tNum = RngImageJson.total
         document.getElementById("possibleFilteredImageNumber").innerHTML = tNum;
         var randomImageNumber = ((Math.floor(Math.random()*tNum))+1);
         document.getElementById("filteredImageNumber").value = (randomImageNumber);
 
-        var test = getFilterDataAndEncode(randomImageNumber);
+        var test = getFilterDataAndEncode(randomImageNumber, 1);
         fetch("https://derpibooru.org/api/v1/json/search/images"+ test).then(function (r) { return r.json() }).then(function (theImageJson){
             var id = theImageJson.images[0].id;
             imagesUpdateWebsite(theImageJson, id);
@@ -767,13 +769,13 @@ function goToFilterImage(t){
     if (t === true){
     event.preventDefault();
     }
-    var sPage = document.getElementById("filteredImageNumber").value;
-    if (sPage === ""){
+    var specificPageNumber = document.getElementById("filteredImageNumber").value;
+    if (specificPageNumber === ""){
         alert("input a number to the 'Total possible images' input");
         return;
     }
     refreshImageAndVideoDivs();
-    var test = getFilterDataAndEncode(sPage);
+    var test = getFilterDataAndEncode(specificPageNumber, 1);
     fetch("https://derpibooru.org/api/v1/json/search/images"+ test).then(function (r) { return r.json() }).then(function (thisImageJson){
         var id = thisImageJson.images[0].id;
         imagesUpdateWebsite(thisImageJson, id);
@@ -815,8 +817,8 @@ function previousFilterImage(){
 //  Filter possiblities 
 ////////
 
-function getFilterPossibilityNumber(sPage) {
-    var test = getFilterDataAndEncode(sPage);
+function getFilterPossibilityNumber(specificPageNumber) {
+    var test = getFilterDataAndEncode(specificPageNumber, 1);
     fetch("https://derpibooru.org/api/v1/json/search/images"+ test).then(function (r) { return r.json() }).then(function (assumeFilterJson){
         var tot = assumeFilterJson.total;
         document.getElementById("possibleFilteredImageNumber").innerHTML = tot;
@@ -825,7 +827,10 @@ function getFilterPossibilityNumber(sPage) {
         var pn = (Math.floor(tot/gridDisplayValue)) + 1
         document.getElementById("possibleFilteredPagesNumber").innerHTML = pn;
         document.getElementById("currentFilteredPageNumber").value = "1";  
-        goToFilterImage(false); //load page with first image
+
+        goToFilterImage(false); //load page with first image on DB
+        refreshGrid();
+        getDataForGrid();
     });
 }
 
@@ -864,7 +869,7 @@ function refreshImageAndVideoDivs() {
 //  grab filter values and encode
 ////////
 
-function getFilterDataAndEncode(page){
+function getFilterDataAndEncode(page, per_page){
     var filterNumber = document.getElementById("filter").value;
     var score = document.getElementById("filteredScoreNumber").value;
     var upVoteNumber = document.getElementById("filteredUpVotesNumber").value;
@@ -905,7 +910,7 @@ function getFilterDataAndEncode(page){
     //console.log(filterNumber, score, upVoteNumber, downVoteNumber, tag);
     var encodedFilterSearch = "";
     encodedFilterSearch += "?filter_id=" + filterNumber;
-    encodedFilterSearch += "&per_page=1"
+    encodedFilterSearch += "&per_page=" + per_page;
     encodedFilterSearch += "&key=PpzyTx7523PoVv4y9WrG"
     encodedFilterSearch += "&page=" + page;
     encodedFilterSearch += "&q=upvotes.gte:" + upVoteNumber;
@@ -1315,6 +1320,7 @@ function toggleImageLayoutButton() {
             document.getElementById("basicPictureInfo").style.display = "none";
             document.getElementById("filteredImageNumber").disabled = true;
             document.getElementById("goFilterButton").disabled = true; 
+            updateWholeGrid();
         }
         else {
             thisButton.innerHTML = "▦";
@@ -1341,6 +1347,136 @@ function turnOffGrid() {
         document.getElementById("filteredImageNumber").disabled = false;
         document.getElementById("goFilterButton").disabled = false;
     }
+}
+
+////////
+//  updates the current grid page value and gets images
+////////
+
+function updateWholeGrid() {
+    var i = document.getElementById("filteredImageNumber").value;
+    i = Math.floor((i / gridDisplayValue) + 1)
+    document.getElementById("currentFilteredPageNumber").value = i;
+    refreshGrid();
+    getDataForGrid();
+}
+
+function refreshGrid() {
+    document.getElementById("theGrid").remove();
+    var div = document.createElement("div");
+    div.setAttribute("id", "theGrid");
+    div.setAttribute("class", "theGrid");
+    document.getElementById("gridDisplayArea").appendChild(div);
+}
+
+function getDataForGrid() {
+    var gridPageNumber = document.getElementById("currentFilteredPageNumber").value;
+    if (gridPageNumber === "" || gridPageNumber <= 0){
+        gridPageNumber = 1;
+    }
+    var searchParameters = getFilterDataAndEncode(gridPageNumber, gridDisplayValue);
+    fetch("https://derpibooru.org/api/v1/json/search/images" + searchParameters).then(function (r) {return r.json() }).then(function (gridData){
+        generateGridBoxes(gridData);
+    });
+}
+
+function generateGridBoxes(theData) {
+
+    for (i = 0; i < gridDisplayValue; i++){
+
+        var mainDiv = document.createElement("div");
+        mainDiv.setAttribute("class", "gridImageBox");
+
+        var statsDiv = document.createElement("div");
+        statsDiv.setAttribute("class", "gridImageStats");
+
+            var div0 = document.createElement("div");
+            div0.setAttribute("class", "gold");
+            div0.innerHTML = theData.images[i].faves;
+            statsDiv.appendChild(div0);
+
+            var div1 = document.createElement("div");
+            div1.setAttribute("class", "green");
+            div1.innerHTML = theData.images[i].upvotes;
+            statsDiv.appendChild(div1);
+
+            var div2 = document.createElement("div");
+            div2.innerHTML = theData.images[i].score;
+            statsDiv.appendChild(div2);
+
+            var div3 = document.createElement("div");
+            div3.setAttribute("class", "red");
+            div3.innerHTML = theData.images[i].downvotes;
+            statsDiv.appendChild(div3);
+
+        mainDiv.appendChild(statsDiv);
+
+        var imgDiv = document.createElement("div");
+        imgDiv.setAttribute("class", "gridImage");
+            var img = document.createElement("img");
+            img.setAttribute("src", getImageAndFilterToGifIfWebm(theData, i));
+        imgDiv.appendChild(img);
+        mainDiv.appendChild(imgDiv);
+        document.getElementById("theGrid").appendChild(mainDiv);
+
+    }
+
+}
+
+////////
+//  check for webm and convert to gif
+////////
+
+function getImageAndFilterToGifIfWebm(jsonData, imageNumber) {
+    var formatType = jsonData.images[imageNumber].format;
+    if (formatType === "webm") {
+        var webmLink = jsonData.images[imageNumber].representations.thumb;
+        var z = webmLink.length;
+        z = z - 4;
+        var gifLink = webmLink.substr(0, z) + "gif";
+        return gifLink;
+    }
+    else {
+        var imgLink = jsonData.images[imageNumber].representations.thumb;
+        return imgLink;
+    }
+
+}
+
+////////
+//  navigation Grid
+////////
+
+function gridGoButton() {
+    event.preventDefault();
+    refreshGrid();
+    getDataForGrid();
+}
+
+function nextGridPage() {
+    var i = document.getElementById("currentFilteredPageNumber").value;
+    var p = Number(i) + 1;
+    var t = document.getElementById("possibleFilteredPagesNumber").innerHTML;
+    if (p > t){
+        p = 1;
+    }
+
+    document.getElementById("currentFilteredPageNumber").value = p;
+    refreshGrid();
+    getDataForGrid();
+}
+
+function previousGridPage() {
+    var i = document.getElementById("currentFilteredPageNumber").value;
+    var p = Number(i) - 1;
+    var t = document.getElementById("possibleFilteredPagesNumber").innerHTML;
+    if (p <= 0){
+        p = t;
+    }
+
+    document.getElementById("currentFilteredPageNumber").value = p;
+    refreshGrid();
+    getDataForGrid();
 }
 
 ////////

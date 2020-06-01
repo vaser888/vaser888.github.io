@@ -28,6 +28,10 @@ input[type="search"] {
     -webkit-appearance: textfield;
 }
 
+.gold {color: #c4b246;}
+.green {color: #67af2b;}
+.red {color: #cf0001;}
+
 .topBar {
     float: left;
     background-color: #3d92d0;
@@ -188,11 +192,47 @@ text-align: center
     transition: 0.3s;
     float: left;
     width: 75%;
-    background-color: lawngreen;
+    background-color: #f8fafc;
     height: calc(100% - 84px) ;
 }
 
+.gridDisplayArea .theGrid {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    overflow-y: auto;
+    padding: 6px;
+    align-content: flex-start;
+}
 
+.gridDisplayArea .theGrid .gridImageBox {
+    cursor: pointer;
+    border: 2px #62a7d9 solid;
+    height: max-content;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+
+.gridDisplayArea .theGrid .gridImageBox .gridImageStats {
+    background-color: #e6eef3;
+    display: flex;
+    justify-content: space-evenly;
+
+}
+
+.gridDisplayArea .theGrid .gridImageBox .gridImage {
+    width: 256px;
+    height: 256px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gridDisplayArea .theGrid .gridImageBox .gridImage img {
+    max-height: 100%;
+    max-width: 100%;
+}
 
 .optionsDisplayArea {
     float: left;

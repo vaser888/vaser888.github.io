@@ -74,16 +74,16 @@
         </div>
 
         <div id="gridControlsArea" class="gridControlsArea" style="display: none;">
-            <button> < Previous page</button>
-            <div class="gridPageInfo">
+            <button onclick="previousGridPage()"> < Previous page</button>
+            <form class="gridPageInfo">
                 <input id="currentFilteredPageNumber" size="5">
                 
                 <div> of</div>
                 <div id="possibleFilteredPagesNumber">x</div> 
                 <div>pages</div>
-                <button>go</button> 
-            </div>
-            <button>Next page > </button>
+                <button onclick="gridGoButton()">go</button> 
+            </form>
+            <button onclick="nextGridPage()">Next page > </button>
         </div>
 
         <div class="slideMenuControls">
@@ -172,7 +172,47 @@
     </div>
 
     <div id="gridDisplayArea" class="gridDisplayArea" style="width: 75%; display: none;">
-        test
+        
+        <div id="theGrid" class="theGrid">
+
+            <div class="gridImageBox">
+                <div class="gridImageStats">
+                    <div class="gold">1533</div>
+                    <div class="green">44</div>
+                    <div>24</div>
+                    <div class="red">20</div>
+                </div>
+                <div class="gridImage">
+                    <img src="https://derpicdn.net/img/2019/9/12/2142083/thumb.jpeg">
+                </div>
+            </div>
+
+            <div class="gridImageBox">
+                <div class="gridImageStats">
+                    <div class="gold">1533</div>
+                    <div class="green">44</div>
+                    <div>24</div>
+                    <div class="red">20</div>
+                </div>
+                <div class="gridImage">
+                    <img src="https://derpicdn.net/img/2020/5/9/2344129/thumb.jpg">
+                </div>
+            </div>
+
+
+            <div class="gridImageBox">
+                <div class="gridImageStats">
+                    <div class="gold">1533</div>
+                    <div class="green">44</div>
+                    <div>24</div>
+                    <div class="red">20</div>
+                </div>
+                <div class="gridImage">
+                    <img src="https://derpicdn.net/img/2020/5/31/2362865/thumb.png">
+                </div>
+            </div>
+
+        </div>
     </div>
 
     <div id="imageDisplayArea" class="imageDisplayArea" style="width: 75%;">
