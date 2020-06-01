@@ -51,16 +51,20 @@ input[type="search"] {
 .topBar .changeImageLayoutButton {
     border: none;
     font: inherit;
-    padding: 6px 0px;
+    padding: 1px 0px;
     width: max-content;
     cursor: pointer;
     color: white;
     background-color: #3d92d0;
     flex-grow: 3;
+    border-left: 4px #2d6895 solid;
+    border-right: 4px #2d6895 solid;
+    border-bottom: 2px #2d6895 solid;
+    border-top: 2px #d3e0ea  solid;
 }
 
 .topBar .topBarText {
-    padding-left: 24px ;
+    padding-left: 18px ;
     color: white;
     /*! padding: 6px 0px 0px 0px; */
 }
@@ -227,11 +231,19 @@ text-align: center
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
 }
 
 .gridDisplayArea .theGrid .gridImageBox .gridImage img {
     max-height: 100%;
     max-width: 100%;
+}
+
+.gridDisplayArea .theGrid .gridImageBox .gridImage .webmSign {
+    background-color: black;
+    width: 100%;
+    color: white;
+    text-align: center;
 }
 
 .optionsDisplayArea {
@@ -633,7 +645,9 @@ text-align: center
         height: calc(100% - 84px);
     }
 
-    .imageDisplayArea, .optionsDisplayArea {
+    .imageDisplayArea,
+    .gridDisplayArea 
+    .optionsDisplayArea {
         height: calc(100% - 84px);
     }
     
@@ -648,7 +662,8 @@ text-align: center
 }
 
 @media screen and (max-width: 953px) {
-    .imageDisplayArea, 
+    .imageDisplayArea,
+    .gridDisplayArea, 
     .optionsDisplayArea {
         height: calc(100% - 106px);
     }
@@ -669,7 +684,8 @@ text-align: center
         height: calc(100% - 43px);
     }
     */
-    .imageDisplayArea, 
+    .imageDisplayArea,
+    .gridDisplayArea, 
     .optionsDisplayArea {
         height: calc(100% - 55px);
     }
@@ -750,6 +766,7 @@ text-align: center
 
 @media screen and (max-width: 512px){
     .imageDisplayArea, 
+    .gridDisplayArea,
     .optionsDisplayArea {
         height: calc(100% - 64px);
     }

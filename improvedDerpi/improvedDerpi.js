@@ -3,7 +3,7 @@ window.onload = function(){
 
     setupSiteWithOptions();
     getFilterPossibilityNumber(0);
-    //toggleImageLayoutButton();
+    
 }
 
 document.getElementById("realDerpiButton").addEventListener("click", (event)=>{
@@ -20,7 +20,8 @@ document.getElementById("filteredImageNumber").addEventListener("input", (event)
 document.getElementById("filteredScoreNumber").addEventListener("input", (event)=> {idValue = "filteredScoreNumber"; noLettersHere(idValue, 1); });
 document.getElementById("filteredUpVotesNumber").addEventListener("input", (event)=> {idValue = "filteredUpVotesNumber"; noLettersHere(idValue, 1); });
 document.getElementById("filteredDownVotesNumber").addEventListener("input", (event)=> {idValue = "filteredDownVotesNumber"; noLettersHere(idValue, 1); });
-document.getElementById("currentFilteredPageNumber").addEventListener("input", (event)=> {idValue = "currentFilteredPageNumber"; noLettersHere(idValue, 0)});
+document.getElementById("currentFilteredGridPageNumber").addEventListener("input", (event)=> {idValue = "currentFilteredGridPageNumber"; noLettersHere(idValue, 0)});
+
 ////////
 //  Does not allow letters to be input into an Input, only numbers 
 ////////
@@ -39,8 +40,6 @@ function noLettersHere(id, setting) {
         }
     }
     else{
-   
- 
         var t = document.getElementById(id).value;
         document.getElementById(id).value = t.substring(0, t.length - 1);
     }
@@ -164,7 +163,7 @@ function imagesUpdateWebsite(imageJson, e){
         z = z - 4;
         var mp4Link = webmlink.substr(0, z) +"mp4";
         //var mp4Link = videolink
-        console.log(mp4Link);
+        //console.log(mp4Link);
         var videosrc = document.createElement("source");
         videosrc.setAttribute("src", webmlink);
         videosrc.setAttribute("type", "video/webm");
@@ -561,6 +560,7 @@ function slideMenuTopMenuPressed(n){
 function historySearch(a){
     event.preventDefault();
     document.getElementById("imageNumberSearch").value = a;
+    turnOffGrid();
     searchImage(a);
 }
 
@@ -776,7 +776,9 @@ function goToFilterImage(t){
     }
     refreshImageAndVideoDivs();
     var test = getFilterDataAndEncode(specificPageNumber, 1);
+    //console.log("v get filter image")
     fetch("https://derpibooru.org/api/v1/json/search/images"+ test).then(function (r) { return r.json() }).then(function (thisImageJson){
+        //console.log("^ get filter image")
         var id = thisImageJson.images[0].id;
         imagesUpdateWebsite(thisImageJson, id);
     });
@@ -819,18 +821,23 @@ function previousFilterImage(){
 
 function getFilterPossibilityNumber(specificPageNumber) {
     var test = getFilterDataAndEncode(specificPageNumber, 1);
+    //console.log("v gets first")
     fetch("https://derpibooru.org/api/v1/json/search/images"+ test).then(function (r) { return r.json() }).then(function (assumeFilterJson){
+        //console.log("^ gets first")
         var tot = assumeFilterJson.total;
         document.getElementById("possibleFilteredImageNumber").innerHTML = tot;
         document.getElementById("filteredImageNumber").value = "1";
 
         var pn = (Math.floor(tot/gridDisplayValue)) + 1
         document.getElementById("possibleFilteredPagesNumber").innerHTML = pn;
-        document.getElementById("currentFilteredPageNumber").value = "1";  
+        document.getElementById("currentFilteredGridPageNumber").value = "1";  
 
+        if (document.getElementById("changeImageLayoutButton").innerHTML === "▣"){
+            refreshGrid();
+            getDataForGrid();
+        }
         goToFilterImage(false); //load page with first image on DB
-        refreshGrid();
-        getDataForGrid();
+        singleImageFilteredImageNumberRam = 1;
     });
 }
 
@@ -1124,6 +1131,7 @@ function testForOptionsCookie(){
         document.getElementById("swipeSensitivity").value = 78;
         document.getElementById("savedFilter").value = 100073;
         document.getElementById("gridDisplayNumberSlider").value = 15;
+        document.getElementById("gridStart").value = "true";
         var d = compressCookieData();
         setCookie("siteSettings", d, 730);
     }
@@ -1136,6 +1144,9 @@ function setupSiteWithOptions() {
     if (data.safeFilter === "true"){
         generateTag("safe");
         giveTagsAValue();
+    }
+    if (data.gridStartVal === "true"){
+        toggleGird();
     }
     document.getElementById("filter").value = data.startDFilter;
     updateGridDisplayNumberValue();
@@ -1151,6 +1162,7 @@ function setOptions () {
     document.getElementById("swipeSensitivity").value = data.swipeSensitivity;
     document.getElementById("savedFilter").value = data.startDFilter;
     document.getElementById("gridDisplayNumberSlider").value = data.numGridDisplay;
+    document.getElementById("gridStart").value = data.gridStartVal;
 
     if (data.startDFilter === "Custom") {
         delCustomIdBox(1);
@@ -1186,6 +1198,7 @@ function compressCookieData(){
     }
 
     var k5 = document.getElementById("gridDisplayNumberSlider").value;
+    var k6 = document.getElementById("gridStart").value;
 
     var cookieData0 = JSON.stringify({
         historyLength: k0,
@@ -1193,7 +1206,8 @@ function compressCookieData(){
         swipeSensitivity: k2,
         startDFilter: k3,
         customFilterNumber: k4,
-        numGridDisplay: k5
+        numGridDisplay: k5,
+        gridStartVal: k6
     }) 
     //console.log(cookieData0);
     return cookieData0;
@@ -1228,6 +1242,9 @@ function checkIntegrityOfCookie(c) {
     if (typeof c.numGridDisplay === "undefined"){
         document.getElementById("gridDisplayNumberSlider").value = 15;
     }
+    if (typeof c.gridStartVal === "undefined"){
+        document.getElementById("gridStart").value = "true"; 
+    }  
     var d = compressCookieData();
     setCookie("siteSettings", d, 730);
 } 
@@ -1298,14 +1315,22 @@ function giveTagsAValue() {
     for (i = 0; i <= a.length - 1; i++){
         document.getElementById(a[i].id).setAttribute("data-order", i); 
     }
-
 }
 
 ////////
 //  Change site to multi-image view 
 ////////
 
+var singleImageFilteredImageNumberRam;
+
 function toggleImageLayoutButton() {
+
+    toggleGird();
+    updateWholeGrid(); 
+    singleImageFilteredImageNumberRam = document.getElementById("filteredImageNumber").value;
+}
+
+function toggleGird() {
     if(document.getElementById("optionsDisplayArea").style.display === "flex"){
         //do nothing
     }
@@ -1320,7 +1345,8 @@ function toggleImageLayoutButton() {
             document.getElementById("basicPictureInfo").style.display = "none";
             document.getElementById("filteredImageNumber").disabled = true;
             document.getElementById("goFilterButton").disabled = true; 
-            updateWholeGrid();
+
+            singleImageFilteredImageNumberRam = document.getElementById("filteredImageNumber").value;
         }
         else {
             thisButton.innerHTML = "▦";
@@ -1330,6 +1356,8 @@ function toggleImageLayoutButton() {
             document.getElementById("basicPictureInfo").style.display = "flex";
             document.getElementById("filteredImageNumber").disabled = false;
             document.getElementById("goFilterButton").disabled = false;
+
+            document.getElementById("filteredImageNumber").value = singleImageFilteredImageNumberRam;
         }
     }
 }
@@ -1356,7 +1384,7 @@ function turnOffGrid() {
 function updateWholeGrid() {
     var i = document.getElementById("filteredImageNumber").value;
     i = Math.floor((i / gridDisplayValue) + 1)
-    document.getElementById("currentFilteredPageNumber").value = i;
+    document.getElementById("currentFilteredGridPageNumber").value = i;
     refreshGrid();
     getDataForGrid();
 }
@@ -1370,7 +1398,7 @@ function refreshGrid() {
 }
 
 function getDataForGrid() {
-    var gridPageNumber = document.getElementById("currentFilteredPageNumber").value;
+    var gridPageNumber = document.getElementById("currentFilteredGridPageNumber").value;
     if (gridPageNumber === "" || gridPageNumber <= 0){
         gridPageNumber = 1;
     }
@@ -1386,6 +1414,9 @@ function generateGridBoxes(theData) {
 
         var mainDiv = document.createElement("div");
         mainDiv.setAttribute("class", "gridImageBox");
+        mainDiv.setAttribute("data-image-order", i+1);
+        mainDiv.setAttribute("data-image-id", theData.images[i].id);
+        mainDiv.setAttribute("onclick", "getClickedGridImage(this)")
 
         var statsDiv = document.createElement("div");
         statsDiv.setAttribute("class", "gridImageStats");
@@ -1414,26 +1445,47 @@ function generateGridBoxes(theData) {
         var imgDiv = document.createElement("div");
         imgDiv.setAttribute("class", "gridImage");
             var img = document.createElement("img");
-            img.setAttribute("src", getImageAndFilterToGifIfWebm(theData, i));
+            img.setAttribute("src", getImageAndFilterToGifIfWebm(theData, i, imgDiv));
         imgDiv.appendChild(img);
         mainDiv.appendChild(imgDiv);
         document.getElementById("theGrid").appendChild(mainDiv);
 
     }
+}
 
+////////
+//  go to the image you press on when you click on a grid image
+////////
+
+function getClickedGridImage(img) {
+    var imageId = img.getAttribute("data-image-id"); 
+    var imageVal = img.getAttribute("data-image-order");
+
+    var i = document.getElementById("currentFilteredGridPageNumber").value;
+    i = ((Number(i) - 1) * Number(gridDisplayValue)) + Number(imageVal);
+    document.getElementById("filteredImageNumber").value = i;
+    document.getElementById("imageNumberSearch").value = imageId;
+    goButton();
+    //console.log(imageId, imageVal, i); 
 }
 
 ////////
 //  check for webm and convert to gif
 ////////
 
-function getImageAndFilterToGifIfWebm(jsonData, imageNumber) {
+function getImageAndFilterToGifIfWebm(jsonData, imageNumber, imgDiv) {
     var formatType = jsonData.images[imageNumber].format;
     if (formatType === "webm") {
         var webmLink = jsonData.images[imageNumber].representations.thumb;
         var z = webmLink.length;
         z = z - 4;
         var gifLink = webmLink.substr(0, z) + "gif";
+
+        var webmDiv = document.createElement("div");
+        webmDiv.setAttribute("class", "webmSign");
+        webmDiv.innerHTML = "Webm";
+        imgDiv.appendChild(webmDiv);
+
         return gifLink;
     }
     else {
@@ -1454,29 +1506,37 @@ function gridGoButton() {
 }
 
 function nextGridPage() {
-    var i = document.getElementById("currentFilteredPageNumber").value;
+    var i = document.getElementById("currentFilteredGridPageNumber").value;
     var p = Number(i) + 1;
     var t = document.getElementById("possibleFilteredPagesNumber").innerHTML;
     if (p > t){
         p = 1;
     }
 
-    document.getElementById("currentFilteredPageNumber").value = p;
+    document.getElementById("currentFilteredGridPageNumber").value = p;
     refreshGrid();
     getDataForGrid();
+    updateFilteredImageNumberBecauseGrid();
 }
 
 function previousGridPage() {
-    var i = document.getElementById("currentFilteredPageNumber").value;
+    var i = document.getElementById("currentFilteredGridPageNumber").value;
     var p = Number(i) - 1;
     var t = document.getElementById("possibleFilteredPagesNumber").innerHTML;
     if (p <= 0){
         p = t;
     }
 
-    document.getElementById("currentFilteredPageNumber").value = p;
+    document.getElementById("currentFilteredGridPageNumber").value = p;
     refreshGrid();
     getDataForGrid();
+    updateFilteredImageNumberBecauseGrid();
+}
+
+function updateFilteredImageNumberBecauseGrid() {
+    var i = document.getElementById("currentFilteredGridPageNumber").value;
+    var t = (i * gridDisplayValue)-1; 
+    document.getElementById("filteredImageNumber").value = t;
 }
 
 ////////
