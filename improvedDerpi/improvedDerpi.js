@@ -1042,8 +1042,11 @@ document.getElementById("imageDisplayArea").addEventListener("touchend", functio
 document.onkeydown = function (event) {
     var keyPressed = event.keyCode;
     //console.log(event.keyCode);
-    if (keyPressed === 59 || keyPressed === 186){
+    if (keyPressed === 219){
         hideAllUi();
+    }
+    if (keyPressed === 221){
+        toggleImageLayoutButton();
     }
     var thisButton =  document.getElementById("changeImageLayoutButton");
     if (thisButton.innerHTML === "▦"){
@@ -1052,6 +1055,14 @@ document.onkeydown = function (event) {
         }
         if (keyPressed === 188){
             previousFilterImage();
+        }
+    }
+    if (thisButton.innerHTML === "▣"){
+        if (keyPressed === 190){
+            nextGridPage();
+        }
+        if (keyPressed === 188){
+            previousGridPage();
         }
     }
 }
@@ -1219,6 +1230,7 @@ function saveOptionsCookie() {
     setCookie("siteSettings", d, 730);
     setOptions();
     alert("saved"); 
+    location.reload(); 
 }
 
 ////////

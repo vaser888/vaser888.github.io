@@ -49,6 +49,7 @@ input[type="search"] {
 }
 
 .topBar .changeImageLayoutButton {
+    outline: none;
     border: none;
     font: inherit;
     padding: 1px 0px;
@@ -77,6 +78,7 @@ input[type="search"] {
 }
 
 .topBar .topBarButton {
+    outline: none;
     border: none;
     font: inherit;
     padding: 6px 32px 6px 32px;
@@ -129,6 +131,7 @@ input[type="search"] {
 
 .basicPictureInfoArea button, 
 .gridControlsArea button {
+    outline: none;
     flex-grow: 2;
     font-size: inherit;
     cursor: pointer;
@@ -165,6 +168,7 @@ text-align: center
     width: 25%;
     display: flex;
     flex-wrap: wrap;
+    flex-direction: column;
 }
 .slideMenuControls div {
     display: flex;
@@ -173,11 +177,12 @@ text-align: center
 }
 
 .slideMenuControls button {
+    outline: none;
     flex-grow: 2;
     font-size: inherit;
     cursor: pointer;
     background-color: #e2ebf2;
-    padding: 6px 10px;
+    padding: 3px 10px;
     border: none;
 }
 .slideMenuControls button:hover {
@@ -189,7 +194,7 @@ text-align: center
     float: left;
     width: 75%;
     background-color: #f8fafc;
-    height: calc(100% - 84px) ;
+    height: calc(100% - 93px) ;
 }
 
 .gridDisplayArea {
@@ -197,10 +202,11 @@ text-align: center
     float: left;
     width: 75%;
     background-color: #f8fafc;
-    height: calc(100% - 84px) ;
+    height: calc(100% - 93px) ;
 }
 
-.gridDisplayArea .theGrid {
+.gridDisplayArea .theGrid,
+.fullWindowImage .theGrid {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
@@ -210,7 +216,8 @@ text-align: center
     align-content: flex-start;
 }
 
-.gridDisplayArea .theGrid .gridImageBox {
+.gridDisplayArea .theGrid .gridImageBox, 
+.fullWindowImage .theGrid .gridImageBox {
     cursor: pointer;
     border: 2px #62a7d9 solid;
     height: max-content;
@@ -218,14 +225,16 @@ text-align: center
     margin-bottom: 10px;
 }
 
-.gridDisplayArea .theGrid .gridImageBox .gridImageStats {
+.gridDisplayArea .theGrid .gridImageBox .gridImageStats,
+.fullWindowImage .theGrid .gridImageBox .gridImageStats {
     background-color: #e6eef3;
     display: flex;
     justify-content: space-evenly;
 
 }
 
-.gridDisplayArea .theGrid .gridImageBox .gridImage {
+.gridDisplayArea .theGrid .gridImageBox .gridImage, 
+.fullWindowImage .theGrid .gridImageBox .gridImage{
     width: 256px;
     height: 256px;
     display: flex;
@@ -234,7 +243,8 @@ text-align: center
     flex-direction: column;
 }
 
-.gridDisplayArea .theGrid .gridImageBox .gridImage img {
+.gridDisplayArea .theGrid .gridImageBox .gridImage img,
+.fullWindowImage .theGrid .gridImageBox .gridImage img {
     max-height: 100%;
     max-width: 100%;
 }
@@ -250,7 +260,7 @@ text-align: center
     float: left;
     width: 75%;
     background-color: #d5e7f5;
-    height: calc(100% - 84px);
+    height: calc(100% - 93px);
     position: relative;
     transition: 0.3s;
     justify-content: center;
@@ -304,6 +314,7 @@ text-align: center
 }
 
 .closeOptionsButton {
+    outline: none;
     transition: 0.3s;
     opacity: 0.5;
     font-size: 36px;
@@ -348,7 +359,7 @@ text-align: center
     float: left;
     width: 25%;
     background-color: #d5e7f5;
-    height: calc(100% - 84px);
+    height: calc(100% - 93px);
     overflow-y: auto;
 }
 
@@ -406,6 +417,7 @@ text-align: center
 }
 
 .settingsAndInfo .slideMenuArea .slideMenuTopMenu button {
+    outline: none;
     background-color: #62a7d9;
     color: white;
     font-size: inherit;
@@ -642,13 +654,13 @@ text-align: center
 @media screen and (max-width: 1488px) {
     
     .settingsAndInfo {
-        height: calc(100% - 84px);
+        height: calc(100% - 93px);
     }
 
     .imageDisplayArea,
     .gridDisplayArea 
     .optionsDisplayArea {
-        height: calc(100% - 84px);
+        height: calc(100% - 93px);
     }
     
     .settingsAndInfo .slideMenuArea .randomButton, 
@@ -661,7 +673,7 @@ text-align: center
     }
 }
 
-@media screen and (max-width: 953px) {
+@media screen and (max-width: 882px) {
     .imageDisplayArea,
     .gridDisplayArea, 
     .optionsDisplayArea {
@@ -764,7 +776,7 @@ text-align: center
     }    
 }
 
-@media screen and (max-width: 512px){
+@media screen and (max-width: 421px){
     .imageDisplayArea, 
     .gridDisplayArea,
     .optionsDisplayArea {
