@@ -1400,7 +1400,7 @@ function turnOffGrid() {
 function updateWholeGrid() {
     var i = document.getElementById("filteredImageNumber").value;
     var p = (i % gridDisplayValue);
-    console.log(p);
+    //console.log(p);
     if ( p === 0){
         i = Math.floor((i / gridDisplayValue));
     }
