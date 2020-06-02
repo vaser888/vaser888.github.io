@@ -1338,7 +1338,11 @@ var singleImageFilteredImageNumberRam;
 function toggleImageLayoutButton() {
 
     toggleGird();
+    var thisButton =  document.getElementById("changeImageLayoutButton");
+    if (thisButton.innerHTML === "▣"){
+    refreshGrid();
     updateWholeGrid(); 
+    }
     singleImageFilteredImageNumberRam = document.getElementById("filteredImageNumber").value;
 }
 
@@ -1395,7 +1399,16 @@ function turnOffGrid() {
 
 function updateWholeGrid() {
     var i = document.getElementById("filteredImageNumber").value;
-    i = Math.floor((i / gridDisplayValue) + 1)
+    var p = (i % gridDisplayValue);
+    console.log(p);
+    if ( p === 0){
+        i = Math.floor((i / gridDisplayValue));
+    }
+    else { 
+        i = Math.floor((i / gridDisplayValue) + 1);
+    }
+
+
     document.getElementById("currentFilteredGridPageNumber").value = i;
     refreshGrid();
     getDataForGrid();
