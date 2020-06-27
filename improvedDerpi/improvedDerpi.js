@@ -818,6 +818,7 @@ function previousFilterImage(){
 ////////
 //  Filter possiblities 
 ////////
+var oneShot = 1;
 
 function getFilterPossibilityNumber(specificPageNumber) {
     var test = getFilterDataAndEncode(specificPageNumber, 1);
@@ -836,7 +837,12 @@ function getFilterPossibilityNumber(specificPageNumber) {
             refreshGrid();
             getDataForGrid();
         }
-        goToFilterImage(false); //load page with first image on DB
+        if (oneShot == 1){
+            goToFilterImage(false); //load page with first image on DB
+            oneShot = 0;
+            console.log('fire');
+        };
+
         singleImageFilteredImageNumberRam = 1;
     });
 }
