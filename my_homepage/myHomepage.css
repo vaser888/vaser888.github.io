@@ -58,6 +58,7 @@ ul {
 	padding: 24px;
 	background-color: #9eb9b9 /* #efefef */;
 	margin-top:13px;
+	max-height:688px;
 }
 
 .card ul {
@@ -78,6 +79,13 @@ ul {
 
 .links {
 	background-color: #ccddd9 /* #cfcfcf */;
+	max-height:640px;
+	overflow-y: auto;
+	scrollbar-width: none;
+	-ms-overflow-style: none;
+}
+.links::-webkit-scrollbar {
+  display: none;
 }
 
 .websiteIcon {
@@ -114,5 +122,15 @@ ul {
 	}
 	.rightColumn{
 		width: auto
+	}
+	.links {
+	background-color: #ccddd9 /* #cfcfcf */;
+	max-height:none;
+	}
+	.card {
+	padding: 24px;
+	background-color: #9eb9b9 /* #efefef */;
+	margin-top:13px;
+	max-height:none;
 	}
 }
