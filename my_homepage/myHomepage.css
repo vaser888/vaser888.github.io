@@ -11,6 +11,7 @@ ul {
 	padding: 0;
 }
 
+
 .header{
 	padding:    20px;
 	text-align: center;
@@ -21,6 +22,9 @@ ul {
 	width: 20%;
 	background-color: #c9dddf/* #dedede */; /* #68827f */
 	height: 100%;
+	overflow-y: auto;
+	scrollbar-width: none;
+	-ms-overflow-style: none;
 }
 
 .middleColumn{
@@ -65,15 +69,38 @@ ul {
 	text-align:center;
 }
 
+.infoArea {
+
+}
+
 .game {
 	background-color: #9eb7b9/* #b3b3b3 */;
-	width: max-content;
-	margin: 0 auto;
+	margin: 8px;
+
+	align-content: center;
+	display: flex;
+	justify-content: center;
+}
+
+.game1 {
+	margin: inherit;
+}
+
+.leftColumn .game table {
+	border-collapse: collapse;
+	border: 2px solid #6c8f93;
+}
+
+.leftColumn .game tr {
+	text-align: center;
+}
+.leftColumn .game tr:nth-child(2n+1){
+	background-color: #b6ced0d9;
 }
 
 .titles {
 	background-color: #6c8f93/* #a0a0a0 */;
-	margin: 24px 0;
+	margin-top: 24px;
 	padding: 6px;
 }
 
