@@ -139,7 +139,9 @@ fetch("https://statsapi.web.nhl.com/api/v1/teams/8?expand=team.schedule.next").t
 			var d = json1.liveData.boxscore.teams.away.teamStats.teamSkaterStats.goals;
 			var e = json1.liveData.linescore.teams.home.shotsOnGoal;
 			var f = json1.liveData.linescore.teams.away.shotsOnGoal;
-			var i = getCurrentGameInfo(a,b,c,d,e,f);
+			var g = json1.liveData.linescore.currentPeriodOrdinal;
+			var h = json1.liveData.linescore.currentPeriodTimeRemaining;
+			var i = getCurrentGameInfo(a,b,c,d,e,f,g,h);
 			makeTable(i,3,"currentGame");
 		}
 		/*
@@ -261,12 +263,15 @@ function getLastGameInfo(homeTeam,awayTeam,homeScore,awayScore) {
 	];
 }
 
-function getCurrentGameInfo(homeTeam,awayTeam,homeScore,awayScore,homeShots,awayShots) {
+function getCurrentGameInfo(homeTeam,awayTeam,homeScore,awayScore,homeShots,awayShots,thePeriod,timeLeftInPeriod) {
 	var a= [homeShots,homeScore,"",awayScore,awayShots];
+	var c = thePeriod + " " + timeLeftInPeriod;
+	var b= [c]; 
 	return [
 		gameTableMakeTr1(5,"Current game"),
 		gameTableMakeTr2(2,homeTeam,awayTeam),
-		gameTableMakeTr3(5,0,a)
+		gameTableMakeTr3(5,0,a),
+		gameTableMakeTr3(1,5,b)
 	];
 }
 
