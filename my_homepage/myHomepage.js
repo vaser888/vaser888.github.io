@@ -142,7 +142,7 @@ fetch("https://statsapi.web.nhl.com/api/v1/teams/8?expand=team.schedule.next").t
 			var g = json1.liveData.linescore.currentPeriodOrdinal;
 			var h = json1.liveData.linescore.currentPeriodTimeRemaining;
 			var i = getCurrentGameInfo(a,b,c,d,e,f,g,h);
-			makeTable(i,3,"currentGame");
+			makeTable(i,4,"currentGame");
 		}
 		/*
 		document.getElementById("currentAway").innerHTML = json1.gameData.teams.away.abbreviation;
