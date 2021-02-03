@@ -132,17 +132,17 @@ fetch("https://statsapi.web.nhl.com/api/v1/teams/8?expand=team.schedule.next").t
 	fetch("https://statsapi.web.nhl.com/api/v1/game/"+testj+"/feed/live").then(function (r) { return r.json() }).then(function (json1) {
 		//console.log(json1);
 		var testLive = json1.liveData.plays.currentPlay.about.period;
+		var time;
 		var NumberOfTotalCol = 4;
 		if (testLive != "0"){
-			//console.log(testLive);
+
 			var IntTest = json1.liveData.linescore.intermissionInfo.inIntermission;
-			if (IntTest === "true"){
+			if (IntTest === true){
 				var t = json1.liveData.linescore.intermissionInfo.intermissionTimeRemaining;
 				var min = Math.floor(t/60);
 				var sec = t % 60;
-				var time = min + ":" + sec;
+				time = "Next period: " + min + ":" + sec;
 				NumberOfTotalCol = 5;
-				//console.log(time);
 			}
 			var a = json1.gameData.teams.home.abbreviation;
 			var b = json1.gameData.teams.away.abbreviation;
@@ -278,7 +278,7 @@ function getCurrentGameInfo(homeTeam,awayTeam,homeScore,awayScore,homeShots,away
 	var a= [homeShots,homeScore,"",awayScore,awayShots];
 	var c = thePeriod + " " + timeLeftInPeriod;
 	var b = [c];
-	var d  = [TimeLeftIntermission];
+	var d = [TimeLeftIntermission];
 	return [
 		gameTableMakeTr1(5,"Current game"),
 		gameTableMakeTr2(2,homeTeam,awayTeam),
