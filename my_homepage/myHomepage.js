@@ -2,7 +2,8 @@
 
 var names = ["vaser888", "TechPony", "lollipony", "TheFloatingTree", "PennyWren", "VanillaGhosties",
 "aemuhn", "JeNnDyLyOn", "RenardeLouve", "SPW", "AnderDragon", "Pucksterv", 
-"TheOtherDash", "TwoKinds", "bluesound", "lilfunkman"];
+"TheOtherDash", "TwoKinds", "bluesound", "lilfunkman", "Neotheta", "ST4Z", "S6RR6", "Sketchiix3", 
+"VulpesVant", "Selenophile"];
 var numberOfUsers = names.length-1;
 
 
@@ -131,8 +132,18 @@ fetch("https://statsapi.web.nhl.com/api/v1/teams/8?expand=team.schedule.next").t
 	fetch("https://statsapi.web.nhl.com/api/v1/game/"+testj+"/feed/live").then(function (r) { return r.json() }).then(function (json1) {
 		//console.log(json1);
 		var testLive = json1.liveData.plays.currentPlay.about.period;
+		var NumberOfTotalCol = 4;
 		if (testLive != "0"){
 			//console.log(testLive);
+			var IntTest = json1.liveData.linescore.intermissionInfo.inIntermission;
+			if (IntTest === "true"){
+				var t = json1.liveData.linescore.intermissionInfo.intermissionTimeRemaining;
+				var min = Math.floor(t/60);
+				var sec = t % 60;
+				var time = min + ":" + sec;
+				NumberOfTotalCol = 5;
+				//console.log(time);
+			}
 			var a = json1.gameData.teams.home.abbreviation;
 			var b = json1.gameData.teams.away.abbreviation;
 			var c = json1.liveData.boxscore.teams.home.teamStats.teamSkaterStats.goals;
@@ -141,8 +152,8 @@ fetch("https://statsapi.web.nhl.com/api/v1/teams/8?expand=team.schedule.next").t
 			var f = json1.liveData.linescore.teams.away.shotsOnGoal;
 			var g = json1.liveData.linescore.currentPeriodOrdinal;
 			var h = json1.liveData.linescore.currentPeriodTimeRemaining;
-			var i = getCurrentGameInfo(a,b,c,d,e,f,g,h);
-			makeTable(i,4,"currentGame");
+			var i = getCurrentGameInfo(a,b,c,d,e,f,g,h,time);
+			makeTable(i,NumberOfTotalCol,"currentGame");
 		}
 		/*
 		document.getElementById("currentAway").innerHTML = json1.gameData.teams.away.abbreviation;
@@ -263,15 +274,17 @@ function getLastGameInfo(homeTeam,awayTeam,homeScore,awayScore) {
 	];
 }
 
-function getCurrentGameInfo(homeTeam,awayTeam,homeScore,awayScore,homeShots,awayShots,thePeriod,timeLeftInPeriod) {
+function getCurrentGameInfo(homeTeam,awayTeam,homeScore,awayScore,homeShots,awayShots,thePeriod,timeLeftInPeriod,TimeLeftIntermission) {
 	var a= [homeShots,homeScore,"",awayScore,awayShots];
 	var c = thePeriod + " " + timeLeftInPeriod;
-	var b= [c]; 
+	var b = [c];
+	var d  = [TimeLeftIntermission];
 	return [
 		gameTableMakeTr1(5,"Current game"),
 		gameTableMakeTr2(2,homeTeam,awayTeam),
 		gameTableMakeTr3(5,0,a),
-		gameTableMakeTr3(1,5,b)
+		gameTableMakeTr3(1,5,b),
+		gameTableMakeTr3(1,5,d)
 	];
 }
 
