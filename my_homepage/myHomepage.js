@@ -120,7 +120,7 @@ fetch("https://statsapi.web.nhl.com/api/v1/teams/8?expand=team.schedule.next").t
 	var utcDate = json0.teams[0].nextGameSchedule.dates[0].games[0].gameDate;
 	var localDate = new Date(utcDate);
 
-	var x = "Next game: " + localDate.toLocaleString("en-US", {hour:"numeric", hour12:true,year:"numeric", month:"numeric", day:"numeric"});//use can also use Long instead of numeric
+	var x = "Next game: " + localDate.toLocaleString("en-US", {hour:"numeric", hour12:true,year:"numeric", month:"numeric", day:"numeric", minute:"numeric"});//use can also use Long instead of numeric
 	var y = innerHTML =json0.teams[0].nextGameSchedule.dates[0].games[0].teams.home.team.name;
 	var z =json0.teams[0].nextGameSchedule.dates[0].games[0].teams.away.team.name;
 	//document.getElementById("nextGameDate").innerHTML = "Next game: " + json0.teams[0].nextGameSchedule.dates[0].date;
