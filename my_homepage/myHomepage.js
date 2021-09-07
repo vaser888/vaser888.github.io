@@ -18,6 +18,8 @@ for (i=0; i<= numberOfUsers; i++) {
 			var artistName = myObj.name;
 			var onlineTest = myObj.online;
 			var nsfwTest = myObj.adult;
+
+			thumbnail = "https://thumb" /*-us-newyork*/ + thumbnail.slice(13);
 			
 			var videoThumbnail = thumbnail;
 			videoThumbnail = (videoThumbnail.substring(0, videoThumbnail.length - 3)) + "mp4";
@@ -62,7 +64,7 @@ for (i=0; i<= numberOfUsers; i++) {
 			
 		}		  
 	};
-	xmlhttp.open("GET", "https://api.picarto.tv/v1/channel/name/" + names[i], true);
+	xmlhttp.open("GET", "https://api.picarto.tv/api/v1/channel/name/" + names[i], true);
 	xmlhttp.send();
 }
 
