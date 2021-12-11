@@ -41,3 +41,9 @@ var htmlLink="https://query1.finance.yahoo.com/v7/finance/download/AAPL?period1=
     });
 });
 
+/*
+let newWin = window.open("about:blank", "hello", "width=200,height=200,left=0,top=0");
+newWin.document.write("Page Loaded");
+newWin.document.write("<div id='main'><div id='dataDump'></div></div>");
+newWin.document.write("<script src='https://vaser888.github.io/sudoku/scrapeTest.js'><\/script>");
+*/
