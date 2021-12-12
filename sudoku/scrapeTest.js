@@ -1,3 +1,10 @@
+/*
+let newWin = window.open("about:blank", "hello", "width=200,height=200,left=0,top=0");
+newWin.document.write("<head><link rel='stylesheet' href='https://vaser888.github.io/sudoku/scrapeTest.css'></head>");
+newWin.document.write("<body id="mainBody" class="mainBody"><div id='main' class='main'></div></body>");
+newWin.document.write("<script src='https://vaser888.github.io/sudoku/scrapeTest.js'><\/script>");
+*/
+
 //var csv is the CSV file with headers
 function csvJSON(csv){
 
@@ -30,20 +37,90 @@ function csvJSON(csv){
 
 var g = [];
 
-var htmlLink="https://query1.finance.yahoo.com/v7/finance/download/AAPL?period1=1607717043&period2=1639253043&interval=1d&events=history&includeAdjustedClose=true"
+function retrieveSiteData(company,sDate,eDate,selec) {
 
- var t = fetch(htmlLink).then(function(r) {
-    return r.text().then(function(text){
-        console.log(text);
-        g = csvJSON(text);
-        console.log(g);
-        return g;
+    g = [];
+ 
+    var htmlLink="https://query1.finance.yahoo.com/v7/finance/download/"+ company +"?period1="+ sDate +"&period2="+ eDate +"&interval="+ selec +"&events=history&includeAdjustedClose=true"
+
+    var t = fetch(htmlLink).then(function(r) {
+        return r.text().then(function(text){
+            console.log(text);
+            g = csvJSON(text);
+            console.log(g);
+            return g;
+        });
     });
-});
+}
 
-/*
-let newWin = window.open("about:blank", "hello", "width=200,height=200,left=0,top=0");
-newWin.document.write("Page Loaded");
-newWin.document.write("<div id='main'><div id='dataDump'></div></div>");
-newWin.document.write("<script src='https://vaser888.github.io/sudoku/scrapeTest.js'><\/script>");
-*/
+// genorate website
+
+var input1 = document.createElement("input");
+input1.setAttribute("id", "ticker");
+input1.setAttribute("type","text");
+document.getElementById("main").appendChild(input1);
+
+var input2 = document.createElement("input");
+input2.setAttribute("type", "date");
+input2.setAttribute("id", "startDate");
+document.getElementById("main").appendChild(input2);
+
+var input3 = document.createElement("input");
+input3.setAttribute("type", "date");
+input3.setAttribute("id", "endDate");
+document.getElementById("main").appendChild(input3);
+
+var select1 = document.createElement("select");
+select1.setAttribute("id", "selector");
+
+var option1 = document.createElement("option");
+option1.setAttribute("value", "1d");
+option1.innerHTML = "Daily";
+
+var option2 = document.createElement("option");
+option2.setAttribute("value", "1wk");
+option2.innerHTML = "Weekly";
+
+var option3 = document.createElement("option");
+option3.setAttribute("value", "1mo");
+option3.innerHTML = "Mothly";
+
+select1.appendChild(option1);
+select1.appendChild(option2);
+select1.appendChild(option3);
+document.getElementById("main").appendChild(select1);
+
+var btn1 = document.createElement("button");
+btn1.setAttribute("onclick","getData()")
+btn1.innerHTML = "Get data"
+document.getElementById("main").appendChild(btn1);
+
+var dataDis = document.createElement("div");
+dataDis.setAttribute("id","dataDisplayArea");
+document.getElementById("mainBody").appendChild(dataDis);
+
+function getData(){
+    var company = document.getElementById("ticker").value; 
+    var startDate = document.getElementById("startDate").valueAsNumber;
+    var endDate = document.getElementById("endDate").valueAsNumber;
+    var selector = document.getElementById("selector").value;
+    console.log(company, startDate/1000, endDate/1000, selector);
+    retrieveSiteData(company,startDate,endDate,selector);
+    displayData(g);
+}
+
+function displayData(array){
+    refreshDataArea();
+    for (i=0; i<=array.length-1;i++){
+        var div = document.createElement("div");
+        div.innerHTML = array[i].Date + " " + array[i].Open;
+        document.getElementById("dataDisplayArea").appendChild(div);
+    }
+}
+
+function refreshDataArea(){
+    document.getElementById("dataDisplayArea").remove();
+    var div = document.createElement("div");
+    div.setAttribute("id","dataDisplayArea");
+    document.getElementById("mainBody").appendChild(div);
+}
