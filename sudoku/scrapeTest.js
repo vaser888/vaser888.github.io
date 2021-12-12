@@ -49,10 +49,10 @@ function retrieveSiteData(company,sDate,eDate,selec) {
             console.log(text);
             g = csvJSON(text);
             console.log(g);
+            displayData(g);
             return g;
         });
-    });
-displayData(g);
+    });    
 }
 
 // genorate website
@@ -113,6 +113,7 @@ function getData(){
 }
 
 function displayData(array){
+    console.log("i have fired");
     refreshDataArea();
     for (i=0; i<=array.length-1;i++){
         var div = document.createElement("div");
