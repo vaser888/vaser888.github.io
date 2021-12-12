@@ -1,7 +1,7 @@
 /*
 let newWin = window.open("about:blank", "hello", "width=200,height=200,left=0,top=0");
 newWin.document.write("<head><link rel='stylesheet' href='https://vaser888.github.io/sudoku/scrapeTest.css'></head>");
-newWin.document.write("<body id="mainBody" class="mainBody"><div id='main' class='main'></div></body>");
+newWin.document.write("<body id='mainBody' class='mainBody'><div id='main' class='main'></div></body>");
 newWin.document.write("<script src='https://vaser888.github.io/sudoku/scrapeTest.js'><\/script>");
 */
 
