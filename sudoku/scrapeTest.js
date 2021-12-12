@@ -52,6 +52,7 @@ function retrieveSiteData(company,sDate,eDate,selec) {
             return g;
         });
     });
+displayData(g);
 }
 
 // genorate website
@@ -109,7 +110,6 @@ function getData(){
     endDate = endDate/1000;
     console.log(company, startDate, endDate, selector);
     retrieveSiteData(company,startDate,endDate,selector);
-    displayData(g);
 }
 
 function displayData(array){
