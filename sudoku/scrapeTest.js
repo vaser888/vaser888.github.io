@@ -42,7 +42,7 @@ function retrieveSiteData(company,sDate,eDate,selec) {
 
     g = [];
  
-    var htmlLink="https://query1.finance.yahoo.com/v7/finance/download/"+ company +"?period1="+ sDate/1000 +"&period2="+ eDate/1000 +"&interval="+ selec +"&events=history&includeAdjustedClose=true"
+    var htmlLink="https://query1.finance.yahoo.com/v7/finance/download/"+ company +"?period1="+ sDate +"&period2="+ eDate +"&interval="+ selec +"&events=history&includeAdjustedClose=true"
 
     var t = fetch(htmlLink).then(function(r) {
         return r.text().then(function(text){
@@ -105,7 +105,9 @@ function getData(){
     var startDate = document.getElementById("startDate").valueAsNumber;
     var endDate = document.getElementById("endDate").valueAsNumber;
     var selector = document.getElementById("selector").value;
-    console.log(company, startDate/1000, endDate/1000, selector);
+    startDate = startDate/1000;
+    endDate = endDate/1000;
+    console.log(company, startDate, endDate, selector);
     retrieveSiteData(company,startDate,endDate,selector);
     displayData(g);
 }
