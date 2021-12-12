@@ -115,9 +115,10 @@ function getData(){
 function displayData(array){
     console.log("i have fired");
     refreshDataArea();
+    var r = array.length - 1;
     for (i=0; i<=array.length-1;i++){
         var div = document.createElement("div");
-        div.innerHTML = array[i].Date + " " + array[i].Open;
+        div.innerHTML = array[r-i].Date + ", " + array[r-i].Open;
         document.getElementById("dataDisplayArea").appendChild(div);
     }
 }
