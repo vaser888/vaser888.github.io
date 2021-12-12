@@ -42,7 +42,7 @@ function retrieveSiteData(company,sDate,eDate,selec) {
 
     g = [];
  
-    var htmlLink="https://query1.finance.yahoo.com/v7/finance/download/"+ company +"?period1="+ sDate +"&period2="+ eDate +"&interval="+ selec +"&events=history&includeAdjustedClose=true"
+    var htmlLink="https://query1.finance.yahoo.com/v7/finance/download/"+ company +"?period1="+ sDate/1000 +"&period2="+ eDate/1000 +"&interval="+ selec +"&events=history&includeAdjustedClose=true"
 
     var t = fetch(htmlLink).then(function(r) {
         return r.text().then(function(text){
