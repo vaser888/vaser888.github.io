@@ -1,5 +1,5 @@
 /*
-let newWin = window.open("about:blank", "hello", "width=200,height=200,left=0,top=0");
+let newWin = window.open("about:blank", "hello", "width=600,height=600,left=0,top=0");
 newWin.document.write("<head><link rel='stylesheet' href='https://vaser888.github.io/sudoku/scrapeTest.css'></head>");
 newWin.document.write("Page Loaded");
 newWin.document.write("<body id='mainBody' class='mainBody'><div id='main' class='main'></div></body>");
